@@ -1,4 +1,4 @@
- # **WORDPRESS插件开发** #--
+ # **WORDPRESS插件开发** #
  
  ***WP2WPQAQ*** 插件是一个根据WordPress中的xmlrpc进行编写的实现两个WordPress站点进行文章同步的插件。目前该插件实现了文章的同步，媒体文件上传（上传到媒体库），但是分类(category)，标签（Tag）和自定义字段（custom_fields）的同步功能未能实现。
 
@@ -476,4 +476,4 @@ eg.想上传到order/结果却是上传到wp-content/uploads/2017/12/目录。
 			// alert(postId);
 		}
 		
-		
+希望大家提供您宝贵的经验，帮助完善插件功能，非常感谢。
