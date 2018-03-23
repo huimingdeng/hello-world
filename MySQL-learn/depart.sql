@@ -1,0 +1,10 @@
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (1, '信息技术', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (2, '生物信息', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (3, '财务', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (4, '行政', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (5, '人力资源', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (6, '生产', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (7, '项目管理', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (8, '研发', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (9, '质控', 1);
+INSERT INTO `depart` (`id`, `dname`, `comid`) VALUES (10, '总裁办', 1);
