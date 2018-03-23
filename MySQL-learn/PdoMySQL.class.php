@@ -189,6 +189,55 @@ class PdoMySQL
 		return $this->execute($sql);
 	}
 	/**
+	 * 获取最后执行的 SQL 语句
+	 * @return 返回 SQL 语句
+	 */
+	public function getLastSql(){
+		$link=self::$link;
+		if(!$link) return false;
+		return self::$queryStr;
+	}
+	/**
+	 * 得到上一步插入操作产生的 AUTO_INCREMENT 的值
+	 * @return string|boolean
+	 */
+	public function getLastInsertId(){
+		$link=self::$link;
+		if(!$link) return false;
+		return self::$lastInsertId;
+	}
+	/**
+	 * 获取数据库版本信息
+	 * @return string|boolean
+	 */
+	public function getDBVersion(){
+		$link=self::$link;
+		if(!$link) return false;
+		return self::$dbVersion;
+	}
+	/**
+	 * 返回数据库中存在的数据表
+	 * @return  返回当前数据库中的数据表
+	 */
+	public function showTables(){
+		$tables = array();
+		if(self::query("SHOW TABLES")){
+			$result = $this->getAll();
+			foreach ($result as $k => $v) {
+				$tables[$k]=current($v);//获取当前值
+			}
+		}
+		return $tables;
+	}
+	/**
+	 * 注销数据库连接
+	 * @return  boolean
+	 */
+	public function close(){
+		if(!is_null(self::$link)) self::$link = null;
+		return true;
+	}
+	/**
 	 * 增删改操作，返回受影响条数
 	 * @param  string $sql 增删改操作 SQL 语句
 	 * @return 返回受影响条数
