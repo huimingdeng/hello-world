@@ -10,7 +10,7 @@
 <div id="SBody<?php echo $atts['class'];?>">
 	<form action="/product/search3/" id="searchbar<?php echo $atts['class'];?>">
 		<div class="input-group" id="searchbar-group<?php echo $atts['class'];?>">
-			<input type="text" id="searchtext<?php echo $atts['class'];?>" name="s" class="form-control" placeholder="<?php echo $atts['title'];?>"	>
+			<input type="text" id="searchtext<?php echo $atts['class'];?>" name="s" class="form-control" placeholder="<?php echo $atts['title'];?>"	autocomplete="off">
 			<span class="input-group-btn">
 				<button class="btn btn-default" id="searchbarsubmit<?php echo $atts['class'];?>" type="button">
 					<i class="glyphicon glyphicon-search"></i>

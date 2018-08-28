@@ -3,7 +3,7 @@
  Plugin Name: Posts Search Bar
  Plugin URI: #
  Description: Search Bar using [list_search_bar_plugs class='1-1'], class is postID-number
- Version: 1.3.7
+ Version: 1.3.8
  Author: DHM
  Author URI: #
  License: none
