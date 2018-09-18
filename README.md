@@ -17,3 +17,6 @@
 为 genecopoeia 公司开发的search3查询工具，利用短代码在文章页中设置特定的查询条件，一篇文章中只能设置一个；修改能在一篇文章中设置多个查询后则命名为 list_search_bar_plugs。
 
 迁移到 [genecopoeia.git](https://github.com/huimingdeng/genecopoeia) 仓库 ---- Aug 28,2018.
+
+## phpStudy 小笔记 ##
+该目录保存的是日常复习和学习 PHP 知识的小笔记形成的一个项目（包含JavaScript等）。---- Sep 18,2018.
