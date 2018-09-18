@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>让div进行动画——策略模式</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/docs.css">
+	<style type="text/css">
+		.lamp{border: 1px solid #1b809e; border-radius: 15px; width: 15px; height: 15px; background-color: #1b809e; position: absolute;}
+		.rl{position: relative; min-height: 50px;}
+		.blue{color:#1b809e;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header><h1>策略模式——让div进行动画&nbsp;<small>策略模式指的是定义一些列的算法，把他们一个个封装起来，目的就是将算法的使用与算法的实现分离开来。</small></h1>返回复习查看<a href="demo20.html">策略模式</a></header>
+		<main>
+			<article>
+				<p class="lead">具体思路看PDF文件《JavaScript设计模式与开发实践》实现代码如下：</p>
+				<div class="show-pannel">
+					<ul class="list-inline">
+						<li><label><input type="radio" name="tween" value="linear" checked="checked">linear</label></li>
+						<li><label><input type="radio" name="tween" value="easeIn">easeIn</label></li>
+						<li><label><input type="radio" name="tween" value="strongEaseIn">strongEaseIn</label></li>
+						<li><label><input type="radio" name="tween" value="strongEaseOut">strongEaseOut</label></li>
+						<li><label><input type="radio" name="tween" value="sineaseIn">sineaseIn</label></li>
+						<li><label><input type="radio" name="tween" value="sineaseOut">sineaseOut</label></li>
+						<li><label><input type="button" name="left" value="←"></label></li>
+						<li><label><input type="button" name="right" value="→"></label></li>
+						<li><input type="button" name="run" id="btnRun" class="btn btn-sm btn-info" value="run"></li>
+					</ul>
+					<div class="quotes quotes-info rl">
+						<div class="div lamp" id="div"></div>
+					</div>
+				</div>
+				<p>小球运动方式进行封装——策略如下：</p>
+				<pre class="pre-scrollable">
+	/*
+	 * 缓动算法: 接收4个参数，分别表示： t-动画已消失的时间，b-小球原始位置， c-小球目标位置， d-动画持续的总时间
+	 */
+	var tween = {
+		linear: function( t, b, c, d ){
+			return c*t/d + b;
+		},
+		easeIn: function( t, b, c, d ){
+			return c * ( t /= d ) * t + b;
+		},
+		strongEaseIn: function(t, b, c, d){
+			return c * ( t /= d ) * t * t * t * t + b;
+		},
+		strongEaseOut: function(t, b, c, d){
+			return c * ( ( t = t / d - 1) * t * t * t * t + 1 ) + b;
+		},
+		sineaseIn: function( t, b, c, d ){
+			return c * ( t /= d) * t * t + b;
+		},
+		sineaseOut: function(t,b,c,d){
+			return c * ( ( t = t / d - 1) * t * t + 1 ) + b;
+		}
+	}
+				</pre>
+				<p>现在我们开始编写完整的代码，下面代码的思想来自 jQuery 库，由于本节的目标是演示策略模式，而非编写一个完整的动画库，因此我们省去了动画的队列控制等更多完整功能。</p>
+				<p>现在进入代码实现阶段，首先在页面中放置一个 div,如本节开头中的蓝色小球所示。</p>
+				<pre>
+	&lt;style&gt;
+	.lamp{border: 1px solid #1b809e; border-radius: 15px; width: 15px; height: 15px; <code class="blue">background-color: #1b809e;</code> position: absolute;}
+	.rl{position: relative; min-height: 50px;}
+	&lt;/style&gt;
+		&lt;div class="quotes quotes-info rl">
+			&lt;div class="div lamp" id="div">&lt;/div&gt;
+		&lt;/div>
+				</pre>
+				<p>接下来定义 Animate 类，Animate 的构造函数接受一个参数：即将运动起来的 dom 节点。Animate类的代码如下：</p>
+				<pre>
+	var Animate = function( dom ){
+		this.dom = dom; // 进行运动的 dom 节点
+		this.startTime = 0; // 动画开始时间
+		this.startPos = 0; // 动画开始时， dom 节点的位置，即 dom 的初始位置
+		this.endPos = 0; // 动画结束时， dom 节点的位置，即 dom 的目标位置
+		this.propertyName = null; // dom 节点需要被改变的 css 属性名
+		this.easing = null; // 缓动算法
+		this.duration = null; // 动画持续时间
+	};
+				</pre>
+				<p>接下来 Animate.prototype.start 方法负责启动这个动画，在动画被启动的瞬间，要记录一些信息，供缓动算法在以后计算小球当前位置的时候使用。在记录完这些信息之后，此方法还要负责启动定时器。代码如下：</p>
+				<pre>
+	Animate.prototype.start = function( propertyName, endPos, duration, easing ){
+		this.startTime = +new Date; // 动画启动时间
+		this.startPos = this.dom.getBoundingClientRect()[ propertyName ]; // dom 节点初始位置
+		this.propertyName = propertyName; // dom 节点需要被改变的 CSS 属性名
+		this.endPos = endPos; // dom 节点目标位置
+		this.duration = duration; // 动画持续事件
+		this.easing = tween[ easing ]; // 缓动算法
+		var self = this;
+		var timeId = setInterval(function(){ // 启动定时器，开始执行动画
+			if ( self.step() === false ){ // 如果动画已结束，则清除定时器
+				clearInterval( timeId );
+			}
+		}, 19 );
+	};
+				</pre>
+				<p>Animate.prototype.start 方法接受以下 4 个参数。</p>
+				<ul class="list-group list-unstyled">
+					<li class="list-group-item-info">propertyName：要改变的 CSS 属性名，比如'left'、 'top'，分别表示左右移动和上下移动。</li>
+					<li>endPos：小球运动的目标位置。</li>
+					<li class="list-group-item-success">duration： 动画持续时间。</li>
+					<li>easing： 缓动算法.</li>
+				</ul>
+				<p>再接下来是 Animate.prototype.step 方法，该方法代表小球运动的每一帧要做的事情。在此处，这个方法负责计算小球的当前位置和调用更新 CSS 属性值的方法 Animate.prototype.update。代码如下：</p>
+				<pre>
+	Animate.prototype.step = function(){
+		var t = +new Date; // 取得当前时间
+		if ( t >= this.startTime + this.duration ){ // (1)
+			this.update( this.endPos ); // 更新小球的 CSS 属性值
+			return false;
+		}
+		var pos = this.easing( t - this.startTime, this.startPos,
+		this.endPos - this.startPos, this.duration );
+		// pos 为小球当前位置
+		this.update( pos ); // 更新小球的 CSS 属性值
+	};
+				</pre>
+				<p>在这段代码中， (1)处的意思是，如果当前时间大于动画开始时间加上动画持续时间之和，说明动画已经结束，此时要修正小球的位置。因为在这一帧开始之后，小球的位置已经接近了目标位置，但很可能不完全等于目标位置。此时我们要主动修正小球的当前位置为最终的目标位置。此外让 Animate.prototype.step 方法返回 false，可以通知 Animate.prototype.start 方法清除定时器。</p>
+				<p>最后是负责更新小球 CSS 属性值的 Animate.prototype.update 方法：</p>
+				<pre>
+	Animate.prototype.update = function( pos ){
+		this.dom.style[ this.propertyName ] = pos + 'px';
+	};
+				</pre>
+				<p>如果不嫌麻烦，我们可以进行一些小小的测试：</p>
+				<pre>
+	var div = document.getElementById( 'div' );
+	var animate = new Animate( div );
+	animate.start( 'left', 500, 1000, 'strongEaseOut' );
+	// animate.start( 'top', 1500, 500, 'strongEaseIn' );
+				</pre>
+				<p>修改测试方法：</p>
+				<pre class="pre-scrollable">
+	// 设置运行事件
+	    var btnRun = document.getElementById("btnRun");
+	    var radios = document.getElementsByName("tween"); // 获取单选框
+	    btnRun.onclick = function(){
+	        for(var i= 0,lengh=radios.length;i&lt;lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'left', 500, 1000, radios[i].value);
+	                break;
+	            }
+	        }
+	    };
+	    //左右控制
+	    var left = document.getElementsByName('left');
+	    var right = document.getElementsByName('right');
+	    left[0].onclick = function(){
+	    	for(var i= 0,lengh=radios.length;i&lt;lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'left', 500, 1000, radios[i].value);
+	                break;
+	            }
+	        }
+	    }
+	    right[0].onclick = function(){
+	    	for(var i= 0,lengh=radios.length;i&lt;lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'right', 1500, 500, radios[i].value);
+	                break;
+	            }
+	        }
+	    }
+				</pre>
+				<p>添加如下代码：</p>
+				<pre>
+	Animate.prototype.reset = function(){
+        // 重置为 0
+    	this.dom.style[this.propertyName] = "0px";
+	};
+				</pre>
+			</article>
+		</main>
+		<footer>&copy;20171012 &nbsp;&nbsp; html:dhm &nbsp;&nbsp; author:zengtan</footer>
+	</div>
+	<script type="text/javascript">
+		var tween={
+			linear: function( t, b, c, d ){
+				return c*t/d + b;
+			},
+			easeIn: function( t, b, c, d ){
+				return c * ( t /= d ) * t + b;
+			},
+			strongEaseIn: function(t, b, c, d){
+				return c * ( t /= d ) * t * t * t * t + b;
+			},
+			strongEaseOut: function(t, b, c, d){
+				return c * ( ( t = t / d - 1) * t * t * t * t + 1 ) + b;
+			},
+			sineaseIn: function( t, b, c, d ){
+				return c * ( t /= d) * t * t + b;
+			},
+			sineaseOut: function(t,b,c,d){
+				return c * ( ( t = t / d - 1) * t * t + 1 ) + b;
+			}
+		};
+
+		var Animate = function( dom ){
+			this.dom = dom; // 进行运动的 dom 节点
+			this.startTime = 0; // 动画开始时间
+			this.startPos = 0; // 动画开始时， dom 节点的位置，即 dom 的初始位置
+			this.endPos = 0; // 动画结束时， dom 节点的位置，即 dom 的目标位置
+			this.propertyName = null; // dom 节点需要被改变的 css 属性名
+			this.easing = null; // 缓动算法
+			this.duration = null; // 动画持续时间
+		};
+
+		Animate.prototype.start = function( propertyName, endPos, duration, easing ){
+			this.startTime = +new Date; // 动画启动时间
+			this.startPos = this.dom.getBoundingClientRect()[ propertyName ]; // dom 节点初始位置
+			this.propertyName = propertyName; // dom 节点需要被改变的 CSS 属性名
+			this.endPos = endPos; // dom 节点目标位置
+			this.duration = duration; // 动画持续事件
+			this.easing = tween[ easing ]; // 缓动算法
+			var self = this;
+			var timeId = setInterval(function(){ // 启动定时器，开始执行动画
+				if ( self.step() === false ){ // 如果动画已结束，则清除定时器
+					clearInterval( timeId );
+				}
+			}, 19 );
+		};
+		/*
+ 		 * step 表示节点运动的每一帧要做的事情。 负责计算节点的当前位置和调整更新 CSS 属性值
+ 		 */
+		Animate.prototype.step = function(){
+			var t = +new Date; // 取得当前时间
+			if ( t >= this.startTime + this.duration ){ // (1)
+				this.update( this.endPos ); // 更新小球的 CSS 属性值
+				return false;
+			}
+			var pos = this.easing( t - this.startTime, this.startPos,
+			this.endPos - this.startPos, this.duration );
+			// pos 为小球当前位置
+			this.update( pos ); // 更新小球的 CSS 属性值
+		};
+
+		Animate.prototype.update = function( pos ){
+			this.dom.style[ this.propertyName ] = pos + 'px';
+		};
+		var div = document.getElementById( 'div' );
+		// var animate = new Animate( div );
+		// animate.start( 'left', 500, 1000, 'strongEaseOut' );
+		// animate.start( 'right', 1500, 500, 'strongEaseIn' );
+		var animate = new Animate(div);
+	    
+	    // 设置运行事件
+	    var btnRun = document.getElementById("btnRun");
+	    var radios = document.getElementsByName("tween"); // 获取单选框
+	    btnRun.onclick = function(){
+	        for(var i= 0,lengh=radios.length;i<lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'left', 500, 1000, radios[i].value);
+	                break;
+	            }
+	        }
+	    };
+	    //左右控制
+	    var left = document.getElementsByName('left');
+	    var right = document.getElementsByName('right');
+	    left[0].onclick = function(){
+	    	for(var i= 0,lengh=radios.length;i<lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'left', 500, 1000, radios[i].value);
+	                break;
+	            }
+	        }
+	    }
+	    right[0].onclick = function(){
+	    	for(var i= 0,lengh=radios.length;i<lengh;i++){
+	            // 查找被选中要执行的算法策略
+	            if(radios[i].checked){
+	                animate.reset(); // 重置节点运动属性
+	                // 设置动画的基本属性
+	                animate.start( 'right', 1500, 500, radios[i].value);
+	                break;
+	            }
+	        }
+	    }
+	    Animate.prototype.reset = function(){
+		        // 重置为 0
+		    this.dom.style[this.propertyName] = "0px";
+		};
+	</script>
+</body>
+</html>

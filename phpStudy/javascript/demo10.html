@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>javascript设计模式--this的丢失</title>
+	<link href="css/public.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header>this的丢失</header>
+	<main>
+		<article id="article-test">
+			<p><a href="demo9.html">javascript设计模式--this,call,apply</a>也介绍了this的丢失，本节重点讲this的丢失。</p>
+			<p>document.getElementById 这个方法名实在有点过长，我们大概尝试过用一
+个短的函数来代替它，如同 prototype.js 等一些框架所做过的事情:</p>
+			<pre>
+				&lt;script type="text/javascript"&gt;
+					//1.
+					var getId=function(id){
+						return document.getElementById(id);
+					}
+					getId('article-test');//获取id为article-test的对象
+					//打印观察是否获取到
+					console.log(getId('article-test').id);//可以获取并输出id名
+					//2.但是一般在学习的时候首先会想到如下情况
+					var getId=document.getElementById;
+					//打印观察是否获取到
+					console.log('抛出异常：');//观察异常，请解开注释
+					//console.log(getId('article-test'));//可以获取
+					//3.完善一下该方法，使用apply
+					console.log('apply解决异常:')
+					document.getElementById=(function(func){
+						return function(){
+							return func.apply(document,arguments)
+						}
+					})(document.getElementById)
+					var getId=document.getElementById;
+					console.log(getId('article-test').id);
+				&lt;/script&gt;
+			</pre>
+			<p class="in2em">从2中的测试，我们发现会抛出异常。因为许多引擎的 document.getElementById 方法的内部实现中需要用到 this。这个 this 本来被期望指向document，当 getElementById 方法作为 document 对象的属性被调用时，方法内部的 this 确实是指向 document 的。</p>
+			<p class="in2em">但当用 getId 来引用 document.getElementById 之后，再调用 getId，此时就成了普通函数调用，函数内部的 this 指向了 window，而不是原来的 document。（如果忘记了请观察<a href="demo9.html">demo9:《javascript设计模式--this,call,apply》</a>）</p>
+			<p class="in2em">这样我们大概了解了this会丢失的4中情况后，其中我们解决的方法使用了call和apply，接下来就学习一下<a href="demo11.html">call和apply</a></p>
+			<p class="tip">具体效果，请单击右键查看源代码->选择控制台，就可以观察具体效果。</p>
+		</article>
+	</main>
+	<footer>&copy;by 20170816
+	</footer>
+	<script type="text/javascript">
+		//1.
+		var getId=function(id){
+			return document.getElementById(id);
+		}
+		getId('article-test');//获取id为article-test的对象
+		//打印观察是否获取到
+		console.log(getId('article-test').id);//可以获取并输出id名
+		//2.但是一般在学习的时候首先会想到如下情况
+		var getId=document.getElementById;
+		//打印观察是否获取到
+		console.log('抛出异常：');
+		//console.log(getId('article-test'));//可以获取
+		//3.完善一下该方法，使用apply
+		console.log('apply解决异常:')
+		document.getElementById=(function(func){
+			return function(){
+				return func.apply(document,arguments)
+			}
+		})(document.getElementById)
+		var getId=document.getElementById;
+		console.log(getId('article-test').id);
+	</script>
+</body>
+</html>

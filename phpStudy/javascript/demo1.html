@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>js study</title>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="javascript,javascript设计模式,javascript学习"/>
+	<meta name="description" content="javascript王国--合唱团，鸭叫声。" />
+	<link rel="stylesheet" type="text/css" href="css/public.css" />
+</head>
+<body>
+	<header>demo1,JavaScript王国
+	</header>
+	<main>
+		<article>
+			<p><a href="/javascript.php">javascript</a>设计模式举例：</p>
+			<pre>
+				&lt;script type="text/javascript"&gt;
+				var duck={//鸭子的叫声
+					duckSinging:function(){
+						console.log('嘎嘎嘎');
+					}
+				};
+				var chicken={
+					duckSinging:function(){
+						console.log('嘎嘎嘎');
+					}
+				};
+				var choir=[];//合唱团
+				var joinchoir=function(animal){
+					if(animal&&typeof animal.duckSinging=='function'){//判断是否存在该函数
+						choir.push(animal);
+						console.log('欢迎加入合唱团.');
+						console.log('合唱团成员数：'+choir.length);
+					}
+				};
+				joinchoir(duck);
+				joinchoir(chicken);
+				&lt;script&gt;
+			</pre>
+			<p class="tip">具体效果，请单击右键查看源代码->选择控制台，就可以观察具体效果。</p>
+			<p><a href="demo2.html">JavaScript设计模式--多态的错误示例</a></p>
+		</article>
+	</main>
+	<footer>
+	&copy;by 20170815
+	</footer>
+	<script type="text/javascript">
+	//
+	var duck={//鸭子的叫声
+		duckSinging:function(){
+			console.log('嘎嘎嘎');
+		}
+	};
+	var chicken={
+		duckSinging:function(){
+			console.log('嘎嘎嘎');
+		}
+	};
+	var choir=[];//合唱团
+	var joinchoir=function(animal){
+		if(animal&&typeof animal.duckSinging=='function'){//判断是否存在该函数
+			choir.push(animal);
+			console.log('欢迎加入合唱团.');
+			console.log('合唱团成员数：'+choir.length);
+		}
+	};
+	joinchoir(duck);
+	joinchoir(chicken);
+	</script>
+</body>
+</html>

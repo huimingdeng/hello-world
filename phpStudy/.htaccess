@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+#RewriteBase /
+
+RewriteRule ^look-(\d+)\.html$ /look.php?p=$1
+</IfModule>

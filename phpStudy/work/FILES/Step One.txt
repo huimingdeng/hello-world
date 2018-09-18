@@ -1,0 +1,76 @@
+Array
+(
+    [1] => Array
+        (
+            [name] => GC-N0089
+            [pm_status_c] => PM_IN_DB
+            [primer_no_c] => PF5350
+            [length_c] => 2238
+            [plate_well_c] => 103F_E12
+            [place_no_c] => GS061-24
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-001-A01
+        )
+
+    [2] => Array
+        (
+            [name] => GC-A0017
+            [pm_status_c] => Y
+            [primer_no_c] => PF17
+            [length_c] => 585
+            [plate_well_c] => 420F_A08
+            [place_no_c] => Rp295-32
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-018-F07
+        )
+
+    [3] => Array
+        (
+            [name] => GC-A0016
+            [pm_status_c] => Conserved
+            [primer_no_c] => PF16
+            [length_c] => 1542
+            [plate_well_c] => 452F_H05
+            [place_no_c] => Rp355-32
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-018-H01
+        )
+
+    [4] => Array
+        (
+            [name] => GC-A0014
+            [pm_status_c] => Y
+            [primer_no_c] => PF14
+            [length_c] => 627
+            [plate_well_c] => 014F_A01
+            [place_no_c] => GS001-04
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-060-A02
+        )
+
+    [5] => Array
+        (
+            [name] => GC-A0012
+            [pm_status_c] => Conserved
+            [primer_no_c] => PF12
+            [length_c] => 822
+            [plate_well_c] => 420F_G04
+            [place_no_c] => Rp293-27
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-061-H07
+        )
+
+    [6] => Array
+        (
+            [name] => GC-A0013
+            [pm_status_c] => Y
+            [primer_no_c] => PF13
+            [length_c] => 1800
+            [plate_well_c] => 476F_C02
+            [place_no_c] => Rp399-39
+            [antibiotics_c] => kanamycin
+            [stock_plate_no_c] => GC-116-G06
+        )
+
+)
+[Finished in 3.2s]
