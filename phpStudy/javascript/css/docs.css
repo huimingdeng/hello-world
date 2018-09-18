@@ -1,0 +1,10 @@
+p{text-indent:2em;}pre{font-size:14px;}
+.quotes{ display: block; border:1px solid #eee; padding: 20px 0px; border-left-width: 5px; border-radius: 3px;}
+.quotes-info{ border-left-color: #1b809e; }
+.legend{border-top:1px solid #eee; border-top-width: 3px; display: block; padding: 15px 10px; border-radius: 2px; margin: 10px 0px;}
+.legend-default{border-top-color: #000;}
+.legend-info{border-top-color: #1b809e;}
+.show-pannel{padding: 10px; margin: 10px; display: block; background-color: rgba(234,221,233,.5);}
+.show-pannel .quotes{ border-right: 1px solid #000; border-bottom: 1px solid #000; border-top: 1px solid #000; }
+/*尾部*/
+footer{margin: 10px 0px; padding: 10px;}

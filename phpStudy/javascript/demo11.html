@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>javascript设计模式--call和apply</title>
+<link rel="stylesheet" type="text/css" href="css/public.css"/>
+</head>
+<body>
+	<header>javascript设计模式--call和apply</header>
+	<main>
+		<article>
+			<p>前面了解了<a href="demo9.html">4种情况下this的指向</a>和<a href="demo10.html">this的丢失</a>，下面熟悉一下apply和call：
+			<ul>
+				<li>apply函数：apply 接受两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组， apply 方法把这个集合中的元素作为参数传递给被调用的函数：<a href="#ex1">例1：</a></li>
+				<li>call传入的参数数量不固定，跟apply相同的是，第一个参数也是代表函数体内的this指向，从第二个参数开始往后，每个参数被依次传入函数:<a href="#ex2">例2：</a></li>
+			</ul>
+			</p>
+			<pre id="ex1">
+				&lt;script&gt;
+					var func = function( a, b, c ){
+						console.log ( [ a, b, c ] ); // 输出 Array[ 1, 2, 3 ]
+					};
+					func.apply( null, [ 1, 2, 3 ] );
+				&lt;/script&gt;
+			</pre>
+			<pre id="ex2">
+				&lt;script&gt;
+					var func = function( a, b, c ){
+						console.log ( [ a, b, c ] ); // 输出 Array[ 1, 2, 3 ]
+					};
+					func.call( null, 1, 2, 3 );
+				&lt;/script&gt;
+			</pre>
+			<p class="in2em">当调用一个函数时，JavaScript的解释器并不会计较形参和实参在数量、类型以及顺序上的区别，JavaScript的参数在内部就是用一个数组来表示的。从这个意义上说， apply 比 call 的使用率更高，我们不必关心具体有多少参数被传入函数，只要用 apply 一股脑地推过去就可以了。</p>
+			<p class="in2em">call是包装在apply上面的一颗语法糖，如果我们明确地知道函数接受多少个参数，而且想一目了然地表达形参和实参的对应关系，那么也可以用 call 来传送参数。</p>
+			<p class="in2em">当使用 call 或者 apply 的时候，如果我们传入的第一个参数为 null，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window:<a href="#ex3">例3</a>。但存在使用严格模式，this指向的还是null:<a href="#ex4">例4:</a></p>
+			<pre id="ex3">
+				&lt;script&gt;
+					var func=function(a,b,c){
+						console.log(this===window);//输出true
+					}
+					//使用apply
+					console.log('使用apply：');
+					func.apply(null,[1,2,5]);//集合[1,2,5]
+					//使用call
+					console.log('使用call：');
+					func.call(null,1,3,6);
+				&lt;/script&gt;
+			</pre>
+			<pre id="ex4">
+				&lt;script&gt;
+					//例4：
+					console.log("例4：");
+					var func=function(a,b,c){
+						"use strict";
+						console.log(this===null);
+					}
+					func.apply(null,[0,0,0]);
+					console.log('call:');
+					func.call(null,0,0,0);
+				&lt;/script&gt;
+			</pre>
+			<p class="in2em">有时候我们使用 call 或者 apply 的目的不在于指定 this 指向，而是另有用途，比如借用其他对象的方法。那么我们可以传入 null 来代替某个具体的对象:<a href="#ex5">例5</a></p>
+			<pre id="ex5">
+				&lt;script&gt;
+					console.log(Math.max.apply(null,[1,21,43,22,12,5,32,54,45,55,33]));//输出最大值55
+				&lt;/script&gt;
+			</pre>
+			<p class="tip">具体效果，请单击右键查看源代码->选择控制台，就可以观察具体效果。</p>
+			<p>熟悉了call和apply后，我们再看一下<a href="demo12.html">call和apply的用途</a></p>
+		</article>
+	</main>
+	<footer>&copy;by 20170817</footer>
+	<script type="text/javascript">
+		//例1：
+		var func = function( a, b, c ){
+			console.log ( [ a, b, c ] ); // 输出 输出 Array[ 1, 2, 3 ]
+		};
+		func.apply( null, [ 1, 2, 3 ] );
+		//例2：
+		func.call( null, 1, 2, 3 );
+		//例3：
+		var func=function(a,b,c){
+			console.log(this === window);
+		}
+		//使用apply
+		console.log('使用apply：');
+		func.apply(null,[1,2,5]);
+		//使用call
+		console.log('使用call：');
+		func.call(null,1,3,6);
+		//例4：
+		console.log("例4：");
+		var func=function(a,b,c){
+			"use strict";
+			console.log(this===null);
+		}
+		func.apply(null,[0,0,0]);
+		console.log('call:');
+		func.call(null,0,0,0);
+		//例5：
+		console.log(Math.max.apply(null,[1,21,43,22,12,5,32,54,45,55,33]));
+	</script>
+</body>
+</html>

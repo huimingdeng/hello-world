@@ -1,0 +1,697 @@
+Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-N0089
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => PM_IN_DB
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF5350
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 2238
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 103F_E12
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => GS061-24
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-001-A01
+                )
+
+        )
+
+    [1] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0017
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF17
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 585
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 420F_A08
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp295-32
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-018-F07
+                )
+
+        )
+
+    [2] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0016
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Conserved
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF16
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 1542
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 452F_H05
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp355-32
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-018-H01
+                )
+
+        )
+
+)
+[Finished in 10.9s]
+
+
+
+
+
+
+
+
+Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0014
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF14
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 627
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 014F_A01
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => GS001-04
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-060-A02
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => 5b8a3137-61b3-79cc-6e57-50b63382ff7b
+                )
+
+        )
+
+    [1] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0012
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Conserved
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF12
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 822
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 420F_G04
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp293-27
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-061-H07
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => c39c0134-1043-5315-2ab7-50b633d86275
+                )
+
+        )
+
+    [2] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0013
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF13
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 1800
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 476F_C02
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp399-39
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-116-G06
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => 3827ce23-cd4b-6e80-1ed2-50b633362b10
+                )
+
+        )
+
+)
+[Finished in 11.4s]
+
+
+
+
+
+
+
+Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-N0089
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => PM_IN_DB
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF5350
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 2238
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 103F_E12
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => GS061-24
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-001-A01
+                )
+
+        )
+
+    [1] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0017
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF17
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 585
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 420F_A08
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp295-32
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-018-F07
+                )
+
+        )
+
+    [2] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0016
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Conserved
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF16
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 1542
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 452F_H05
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp355-32
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-018-H01
+                )
+
+        )
+
+    [3] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0014
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF14
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 627
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 014F_A01
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => GS001-04
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-060-A02
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => 5b8a3137-61b3-79cc-6e57-50b63382ff7b
+                )
+
+        )
+
+    [4] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0012
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Conserved
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF12
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 822
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 420F_G04
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp293-27
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-061-H07
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => c39c0134-1043-5315-2ab7-50b633d86275
+                )
+
+        )
+
+    [5] => Array
+        (
+            [0] => Array
+                (
+                    [name] => name
+                    [value] => GC-A0013
+                )
+
+            [1] => Array
+                (
+                    [name] => pm_status_c
+                    [value] => Y
+                )
+
+            [2] => Array
+                (
+                    [name] => primer_no_c
+                    [value] => PF13
+                )
+
+            [3] => Array
+                (
+                    [name] => length_c
+                    [value] => 1800
+                )
+
+            [4] => Array
+                (
+                    [name] => plate_well_c
+                    [value] => 476F_C02
+                )
+
+            [5] => Array
+                (
+                    [name] => place_no_c
+                    [value] => Rp399-39
+                )
+
+            [6] => Array
+                (
+                    [name] => antibiotics_c
+                    [value] => kanamycin
+                )
+
+            [7] => Array
+                (
+                    [name] => stock_plate_no_c
+                    [value] => GC-116-G06
+                )
+
+            [8] => Array
+                (
+                    [name] => id
+                    [value] => 3827ce23-cd4b-6e80-1ed2-50b633362b10
+                )
+
+        )
+
+)
+[Finished in 12.0s]
+
+
+
+
+
+
+
+
+
+

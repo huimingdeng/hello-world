@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>通用的惰性单例</title>
+		<meta charset="UTF-8"/>
+		<meta name="Keywords" content=""/>
+		<meta name="Description" content=""/>
+		<!-- <link rel="stylesheet" type="text/css" href="css/public.css"/> -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<style type="text/css">p{text-indent: 2em;}pre{font-size: 14px;}</style>
+		<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header><h1>通用的惰性单例&nbsp;<small class="lead">在需要的时候才创建对象实例</small></h1>&nbsp;<small>本节仅有一个实例，且同<a href="demo18.html">单例模式</a>存在较大的相似性，点击查看<a href="javascript:void(0);" id="loginBtn" data-toggle="modal" data-target="#myModal">惰性单例实例</a></small></header>
+			<main>
+				<article>
+					<p>上一个demo实例中的惰性单例模式中的代码段仍然是违反单一职责原则的，创建对象和管理单例的逻辑都放在 createLoginLayer对象内部。</p>
+					<p>如果我们下次需要创建页面中唯一的 iframe，或者 script 标签，用来跨域请求数据，就必须得如法炮制，把 createLoginLayer 函数几乎照抄一遍:</p>
+					<pre class="pre-scrollable">
+						var createIframe= (function(){
+							var iframe;
+							return function(){
+								if ( !iframe){
+									iframe= document.createElement( 'iframe' );
+									iframe.style.display = 'none';
+									document.body.appendChild( iframe);
+								}
+								return iframe;
+							}
+						})();
+					</pre>
+					<p>我们需要把不变的部分隔离出来，先不考虑创建一个 div 和创建一个 iframe 有多少差异，管理单例的逻辑其实是完全可以抽象出来的，这个逻辑始终是一样的：用一个变量来标志是否创建过对象，如果是，则在下次直接返回这个已经创建好的对象：</p>
+					<code>
+						var obj;
+						if ( !obj ){
+						obj = xxx;
+						}
+					</code>
+					<p>现在我们就把如何管理单例的逻辑从原来的代码中抽离出来，这些逻辑被封装在 getSingle函数内部，创建对象的方法 fn 被当成参数动态传入 getSingle 函数：</p>
+					<pre>
+						var getSingle = function( fn ){
+							var result;
+							return function(){
+								return result || ( result = fn .apply(this, arguments ) );
+							}
+						};
+					</pre>
+					<p>接下来将用于创建登录浮窗的方法用参数 fn 的形式传入 getSingle，我们不仅可以传入createLoginLayer，还能传入 createScript、 createIframe、 createXhr 等。之后再让 getSingle 返回一个新的函数，并且用一个变量 result 来保存 fn 的计算结果。 result 变量因为身在闭包中，它永远不会被销毁。在将来的请求中，如果 result 已经被赋值，那么它将返回这个值。代码如下：</p>
+					<pre>
+						var createLoginLayer = function(){
+							var div = document.createElement( 'div' );
+							div.innerHTML = '我是登录浮窗';
+							div.style.display = 'none';
+							document.body.appendChild( div );
+							return div;
+						};
+						var createSingleLoginLayer = getSingle( createLoginLayer );
+						document.getElementById( 'loginBtn' ).onclick = function(){
+							var loginLayer = createSingleLoginLayer();
+							loginLayer.style.display = 'block';
+						};
+					</pre>
+					<p>下面我们再试试创建唯一的 iframe 用于动态加载第三方页面：</p>
+					<pre>
+						var createSingleIframe = getSingle( function(){
+							var iframe = document.createElement ( 'iframe' );
+							document.body.appendChild( iframe );
+							return iframe;
+						});
+						document.getElementById( 'loginBtn' ).onclick = function(){
+							var loginLayer = createSingleIframe();
+							loginLayer.src = 'http://baidu.com';
+						};
+					</pre>
+					<p>在这个例子中，我们把创建实例对象的职责和管理单例的职责分别放置在两个方法里，这两个方法可以独立变化而互不影响，当它们连接在一起的时候，就完成了创建唯一实例对象的功能，看起来是一件挺奇妙的事情。</p>
+					<p>这种单例模式的用途远不止创建对象，比如我们通常渲染完页面中的一个列表之后，接下来要给这个列表绑定 click 事件，如果是通过 ajax 动态往列表里追加数据，在使用事件代理的前提下，click事件实际上只需要在第一次渲染列表的时候被绑定一次，但是我们不想去判断当前是否是第一次渲染列表，如果借助于 jQuery，我们通常选择给节点绑定 one 事件：</p>
+					<pre>
+						var bindEvent = function(){
+							$( 'div' ).one( 'click', function(){
+								console.log ( 'click' );
+							});
+						};
+						var render = function(){
+							console.log( '开始渲染列表' );
+							bindEvent();
+						};
+						render();
+						render();
+						render();
+					</pre>
+					<p>如果利用 getSingle 函数，也能达到一样的效果。代码如下：</p>
+					<pre>
+						var bindEvent = getSingle(function(){
+							document.getElementById( 'div1' ).onclick = function(){
+								console.log ( 'click' );
+							}
+							return true;
+						});
+						var render = function(){
+							console.log( '开始渲染列表' );
+							bindEvent();
+						};
+						render();
+						render();
+						render();
+					</pre>
+					<p>可以看到， render 函数和 bindEvent 函数都分别执行了 3 次，但 div 实际上只被绑定了一个事件。</p>
+					<h2>小结</h2>
+					<p>单例模式是我们学习的第一个模式，我们先学习了传统的单例模式实现，也了解到因为语言的差异性，有更适合的方法在JavaScript中创建单例。这一章还提到了代理模式和单一职责原则，后面的章节会对它们进行更详细的讲解。</p>
+					<p>在 getSinge 函数中，实际上也提到了闭包和高阶函数的概念。单例模式是一种简单但非常实用的模式，特别是惰性单例技术，在合适的时候才创建对象，并且只创建唯一的一个。更奇妙的是，创建对象和管理单例的职责被分布在两个不同的方法中，这两个方法组合起来才具有单例模式的威力。</p>
+					<p>下一个demo是书本第5章<a href="demo20.html">策略模式</a></p>
+				</article>
+			</main>
+			<footer>&copy;by 20171011</footer>
+		</div>
+		<script type="text/javascript">
+			var createloginlayer=function(){
+				var div = document.createElement('div');
+				var str = '<div class="modal-dialog">';
+					str+= "	<div class=\"modal-content\">";
+					str+= '		<div class="modal-header">';
+					str+= '			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+					str+= '			<h4 class="modal-title" id="myModalLabel">QQ</h4>'
+					str+= '		</div>';
+					str+= '		<div class="modal-body">';
+					str+= '			这是一个测试单例实例，目前未实行弹窗的关闭，使用的是bootstrap模态框，估计是没有引入bootstrap.js';
+					str+= '		</div>';
+					str+= "	</div>";
+					str+= "</div>";
+				div.setAttribute('class','modal fade');
+				div.setAttribute('tableindex','-1');
+				div.setAttribute('id','myModal');
+				div.setAttribute('role','dialog');
+				div.setAttribute('aria-labelledby','myModalLabel');
+				div.setAttribute('aria-hidden','true');
+				div.innerHTML=str;
+				div.style.display='none';
+				document.body.appendChild(div);
+				return div;
+			};
+			var getSingle = function( fn ){
+				var result;
+				return function(){
+					return result || ( result = fn .apply(this, arguments ) );
+				}
+			};
+			var createSingleLoginLayer = getSingle( createloginlayer );
+			document.getElementById( 'loginBtn' ).onclick = function(){
+				var loginLayer = createSingleLoginLayer();
+				loginLayer.style.display = 'block';
+			};
+			var createSingleIframe = getSingle( function(){
+				var iframe = document.createElement ( 'iframe' );
+				document.body.appendChild( iframe );
+				return iframe;
+			});
+			document.getElementById( 'loginBtn' ).onclick = function(){
+				var loginLayer = createSingleIframe();
+				loginLayer.src = 'http://baidu.com';
+			};
+		</script>
+	</body>
+</html>

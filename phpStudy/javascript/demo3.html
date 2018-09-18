@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>js study demo3</title>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="javascript,javascript设计模式,javascript学习"/>
+	<meta name="description" content="javascript王国--合唱团，多态。" />
+	<link type="text/css" rel="stylesheet" href="css/public.css"/>
+</head>
+<body>
+	<header>JavaScript王国--多态案例2</header>
+	<main>
+		<article>
+			<p>把不变的单独抽离,可变的各自封装。<a href="demo2.html">JavaScript王国--多态案例1</a></p>
+			<p>以下是一个JavaScript多态的例子：</p>
+			<pre>
+				&lt;script type="text/javascript"&gt;
+					//不变部分
+					var makeSound=function (animal){
+						animal.sound();
+					};
+					//可变部分进行封装
+					var Duck = function(){};
+					Duck.prototype.sound=function(){ console.log('嘎嘎嘎');}
+					var Chicken = function(){};
+					Chicken.prototype.sound=function(){ console.log('咯咯咯');}
+					makeSound(new Duck());
+					makeSound(new Chicken());
+					//当动物世界新增一个动物狗，添加如下代码
+					var Dog = function(){};
+					Dog.prototype.sound=function(){ console.log('汪汪汪');}
+					makeSound(new Dog());
+				&lt;/script&gt;
+			</pre>
+			<p class="tip">具体效果，请单击右键查看源代码->选择控制台，就可以观察具体效果。</p>
+			<p><a href="demo4.html">JavaScript王国--多态案例3</a></p>
+		</article>
+	</main>
+	<footer>&copy;by 20170815
+	</footer>
+	<script type="text/javascript">
+	//不变部分
+	var makeSound=function (animal){
+		animal.sound();
+	};
+	//可变部分进行封装
+	var Duck = function(){};
+	Duck.prototype.sound=function(){ console.log('嘎嘎嘎');}
+	var Chicken = function(){};
+	Chicken.prototype.sound=function(){ console.log('咯咯咯');}
+	makeSound(new Duck());
+	makeSound(new Chicken());
+	//当动物世界新增一个动物狗，添加如下代码
+	var Dog = function(){};
+	Dog.prototype.sound=function(){ console.log('汪汪汪');}
+	makeSound(new Dog());
+	</script>
+</body>
+</html>
