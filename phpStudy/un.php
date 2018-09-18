@@ -1,5 +1,7 @@
 <?php //前端不显示在导航中的页面
 $not_show_display=array(
+	'.gitignore',
+	'.htaccess',
 	'index.php',
 	'navbar.php',
 	'un.php',
