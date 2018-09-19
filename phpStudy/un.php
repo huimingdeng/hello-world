@@ -10,5 +10,9 @@ $not_show_display=array(
 	'test.php',
 	'file.txt',
 	'file.csv',
-	'upload_file.php'
+	'upload_file.php',
+	'framework7.php',
+	'favicon.ico',
+	'readme.txt',
+	'xbug.sublime-workspace'
 );
