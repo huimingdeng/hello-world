@@ -69,7 +69,7 @@ class PdoMySQL
 				return false;
 			}
 			// 成功后，设置字符值
-			self::$link -> exec('SET NAMES '.DB_CHARSET);
+			self::$link -> exec('SET NAMES '.DB_CHARSET);//UTF8
 			// 成功返回数据库版本
 			self::$dbVersion = self::$link->getAttribute(constant("PDO::ATTR_SERVER_VERSION"));
 			self::$connected = true;
