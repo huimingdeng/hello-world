@@ -26,3 +26,5 @@
 
 ## NN ##
 深度学习，神经网络图谱，笔记等。
+
+这里面的脚本在jupyter notebook中执行可以，目前自定义配置的sublime中的Python执行会抛出弃用警告 **`DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses import imp`**
