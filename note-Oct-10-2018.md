@@ -18,7 +18,7 @@
 5. .... 编译 Perl `make && make test` 后，虚拟机挂掉了
 6. 最终检测，原因是联网不成功，设置IP后，ping通网络后使用`yum install perl*` 成功安装 perl5 。
 7. 安装 VMware tools，在 vmware-tools-distrib 目录执行 `./vmware-install.pl`，提示：The path "" is not a valid path to the ... ,处理：`yum -y install kernel-$(uname -r)` 
-8. **扩容问题**：
+8. **扩容问题**：（P.S.也可参考[百度经验](https://jingyan.baidu.com/article/54b6b9c0fc8b0b2d583b47c6.html "Linux系统下增加LV（逻辑卷）容量")）
 	1. 由安装的 30GB 扩展到 50GB ，（P.S. 只扩容，磁盘数不加） `df -h`命令查看空间
 	2. `fdisk /dev/sda` 详细步骤参考：[VMware内CentOS7虚拟机硬盘扩容](https://blog.csdn.net/Wang_Xin_SH/article/details/77872885 "VMware内CentOS7虚拟机硬盘扩容")
 	3. 重启后查看分区类型 `df -T /dev/sda1` 类型为xfs，与上面教程一致
