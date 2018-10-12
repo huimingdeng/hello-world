@@ -45,3 +45,18 @@ Oct 10,2018:
 
 
 P.S. 感谢各位 CSDN 的博主以及互联网上的无名工作者，虽然部分博客不能解决安装中具体遇到的问题，但提供比较好的相关知识，帮助理解和处理、储备知识。
+
+## CentOS 安装 docker (以前面虚拟机中的CentOS为例) ##
+docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如图：
+![eg.本地安装的CentOS7](https://i.imgur.com/RTOPp4M.png)
+或使用 `uname -r` 可以直观的查看。
+
+1. 更新 yum ：root 用户直接 `yum update`,其它用户在 sudo 组则 `sudo yum update`
+2. 如果存在旧版本的 docker 则可以执行命令卸载 `sudo yum remove docker  docker-common docker-selinux docker-engine` 
+3. 安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
+4. 设置yum源 `sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo` <br> ![设置yum](https://i.imgur.com/I1dnUyr.png)
+5. 可以查看仓库中 docker 版本 `yum list docker-ce --showduplicates | sort -r` <br> ![2018.10.12-docker-version](https://i.imgur.com/Fq9KnGx.png) 
+6. 开始安装 docker 了： `sudo yum install docker-ce` 由于repo中默认只开启stable仓库，故这里安装的是最新稳定版 18.03.1 <br> `sudo yum install <FQPN>` eg. `sudo yum install docker-ce-18.06.1.ce7` <br> 这里采用了默认安装 <br> ![默认安装docker最新版18.06.1.ce](https://i.imgur.com/ltViogP.png)
+
+
+
