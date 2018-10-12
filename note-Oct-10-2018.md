@@ -30,6 +30,10 @@
 	9. VG加入LV `lvextend -l +5120 /dev/centos/root` 记住这里是 centos ，输入的是第7步中的VG Name，否则出错。（P.S.加入逻辑卷中，+2559：为 `vgdisplay`命令中显示的 Free PE/Size 字段，而我这边是 5120 ，/dev/cl/root:为 `lvdisplay` 命令显示中的 LV Path ）
 	10. 调整文件系统大小，本例中是xfs文件系统使用xfs_growfs命令调整，若其他文件系统，如ext4使用resize2fs命令，注意区分： `xfs_growfs /dev/centos/root` （教程中：`xfs_growfs /dev/cl/root`）最终，我的数据块由6GB(7075840)更改为11GB(12318720)
 	11. `df -h` 查看最终修改数据 显示47GB，加上已经使用的等各种数据，证明已经从30GB扩容到50GB。
+	12. pv、lv、vg 详解：(P.S.参考：[Linx 卷管理详解--VG LV PV](https://blog.csdn.net/wuweilong/article/details/7565530 "Linx 卷管理详解--VG LV PV"))
+		1. PV：物理卷（physicalvolume）；指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。
+		2. LV:逻辑卷（logicalvolume）; LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。
+		3. VG：卷组（Volume Group）；LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。
 
 Oct 10,2018:
 <h3>最终发现只是处理解决了如下问题：</h3>
@@ -39,3 +43,5 @@ Oct 10,2018:
 3. gcc 安装成功
 4. 配置网络，yum 安装 Perl.(P.S.检测 yum 能否成功安装互联网资源)
 
+
+P.S. 感谢各位 CSDN 的博主以及互联网上的无名工作者，虽然部分博客不能解决安装中具体遇到的问题，但提供比较好的相关知识，帮助理解和处理、储备知识。
