@@ -56,7 +56,9 @@ docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如�
 3. 安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
 4. 设置yum源 `sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo` <br> ![设置yum](https://i.imgur.com/I1dnUyr.png)
 5. 可以查看仓库中 docker 版本 `yum list docker-ce --showduplicates | sort -r` <br> ![2018.10.12-docker-version](https://i.imgur.com/Fq9KnGx.png) 
-6. 开始安装 docker 了： `sudo yum install docker-ce` 由于repo中默认只开启stable仓库，故这里安装的是最新稳定版 18.03.1 <br> `sudo yum install <FQPN>` eg. `sudo yum install docker-ce-18.06.1.ce7` <br> 这里采用了默认安装 <br> ![默认安装docker最新版18.06.1.ce](https://i.imgur.com/ltViogP.png)
+6. 开始安装 docker 了：<br> `sudo yum install docker-ce` 由于repo中默认只开启stable仓库，故这里安装的是最新稳定版 18.03.1 <br> `sudo yum install <FQPN>` eg. `sudo yum install docker-ce-18.06.1.ce7` <br> 这里采用了默认安装 <br> ![默认安装docker最新版18.06.1.ce](https://i.imgur.com/ltViogP.png)
+7. 启动并加入开机启动 <br> `sudo systemctl start docker` <br> `sudo systemctl enable docker`
+8. 验证是否成功安装 docker： <br> **`docker version`** <br><br>![安装docker验证](https://i.imgur.com/fKZJAQF.png)
 
 
 
