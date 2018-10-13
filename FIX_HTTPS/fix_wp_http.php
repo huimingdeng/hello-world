@@ -1,12 +1,14 @@
 <?php 
 /**
  * Script Name: fix_wp_http
- * Version: 1.0
+ * Version: 2.0
  * Author: huimingdeng
  * CreateTime: Oct,10,2018
- * MTime: 
+ * MTime: Oct,10,2018 17:00
  */
+error_reporting(0);
 require './wp-config.php';
+
 date_default_timezone_set("Asia/Shanghai");
 global $wpdb;
 // 获取文章数量，返回对象
@@ -16,6 +18,7 @@ $post_publish = $post_count_obj->publish;
 
 // 查询wp中已经发布状态下的文章，获取一条
 $page = 0;
+$update = "UPDATE wp_posts SET `post_content`='%s' WHERE ID=%s";
 for ($i=0; $i < $post_publish; $i++) { 
 	$page = $i;
 	$offset = 1;
@@ -28,12 +31,20 @@ for ($i=0; $i < $post_publish; $i++) {
 		$new_content = getReplaceDomain($post_one_array['post_content']);
 		$post_one_array['post_content'] = '';
 		$post_one_array['post_content'] = $new_content;
-		$bool = wp_update_post($post_one_array);
-		if($bool>0){
-			file_put_contents("fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$bool.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
+		// $bool = wp_update_post($post_one_array);
+		$query = $wpdb->query(sprintf($update,$new_content,$post_one_array['ID']));
+		if($query){
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$query.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
 		}else{
-			file_put_contents("fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$bool.' 中的 http 协议无法替换成 https 协议。'."\n",FILE_APPEND);
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$query.' 中的 http 协议无法替换成 https 协议。'."\n",FILE_APPEND);
 		}
+		/*if($bool>0){
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$bool.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
+		}else{
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$bool.' 中的 http 协议无法替换成 https 协议。'."\n",FILE_APPEND);
+		}*/
+	}else{
+		file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$post_one_array['ID'].' 中的正文无 http 协议。'."\n",FILE_APPEND);
 	}
 
 	/*if(!empty($post_one_array['post_content'])&&haveDomainHttps($post_one_array['post_content'])){
@@ -42,16 +53,16 @@ for ($i=0; $i < $post_publish; $i++) {
 		$post_one_array['post_content'] = $new_content;
 		wp_update_post($post_one_array);
 		if($bool>0){
-			file_put_contents("fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$bool.' 中的 https 协议替换成 http 协议。'."\n",FILE_APPEND);
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$bool.' 中的 https 协议替换成 http 协议。'."\n",FILE_APPEND);
 		}else{
-			file_put_contents("fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$bool.' 中的 https 协议无法替换成 http 协议。'."\n",FILE_APPEND);
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$bool.' 中的 https 协议无法替换成 http 协议。'."\n",FILE_APPEND);
 		}
 	}*/
 }
 
 
 function haveDomainHttp($conetent){
-	if(preg_match_all('/(http:\/\/www\.genecopoeia\.com|http:\/\/genecopoeia\.com|http:\/\/othello\.genecopoeia\.com)/', $conetent)){
+	if(preg_match_all('/(http:\/\/www\.genecopoeia\.com|http:\/\/genecopoeia\.com|http:\/\/othello\.genecopoeia\.com)/', $conetent, $matches)){
 		return true;
 	}else{
 		return false;
@@ -73,7 +84,7 @@ function getReplaceDomain($conetent){
 // -------------------------------------------------------------------------------
 
 function haveDomainHttps($conetent){
-	if(preg_match_all('/(https:\/\/www\.genecopoeia\.com|https:\/\/genecopoeia\.com|https:\/\/othello\.genecopoeia\.com)/', $conetent)){
+	if(preg_match_all('/(https:\/\/www\.genecopoeia\.com|https:\/\/genecopoeia\.com|https:\/\/othello\.genecopoeia\.com)/', $conetent, $matches)){
 		return true;
 	}else{
 		return false;
