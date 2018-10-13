@@ -1,8 +1,8 @@
 <?php 
 /**
  * NAME:FIX_HTTPS
- * VERSION: 2.0
- * DESCRIPTION: 第二版，添加了 ALLOWEDFLOOR 的配置，表示只执行当前目录下的几个特定的子目录
+ * VERSION: 2.1.1
+ * DESCRIPTION: 添加判断内容存在 genecopoeia，才执行替换
  * MTIME: Oct 13,2018
  */
 class FIX_HTTPS
@@ -90,24 +90,33 @@ class FIX_HTTPS
 		if(in_array(strtolower($ext), $this->config['ALLOWEDEXT'])){
 			echo "Reading the file ".$this->file." ..."."\n";
 			$content = file_get_contents($this->file);
-			$new_content = preg_replace('/(http:)/', 'https:', $content);
-			if($this->config['IS_TEST']){
-				echo "Test ..."."\n";
-				$new_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename."_new.".$ext;
-				echo "Generate new file ". $new_filename . " ..." ."\n";
-				file_put_contents($new_filename, $new_content);
-			}else{
-				$new_filename = $this->file;
-				if($this->config['IS_BACK']){
-					$back_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename.".back.".date('Ymd').".".$ext;
-					echo "Backup the original file ".$this->file." and rename it as ".basename($back_filename). " ..."."\n";
-					file_put_contents($back_filename,$content);
+
+			if(preg_match('/(http:\/\/www\.genecopoeia\.com|http:\/\/genecopoeia\.com|http:\/\/othello\.genecopoeia\.com)/', $content)){
+
+				$new_content_v0 = preg_replace('/(http:\/\/www\.genecopoeia\.com)/', 'https://www.genecopoeia.com', $content);
+				$new_content_v1 = preg_replace('/(http:\/\/genecopoeia\.com)/', 'https://genecopoeia.com', $new_content_v0);
+				$new_content = preg_replace('/(http:\/\/othello\.genecopoeia\.com)/', 'https://othello.genecopoeia.com', $new_content_v1);
+
+				if($this->config['IS_TEST']){
+					echo "Test ..."."\n";
+					$new_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename."_new.".$ext;
+					echo "Generate new file ". $new_filename . " ..." ."\n";
+					file_put_contents($new_filename, $new_content);
+				}else{
+					$new_filename = $this->file;
+					if($this->config['IS_BACK']){
+						$back_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename.".back.".date('Ymd').".".$ext;
+						echo "Backup the original file ".$this->file." and rename it as ".basename($back_filename). " ..."."\n";
+						file_put_contents($back_filename,$content);
+					}
+					echo "Replace the HTTP protocol to save back to the original file ..."."\n";
+					file_put_contents($new_filename, $new_content);
 				}
-				echo "Replace the HTTP protocol to save back to the original file ..."."\n";
-				file_put_contents($new_filename, $new_content);
+				
+				file_put_contents("fix_https_logs.txt",'['.date('Y-m-d H:i:s').'] 已将文件 '.$this->file.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
+			}else{
+				file_put_contents("fix_https_logs.txt",'['.date('Y-m-d H:i:s').'] 文件 '.$this->file.'无需要替换的项目协议。'."\n",FILE_APPEND);
 			}
-			
-			file_put_contents("fix_https_logs.txt",'['.date('Y-m-d H:i:s').'] 已将文件 '.$this->file.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
 		}else{
 			file_put_contents("fix_https_logs.txt",'['.date('Y-m-d H:i:s').'] 文件 '.$this->file.' 不符合 ['.implode(',',$this->config['ALLOWEDEXT']).'] 后缀，所以不执行替换操作。'."\n",FILE_APPEND);
 		}
