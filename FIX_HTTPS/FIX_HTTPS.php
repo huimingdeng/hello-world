@@ -1,6 +1,9 @@
 <?php 
 /**
- * fix http
+ * NAME:FIX_HTTPS
+ * VERSION: 2.0
+ * DESCRIPTION: 第二版，添加了 ALLOWEDFLOOR 的配置，表示只执行当前目录下的几个特定的子目录
+ * MTIME: Oct 13,2018
  */
 class FIX_HTTPS
 {	
@@ -19,11 +22,24 @@ class FIX_HTTPS
 		$this->path = $path.DIRECTORY_SEPARATOR;
 		file_put_contents("fix_https_logs.txt",'['.date('Y-m-d H:i:s').'] 准备执行查找目录 '.$this->path."\n",FILE_APPEND);
 		echo "Start preparing the recursive directory ".$this->path." ..."."\n";
-		$this->checkIsFile($this->path);
+		$this->eachdir($this->path);
 	}
 
 	protected function _config(){
 		$this->config = require_once(dirname(__FILE__).DIRECTORY_SEPARATOR."config.php");
+	}
+
+	private function eachdir($rootpath){
+		if(!empty($this->config['ALLOWEDFLOOR'])){
+			foreach ($this->config['ALLOWEDFLOOR'] as $key => $value) {
+				$allow_path = $rootpath.$value.DIRECTORY_SEPARATOR;
+				$this->checkIsFile($allow_path);
+			}
+		}elseif(empty($this->config['ALLOWEDFLOOR'])){
+			$this->checkIsFile($rootpath);
+		}else{
+			echo "\nError: error of the program or configuration file error...\n";
+		}
 	}
 
 	private function checkIsFile($file){
@@ -82,9 +98,11 @@ class FIX_HTTPS
 				file_put_contents($new_filename, $new_content);
 			}else{
 				$new_filename = $this->file;
-				$back_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename.".back.".date('Ymd').".".$ext;
-				echo "Backup the original file ".$this->file." and rename it as ".basename($back_filename). " ..."."\n";
-				file_put_contents($back_filename,$content);
+				if($this->config['IS_BACK']){
+					$back_filename = dirname($this->file).DIRECTORY_SEPARATOR.$filename.".back.".date('Ymd').".".$ext;
+					echo "Backup the original file ".$this->file." and rename it as ".basename($back_filename). " ..."."\n";
+					file_put_contents($back_filename,$content);
+				}
 				echo "Replace the HTTP protocol to save back to the original file ..."."\n";
 				file_put_contents($new_filename, $new_content);
 			}
