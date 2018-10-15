@@ -1,7 +1,7 @@
 <?php 
 /**
  * Script Name: fix_wp_http
- * Version: 2.0
+ * Version: 2.1
  * Author: huimingdeng
  * CreateTime: Oct,10,2018
  * MTime: Oct,10,2018 17:00
@@ -32,11 +32,11 @@ for ($i=0; $i < $post_publish; $i++) {
 		$post_one_array['post_content'] = '';
 		$post_one_array['post_content'] = $new_content;
 		// $bool = wp_update_post($post_one_array);
-		$query = $wpdb->query(sprintf($update,$new_content,$post_one_array['ID']));
+		$query = $wpdb->query(sprintf($update,addslashes($new_content),$post_one_array['ID']));
 		if($query){
-			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$query.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$post_one_array['ID'].' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
 		}else{
-			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$query.' 中的 http 协议无法替换成 https 协议。'."\n",FILE_APPEND);
+			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Error: 文章 '.$post_one_array['ID'].' 中的 http 协议无法替换成 https 协议。'."\n",FILE_APPEND);
 		}
 		/*if($bool>0){
 			file_put_contents("./fix-wp_posts-https.logs.txt",'['.date('Y-m-d H:i:s').'] Notec: 文章 '.$bool.' 中的 http 协议替换成 https 协议。'."\n",FILE_APPEND);
