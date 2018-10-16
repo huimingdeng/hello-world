@@ -64,8 +64,7 @@ docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如�
 7. 启动并加入开机启动 <br> `sudo systemctl start docker` <br> `sudo systemctl enable docker`
 8. 验证是否成功安装 docker： <br> 
 **`docker version`** <br>
-<br>
-![安装docker验证](https://i.imgur.com/fKZJAQF.png)
+<br>![安装docker验证](https://i.imgur.com/fKZJAQF.png)
 
 ## CentOS7 安装 ftp服务器(vsftpd) ##
 
@@ -74,8 +73,7 @@ docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如�
 <br> 
 **`anon_upload_enable=YES`**<br> 
 和 **`anon_mkdir_write_enable=YES`**；<br><br> 
-同时可以设置 vsftpd 为开机启动<br> 
-![sudo systemctl enable vsftpd.service](https://i.imgur.com/ExI0d5Y.png)**图1** <br>
+同时可以设置 vsftpd 为开机启动<br>![sudo systemctl enable vsftpd.service](https://i.imgur.com/ExI0d5Y.png)**图1** <br>
 重启ftp服务器 `sudo systemctl restart vsftpd.service`。<br>
 
 3. 查看当前安装ftp的状态：`sudo getsebool -a|grep ftp` <br> ![sudo getsebool -a|grep ftp](https://i.imgur.com/8589w9n.png)**图2** <br> 然后设置 `ftpd_full_access ` 和 `tftp_home_dir` 为开启状态 `on` ；<br> 
