@@ -69,10 +69,9 @@ docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如�
 ## CentOS7 安装 ftp服务器(vsftpd) ##
 
 1. `witch vsftpd`或`rpm -aq vsftpd` 发现虚拟机中的 centOS7 系统没有安装服务器，使用命令 `yum update`更新 yum; `yum -y install vsftpd`命令安装ftp服务器。
-2. 配置 vsftpd 服务器，`vim /etc/vsftpd/vsftpd.conf` 关闭匿名用户 **`anonymous_enable=ON`**，测试的时候则开启；设置两项为： yes 
-<br> 
+2. 配置 vsftpd 服务器，`vim /etc/vsftpd/vsftpd.conf` 关闭匿名用户 **`anonymous_enable=ON`**，测试的时候则开启；设置两项为： yes <br>
 **`anon_upload_enable=YES`**<br> 
-和 **`anon_mkdir_write_enable=YES`**；<br><br> 
+和 **`anon_mkdir_write_enable=YES`**；<br> 
 同时可以设置 vsftpd 为开机启动<br>![sudo systemctl enable vsftpd.service](https://i.imgur.com/ExI0d5Y.png) **图1** <br>
 重启ftp服务器 `sudo systemctl restart vsftpd.service`。<br>
 
