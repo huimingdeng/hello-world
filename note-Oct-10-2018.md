@@ -56,9 +56,129 @@ docker 需要 CentOS 内核版本为 3.10 及以上。本地安装的CentOS7如�
 3. 安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
 4. 设置yum源 `sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo` <br> ![设置yum](https://i.imgur.com/I1dnUyr.png)
 5. 可以查看仓库中 docker 版本 `yum list docker-ce --showduplicates | sort -r` <br> ![2018.10.12-docker-version](https://i.imgur.com/Fq9KnGx.png) 
-6. 开始安装 docker 了：<br> `sudo yum install docker-ce` 由于repo中默认只开启stable仓库，故这里安装的是最新稳定版 18.03.1 <br> `sudo yum install <FQPN>` eg. `sudo yum install docker-ce-18.06.1.ce7` <br> 这里采用了默认安装 <br> ![默认安装docker最新版18.06.1.ce](https://i.imgur.com/ltViogP.png)
+6. 开始安装 docker 了：<br> 
+`sudo yum install docker-ce` 由于repo中默认只开启stable仓库，故这里安装的是最新稳定版 18.03.1 <br>
+`sudo yum install <FQPN>` eg. `sudo yum install docker-ce-18.06.1.ce7` <br> 
+这里采用了默认安装 <br> 
+![默认安装docker最新版18.06.1.ce](https://i.imgur.com/ltViogP.png)
 7. 启动并加入开机启动 <br> `sudo systemctl start docker` <br> `sudo systemctl enable docker`
-8. 验证是否成功安装 docker： <br> **`docker version`** <br><br>![安装docker验证](https://i.imgur.com/fKZJAQF.png)
+8. 验证是否成功安装 docker： <br> 
+**`docker version`** <br>
+<br>
+![安装docker验证](https://i.imgur.com/fKZJAQF.png)
+
+## CentOS7 安装 ftp服务器(vsftpd) ##
+
+1. `witch vsftpd`或`rpm -aq vsftpd` 发现虚拟机中的 centOS7 系统没有安装服务器，使用命令 `yum update`更新 yum; `yum -y install vsftpd`命令安装ftp服务器。
+2. 配置 vsftpd 服务器，`vim /etc/vsftpd/vsftpd.conf` 关闭匿名用户 **`anonymous_enable=ON`**，测试的时候则开启；设置两项为： yes 
+<br> 
+**`anon_upload_enable=YES`**<br> 
+和 **`anon_mkdir_write_enable=YES`**；<br><br> 
+同时可以设置 vsftpd 为开机启动<br> 
+![sudo systemctl enable vsftpd.service](https://i.imgur.com/ExI0d5Y.png)**图1** <br>
+重启ftp服务器 `sudo systemctl restart vsftpd.service`。<br>
+
+3. 查看当前安装ftp的状态：`sudo getsebool -a|grep ftp` <br> ![sudo getsebool -a|grep ftp](https://i.imgur.com/8589w9n.png)**图2** <br> 然后设置 `ftpd_full_access ` 和 `tftp_home_dir` 为开启状态 `on` ；<br> 
+执行命令`sudo setsebool -P allow_ftpd_full_access on` 和`sudo setsebool -P tftp_home_dir on` <br> 
+![sudo setsebool -P allow_ftpd_full_access on](https://i.imgur.com/yW6f8oe.png) **图3** <br> 
+![sudo setsebool -P tftp_home_dir on](https://i.imgur.com/spqSP8Y.png) **图4**
+4. 或使用 `sudo systemctl status vsftpd.service` 查看ftp状态；接着在本地安装ftp进行测试：`sudo yum -y install ftp`,<br> 
+测试能否链接使用：`ftp <username>`<br> 如图： 状态码：220和登陆后的状态码为：230表示连接成功。<br>
+![ftp 测试](https://i.imgur.com/6Y0TUxa.png)**图5**
+5. 这是后如果使用 Filezilla 等ftp工具连接虚拟机，发现连接不了，why? <br> 
+是因为防火墙的问题了，需要写入规则，允许通过防火墙，不然外部无法访问。
+6. 防火墙设置：<br> 选项：
+	1. 开发21端口：`sudo firewall-cmd --zone=public --add-port=21/tcp --permanent`
+	2. 永久开放21端口：`sudo firewall-cmd --add-service=ftp --permanent`
+	3. 关闭ftp服务：`sudo firewall-cmd --remove-service=ftp --permanent`
+	4. 不改变状态下，重新加载防火墙：`sudo firewall-cmd --reload`
+
+7. 可能在使用到的命令（P.S.以下命令在非root用户请加上 `sudo`，若加了`sudo`提示没有在用户组中，则添加到`sudo`用户组）：<br>
+`systemctl start firewalld`     启动防火墙服务 <br> 
+`firewall-cmd --add-service=ftp`     暂时开放ftp服务 
+<br> 
+`firewall-cmd --add-service=ftp --permanent`    永久开放ftp服務<br>
+`firewall-cmd --remove-service=ftp --permanent`    永久关闭ftp服務<br>
+`systemctl restart firewalld`    重启firewalld服务<br>
+`firewall-cmd --reload`    重载配置文件<br>
+`firewall-cmd --query-service ftp`    查看服务的启动状态<br>
+`firewall-cmd --list-all`    显示防火墙应用列表<br>
+`firewall-cmd --add-port=8001/tcp`    添加自定义的开放端口<br>
+`iptables -L -n | grep 21`    查看设定是否生效<br>
+`firewall-cmd --state`    检测防火墙状态<br>
+`firewall-cmd --permanent --list-port`    查看端口列表
+
+8. 补充权限设置说明：<br>![权限设置-图1](https://i.imgur.com/MAcMpne.png)<br>其它配置项说明：
+<br>
+**anonymous_enable=YES** #允许匿名登陆 
+<br>
+**local_enable=YES** #启动home目录 
+<br>
+**write_enable=YES** #ftp写的权限 
+<br>
+**local_umask=022** 
+<br>
+**dirmessage_enable=YES** #连接打印的消息 
+<br>
+**connect_from_port_20=YES** #20端口 
+<br>
+**xferlog_std_format=YES**
+<br>
+**idle_session_timeout=600**
+<br>
+**data_connection_timeout=300** 
+<br>
+**accept_timeout=60** 
+<br>
+**connect_timeout=60** 
+<br>
+**ascii_upload_enable=YES** #上传 
+<br>
+**ascii_download_enable=YES** #下载 
+<br>
+**chroot_local_user=NO** #是否限制用户在主目录活动 
+<br>
+**chroot_list_enable=YES** #启动限制用户的列表 
+<br>
+**chroot_list_file=/etc/vsftpd/chroot_list** #每行一个用户名 
+<br>
+**allow_writeable_chroot=YES** #允许写 
+<br>
+**listen=NO**
+<br>
+**listen_ipv6=YES** 
+<br>
+**pasv_min_port=50000** 允许ftp工具访问的端口起止端口 
+<br>
+**pasv_max_port=60000** 
+<br>
+**pam_service_name=vsftpd** #配置虚拟用户需要的 
+<br>
+**userlist_enable=NO** #配置yes之后，user_list的用户不能访问ftp 
+<br>
+**tcp_wrappers=YES** 
+<br>
+**chroot_list** 文件需要自己建,内容一行一个用户名字 
+<br>
+**anon_root=/data/ftp/public** #修改匿名用户的访问路径
+<br>
+
+----------
+#### 测试： ####
+**上传前：**<br>
+![完成链接测试](https://i.imgur.com/tGyq2Ke.png)
+<br>**上传后：**<br>
+![上传后](https://i.imgur.com/21bP7GT.png)
+**Linux 上面的目录：**<br>
+![linux 查找目录](https://i.imgur.com/B92be1H.png)
+
+**P.S. 完成测试，可以链接到虚拟机系统上的FTP，进行上传和下载**   —— Oct,16,2018
+
+ 
+
+ 
+
+
 
 
 
