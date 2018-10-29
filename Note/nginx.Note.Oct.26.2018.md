@@ -22,8 +22,8 @@ Nginx学习笔记：安装 nginx-1.2.3 参考《Nginx高性能Web服务器详解
 			- options/ 目录下的脚本负责处理脚本参数。
 			- 文件（have、nohave、make及install等）负责输出信息到生成文件。
 			- feature 用于脚本自身服务。
-	- configure 文件是 Nginx 软件的自动脚本程序。运行 configure 自动脚本一般会完成两项工作：一是检查环境，根据环境检查结果生成 C 代码；二是生成编译代码需要的 Makefile 文件。--参考：
-		- ![参考书籍《Nginx高性能Web服务器详解》](https://i.imgur.com/9ZFKhuD.jpg)
+	- configure 文件是 Nginx 软件的自动脚本程序。运行 configure 自动脚本一般会完成两项工作：一是检查环境，根据环境检查结果生成 C 代码；二是生成编译代码需要的 Makefile 文件。--参考：《Nginx高性能Web服务器详解》
+		
 	- CHANGES、LICENSE(zlib)、README 为版本说明
 
 2. 
