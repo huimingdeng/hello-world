@@ -26,4 +26,15 @@ Nginx学习笔记：安装 nginx-1.2.3 参考《Nginx高性能Web服务器详解
 		
 	- CHANGES、LICENSE(zlib)、README 为版本说明
 
-2. 
+2. 执行命令 `./configure --prefix=/Nginx_123/Nginx_123_Compile` 生成 MakeFile 文件，根据信息是否需要额外引用库。如下图：是执行后发现 OpenSSL 库没有发现，因此要查找是否安装 OpenSSL。
+![示例图](https://i.imgur.com/Af03sqF.png)
+	- `which openssl` 得到安装路径 `/usr/bin/openssl`，因此，重新执行命令 `./configure --prefix=/Nginx_123/Nginx_123_Compile --with-openssl=/usr/bin/openssl` ,结果如下图：
+![示例图2](https://i.imgur.com/EBLaRrT.png)
+
+3. 执行编译安装，`make && make install`,然后进入 `/Nginx_123/Nginx_123_Compile` 工作目录，查看目录 <b style="color:red;">`ls *`</b> 如下图：
+![安装完成后](https://i.imgur.com/9M4V4RF.png)
+
+4. nginx 的启动和停止控制：
+	- nginx 运行时，会存在一个主进程和多个工作进程。`ps -ef | grep "nginx"` 查找 nginx 是否运行，也可得到：root主进程pid:69309 ，可以使用 `kill SIGNAL PID <pid>` 关闭。
+	- ![启动nginx](https://i.imgur.com/mafRlue.png)
+	
