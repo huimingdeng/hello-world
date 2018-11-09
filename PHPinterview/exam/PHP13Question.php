@@ -40,15 +40,6 @@ class PHP13Question{
 		$res = [];
 		$y;
 		for ($x=$s; $x < $e; $x++) { 
-			/*for ($y=2; $y < $x; $y++) { 
-				if($x%$y == 0){
-					break;
-				}
-			}
-			// 当 $y >= $x,则表示已经是自身外都不能整除
-			if ($y >= $x && $x != 1) {
-				array_push($this->ok, $x);
-			}*/
 			$tmp = $this->decompose($x);
 			if( count($tmp) == 1 && $tmp[0] == $x )
 				array_push($res,$x);
