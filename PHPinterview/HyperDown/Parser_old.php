@@ -500,16 +500,13 @@ class Parser
         // link
         $text = preg_replace_callback(
             "/\[((?:[^\]]|\\\\\]|\\\\\[)+?)\]\(((?:[^\)]|\\\\\)|\\\\\()+?)\)/",
-            function ($matches) use ($self) {//print_r($matches);
+            function ($matches) use ($self) {
                 $escaped = $self->parseInline(
                     $self->escapeBracket($matches[1]),  '',  false, false
                 );
                 $url = $self->escapeBracket($matches[2]);
-                preg_match('/\s(?:\").*(?:\")/',$matches[2],$title_a);
-                (!empty($title_a))?($title=preg_replace('/\"/','',trim($title_a[0]))):($title="");
-                ($title!="")?($title=" title=\"{$title}\""):($title='');
                 $url = $self->cleanUrl($url);
-                return $self->makeHolder("<a href=\"{$url}\"{$title}>{$escaped}</a>");
+                return $self->makeHolder("<a href=\"{$url}\">{$escaped}</a>");
             },
             $text
         );
