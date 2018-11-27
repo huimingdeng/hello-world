@@ -1,11 +1,11 @@
 <?php 
+namespace TemplateMethodPattern;
 class Client{
-	function __construct(){
-		spl_autoload_register(array($this,"autoFile"));
-	}
+	
 
 	public function main(){
-		
+		require './bmwmodel.class.php';
+		require './benzmodel.class.php';
 		$baoma = new BMWModel();
 		$benz = new BenzModel();
 		$sequence = [];
@@ -20,14 +20,6 @@ class Client{
 		$benz->run();
 	}
 
-	private function autoFile($class){
-		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-		$classname = strtolower($class);
-		$classfile = $path . $classname . '.class.php';
-
-		if (file_exists($classfile))
-			require_once($classfile);
-	}
 }
 
 $c = new Client;

@@ -1,14 +1,15 @@
 <?php 
+namespace TemplateMethodPattern;
+
 abstract class CarModel{
 	private $sequence = array();
-
 	protected abstract function start();
 	protected abstract function stop();
 	protected abstract function alarm();
 	protected abstract function engineBoom();
 	final public function run() {
 		for ($i=0; $i < count($this->sequence); $i++) { 
-			switch (strtolower($this->sequence[$i])) {
+			switch (trim(strtolower($this->sequence[$i]))) {
 				case 'start':
 					$this->start();
 					break;
@@ -30,4 +31,5 @@ abstract class CarModel{
 	final public function setSequence($sequence=[]){
 		$this->sequence = $sequence;
 	}
+	
 }
