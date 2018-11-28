@@ -1,8 +1,9 @@
 <?php 
 namespace BuilderPattern;
 
-require(dirname(__FILE__). DIRECTORY_SEPARATOR. 'benzbuilder.class.php');
-require(dirname(__FILE__). DIRECTORY_SEPARATOR. 'bmwbuilder.class.php');
+require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'carbuilder.class.php');
+require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'benzbuilder.class.php');
+require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'bmwbuilder.class.php');
 
 class Client{
 	

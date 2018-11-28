@@ -2,7 +2,6 @@
 namespace BuilderPattern;
 use TemplateMethodPattern;
 
-require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'carbuilder.class.php');
 require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '15.Template_method_pattern' . DIRECTORY_SEPARATOR . 'benzmodel.class.php' );
 /**
  * 奔驰构建者
