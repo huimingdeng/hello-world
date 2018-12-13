@@ -14,5 +14,6 @@ $not_show_display=array(
 	'framework7.php',
 	'favicon.ico',
 	'readme.txt',
-	'xbug.sublime-workspace'
+	'xbug.sublime-workspace',
+	'header.php'
 );
