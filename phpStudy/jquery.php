@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>jQuery学习</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="jQuery/css/bootstrap.css">
-</head>
-<body>
-	<div class="container">
+<?php 
+$pageTitle = "jQuery学习";
+$filename = basename(__FILE__);
+require_once('header.php');
+$createTime = date('Y-m-d',filectime($filename));?>
 		<header><h1>jQuery学习</h1></header>
 		<main>
 			<?php $dir=dirname(__FILE__)."/jQuery";
@@ -34,7 +30,4 @@
 				}
 			 }?>
 		</main>
-		<footer>&copy; by dhm &nbsp; 2017.11.10 <a href="/"><?php echo $_SERVER['HTTP_HOST']?></a></footer>
-	</div>
-</body>
-</html>
+<?php include("footer.php"); ?>
