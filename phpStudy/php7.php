@@ -1,11 +1,11 @@
 <?php 
-$pageTitle = "phpStudy";
+$pageTitle = "PHP7 新特性";
 $filename = basename(__FILE__);
 require_once('header.php');
 $createTime = date('Y-m-d',filectime($filename));?>
-		<header><h1>PHP复习之路</h1></header>
+		<header><h1>PHP7 新特复习之路</h1></header>
 		<main>
-		<?php $dir=dirname(__FILE__)."/";
+		<?php $dir=dirname(__FILE__)."/php7";
 		$file_arr=scandir($dir,0);
 		if(!empty($file_arr)){
 			$array_dir=array();
@@ -20,7 +20,7 @@ $createTime = date('Y-m-d',filectime($filename));?>
 				<ul>
 				<?php foreach ($array_dir as $k => $v) {
 					if($k==0){$ac="active";}else{$ac="";}?>
-					<li class="<?php echo $ac;?>"><a href="<?php echo $v;?>"><?php echo $v;?></a></li>
+					<li class="<?php echo $ac;?>"><a href="php7/<?php echo $v;?>"><?php echo $v;?></a></li>
 					<?php
 				}
 				?>
@@ -30,4 +30,4 @@ $createTime = date('Y-m-d',filectime($filename));?>
 			}
 		 }?>
 		</main>
-<?php include("footer.php"); ?>
+<?php include("footer.php"); ?>		

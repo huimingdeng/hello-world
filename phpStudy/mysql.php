@@ -1,12 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>MySql</title>
-	<link href="javascript/css/public.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
+<?php 
+$pageTitle = "MySQL";
+$filename = basename(__FILE__);
+require_once('header.php');
+$createTime = date('Y-m-d',filectime($filename));?>
 	<header>MySql</header>
-<script type="text/javascript"></script>
-</body>
-</html>
+
+<?php include("footer.php"); ?>

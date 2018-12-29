@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>php复习</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="php/globals/bootstrap.css">
-
-</head>
-<body>
-	<div class="container">
+<?php 
+$pageTitle = "PHP 复习";
+$filename = basename(__FILE__);
+require_once('header.php');
+$createTime = date('Y-m-d',filectime($filename));?>
 		<header><h1>PHP复习之路</h1></header>
 		<main>
 		<?php $dir=dirname(__FILE__)."/php";
@@ -35,9 +30,4 @@
 			}
 		 }?>
 		</main>
-		<footer>&copy;by dhm &nbsp,20171016, &nbsp;<a href="/"><?php echo $_SERVER['HTTP_HOST'];?></a></footer>
-	</div>
-	<script type="text/javascript" src="php/globals/jquery-3.2.1.js"></script>
-	<script type="text/javascript" src="php/globals/bootstrap.js"></script>
-</body>
-</html>
+<?php include_once 'footer.php'; ?>
