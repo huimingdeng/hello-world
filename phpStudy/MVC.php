@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>MVC复习（学习）</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="php/globals/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="php/globals/public.css">
-</head>
-<body>
-	<div class="container">
+<?php 
+$pageTitle = "MVC复习（学习）";
+$filename = basename(__FILE__);
+require_once('header.php');
+$createTime = date('Y-m-d',filectime($filename));?>
 		<header><h1>PHP框架——MVC基础</h1></header>
 		<main>
 			<article>
@@ -66,7 +61,4 @@
 		 		}?>
 			</article>
 		</main>
-		<footer>&copy;by dhm &nbsp; &nbsp; 2017.11.15 &nbsp; &nbsp; <a href="/"><?php echo $_SERVER['HTTP_HOST'];?></a></footer>
-	</div>
-</body>
-</html>
+<?php include_once 'footer.php'; ?>		
