@@ -31,6 +31,11 @@ Jan 2,2019
 ## Laravel 控制器 ##
 大小驼峰命名法。 使用命令创建控制器 `php artisan make:controller <模块名>/<控制器名>Controller`
 
+大驼峰:每个单词首字母都大写  eg. HelloController
+
+小驼峰:第一个单词全小写。后续单词首字母大写 eg. helloController
+
+
 创建成果后，如果没有写<模块名>，则在 app/Http/Controllers/ 目录下生成，如果有<模块名> eg. Login，则控制器生成在 app/Http/Controllers/Login/ 目录下。 同时一般默认添加Contrller后缀。
 
 ### 控制器分层定义 ###
