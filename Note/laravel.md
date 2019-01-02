@@ -2,7 +2,7 @@
 Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题处理方案。
 
 ## composer 脚手架安装 laravel5.7 ##
-使用composer 安装脚手架。 默认安装 laravel 最新版，目前为 5.7.
+使用composer 安装脚手架。 默认安装 laravel 最新版，目前安装的为 5.7.19
 
     composer global require "laravel/installer" // 默认安装到 C:\Users\<用户>\AppData\Roaming\Composer
 	cd C:\Users\<用户>\AppData\Roaming\Composer 
