@@ -18,7 +18,7 @@ Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题�
 
 ![laravel57 vendor](https://i.imgur.com/mneguVr.png)
 
-## Laravel 路由 ##
+## Laravel 路由<重点> ##
 
 - Laravel特性： 每个方法必须设置路由才可以访问，不设置路由则无法访问。
 - Laravel 不支持 pathinfo 模式
@@ -27,6 +27,21 @@ Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题�
 - 路由参数 eg. `Route::post('login/{name}/{id?}')` {id?}:表示可以忽略，但使用 get 必须要设置默认值。
 
 Jan 2,2019
+
+### Artisan 的使用 ###
+php artisan + <命令> 创建对应功能模块，亦可以自定义创建命令。例如 Laravel控制器 的事例。
+
+例如使用artisan创建命令，`php artisan make:command ServiceMakeCommand` 回车后在 app/Http/Console/Commands/ 目录生存文件 ServiceMakeCommand.php
+![artisan命令使用，创建命令](https://i.imgur.com/J59JJqd.png)
+
+ServiceMakeCommand.php 文件分析，如图所示：
+![命令文件分析](https://i.imgur.com/i57Df6h.png)
+
+    protected $signature = 'command:name'; // 定义命令分组和命令名 
+										// command：表示命令分组，name：表示命令的名称
+	protected $description = 'Command description'; // 定义命令的描述
+	// 执行：
+	php artisan //可以在控制台中看到对应命令 
 
 ## Laravel 控制器 ##
 大小驼峰命名法。 使用命令创建控制器 `php artisan make:controller <模块名>/<控制器名>Controller`
