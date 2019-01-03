@@ -33,5 +33,30 @@ exam/ 目录，存放解决方案或思路的脚本程序。
 解题思路见 [exam/PHP13Question.php](https://github.com/huimingdeng/hello-world/blob/master/PHPinterview/exam/PHP13Question.php "PHP 面试试题汇总")
 
 ## 其它题目 ##
-1. 一支队伍长100米，一个传令兵在队尾和队伍同时移动，传领兵须沿着队伍运动方向追到对头，追上对头后立即转头与队尾会合，这时队伍正好运动100米，问传令兵跑了多少米？ 路程问题
-2. 
+1、 一支队伍长100米，一个传令兵在队尾和队伍同时移动，传领兵须沿着队伍运动方向追到对头，追上对头后立即转头与队尾会合，这时队伍正好运动100米，问传令兵跑了多少米？ P.S.路程问题
+	
+思路：v1 > v2 (不然永远追不上队头)
+<table colspadding="0" cellspacing="0" border="0">
+	<tr><th>对象</th><th>速度</th><th>时间&路程</th></tr>
+	<tr>
+ 		<td>士兵 soldier</td>
+		<td>v1</td>
+		<td>s1=v1*t1,s2=v1*t2; x= v1*(t1+t2).</td>
+	</tr>
+	<tr>
+ 		<td>队伍 troops</td><td>v2</td><td>S=100,S = v2*(t1+t2);</td></tr>
+	<tr>
+		<td colspan=3>∴ t=t1+t2</td>
+	</tr>
+</table>
+得到公式：
+
+	100 = v2 * (t1+t2); --a) 
+	x = v1 * (t1+t2);   --b)
+	
+	a) 代入 b):
+	x = v1 * (100/v2);  --c) 
+	t1 = 100 / (v1-v2); --d)
+	t2 = 100 / (v1+v2);
+
+
