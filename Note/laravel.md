@@ -49,6 +49,18 @@ ServiceMakeCommand.php 文件分析，如图所示：
 	// 执行：
 	php artisan //可以在控制台中看到对应命令 
 
+
+### 自定义路由 ###
+对 laravel 框架项目进行路由的自定义。`RouteServiceProvider.php`中添加函数。P.S. laravel 框架中定义。
+
+疑问：
+
+- 如何创建自定义路由？
+- 路由优先级？
+
+
+
+
 ## Laravel 控制器 ##
 大小驼峰命名法。 使用命令创建控制器 `php artisan make:controller <模块名>/<控制器名>Controller`
 
@@ -60,3 +72,29 @@ ServiceMakeCommand.php 文件分析，如图所示：
 创建成果后，如果没有写<模块名>，则在 app/Http/Controllers/ 目录下生成，如果有<模块名> eg. Login，则控制器生成在 app/Http/Controllers/Login/ 目录下。 同时一般默认添加Contrller后缀。
 
 ### 控制器分层定义 ###
+
+
+### (单一)行为控制器 ###
+单一行为处理:定义一个只处理单个行为的控制器.
+
+魔术方法 `__invoke()` : 当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用。
+
+官方示例： 
+
+	<?php
+	class CallableClass 
+	{
+	    function __invoke($x) {
+	        var_dump($x);
+	    }
+	}
+	$obj = new CallableClass;
+	$obj(5);
+	var_dump(is_callable($obj));
+	?>
+结果：
+
+	int(5)
+	bool(true)
+
+单一行为控制器参考：《[laravel5.7 中文文档](https://laravel-china.org/docs/laravel/5.7/controllers/2256#single-action-controllers)》
