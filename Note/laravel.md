@@ -76,7 +76,7 @@ ServiceMakeCommand.php 文件分析，如图所示：
 创建成果后，如果没有写<模块名>，则在 app/Http/Controllers/ 目录下生成，如果有<模块名> eg. Login，则控制器生成在 app/Http/Controllers/Login/ 目录下。 同时一般默认添加Contrller后缀。
 
 ### 控制器分层定义 ###
-
+分层定义？什么是控制器分层？有何作用？
 
 ### (单一)行为控制器 ###
 单一行为处理:定义一个只处理单个行为的控制器.
