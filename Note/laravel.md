@@ -56,6 +56,10 @@ ServiceMakeCommand.php 文件分析，如图所示：
 疑问：
 
 - 如何创建自定义路由？
+	- 在 `<Project>/routes/` 目录中新建PHP文件，eg. `admin.php`;
+	- 在 `admin.php` 中定义路由 `Route::get()` 或 `Route::post()`
+	- 在 `RouteServiceProvider.php` 中定义相关路由实现函数
+	- 在 `RouteServiceProvider.php` 中的 `map()` 地图函数中使用上一步定义的路由实现函数。
 - 路由优先级？
 
 
