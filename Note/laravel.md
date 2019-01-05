@@ -1,7 +1,10 @@
 # Laravel 学习笔记 #
 Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题处理方案。
 
-## composer 脚手架安装 laravel5.7 ##
+## laravel5.7 下载与安装 ##
+laravel 框架下载安装部署项目方式。
+
+### composer 脚手架安装 laravel5.7 ###
 使用composer 安装脚手架。 默认安装 laravel 最新版，目前安装的为 5.7.19
 
     composer global require "laravel/installer" // 默认安装到 C:\Users\<用户>\AppData\Roaming\Composer
@@ -17,6 +20,9 @@ Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题�
 	dir //罗列目录 ，扩展若不开启，则下面中的 vendor 目录无法生成：
 
 ![laravel57 vendor](https://i.imgur.com/mneguVr.png)
+
+### GitHub 下载源码安装 ###
+下载地址 [https://github.com/laravel/laravel](https://github.com/laravel/laravel "https://github.com/laravel/laravel")
 
 ## Laravel 路由<重点> ##
 
