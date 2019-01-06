@@ -114,11 +114,16 @@ on Jan 5,2019 by huimingdeng.
 eg. `php artisan make:controller Api/UserController --resource`
 
 生成文件后，文件中的各函数（行为）和动作对照关系如图：
+
 ![资源控制器行为动作对照表](https://i.imgur.com/8H3LLCk.png)
 
 效果如图：
+
 ![资源控制器的创建](https://i.imgur.com/gCwcBZ6.png)
 
+P.S. 注意，在测试验证调试 post 等非 get 动作，需要注释掉中间件验证 `\App\Http\Middleware\VerifyCsrfToken::class,` 文件为：`app\Http\Kernel.php` 否则使用 postman 工具进行调试会报错。
+
+![示例图：post 测试结果](https://github.com/huimingdeng/hello-world/blob/master/Note/notesimg/laravel/resource-test-exam03.png)
 
 on Jan 6,2019 by huimingdeng
 
