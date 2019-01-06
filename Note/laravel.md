@@ -60,7 +60,9 @@ ServiceMakeCommand.php 文件分析，如图所示：
 	- 在 `admin.php` 中定义路由 `Route::get()` 或 `Route::post()`
 	- 在 `RouteServiceProvider.php` 中定义相关路由实现函数
 	- 在 `RouteServiceProvider.php` 中的 `map()` 地图函数中使用上一步定义的路由实现函数。
+	- -- writed by huimingdeng on Jan 4,2019
 - 路由优先级？
+	- 优先级是按照顺序排序？
 
 
 
@@ -102,3 +104,22 @@ ServiceMakeCommand.php 文件分析，如图所示：
 	bool(true)
 
 单一行为控制器参考：《[laravel5.7 中文文档](https://laravel-china.org/docs/laravel/5.7/controllers/2256#single-action-controllers)》
+
+on Jan 5,2019 by huimingdeng. 
+### 资源控制器 ###
+何为资源控制器？如何创建资源控制器？
+
+创建资源控制器：`php artisan make:controller <controllername> --resource` 
+
+eg. `php artisan make:controller Api/UserController --resource`
+
+生成文件后，文件中的各函数（行为）和动作对照关系如图：
+![资源控制器行为动作对照表](https://i.imgur.com/8H3LLCk.png)
+
+效果如图：
+![资源控制器的创建](https://i.imgur.com/gCwcBZ6.png)
+
+
+on Jan 6,2019 by huimingdeng
+
+
