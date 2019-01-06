@@ -121,10 +121,9 @@ eg. `php artisan make:controller Api/UserController --resource`
 
 ![资源控制器的创建](https://i.imgur.com/gCwcBZ6.png)
 
-P.S. 注意，在测试验证调试 post 等非 get 动作，需要注释掉中间件验证 `\App\Http\Middleware\VerifyCsrfToken::class,` 文件为：`app\Http\Kernel.php` 否则使用 postman 工具进行调试会报错。
+P.S. 注意，在测试验证调试 post 等非 get 动作，需要注释掉中间件验证 `\App\Http\Middleware\VerifyCsrfToken::class,` 文件为：`app\Http\Kernel.php` 否则使用 postman 工具进行调试会报错。示例：
 
-![示例图：post 测试结果](https://github.com/huimingdeng/hello-world/blob/master/Note/notesimg/laravel/resource-test-exam03.png)
-
+![post 请求示例](https://i.imgur.com/bAXMUHQ.png)
 on Jan 6,2019 by huimingdeng
 
 
