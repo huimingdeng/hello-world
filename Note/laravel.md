@@ -1,6 +1,6 @@
 # Laravel 学习笔记 #
 Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题处理方案。
-
+《[laravel5.7中文文档](https://laravel-china.org/docs/laravel/5.7 "文档")》
 ## laravel5.7 下载与安装 ##
 laravel 框架下载安装部署项目方式。
 
@@ -189,3 +189,48 @@ on Jan 6,2019 by huimingdeng
 - ddos : 
 - csrf : 伪造授权用户请求攻击网站。 
 
+### requests 请求与 response 响应 ###
+控制器中使用 `Illuminate\Http\Request` 类获取请求数据。
+
+路由闭包中获取请求数据 `Route::get('/', function(Request $request){  });` 
+
+app/Http/Controller/kernel.php 中间件
+
+	protected $middleware = [
+        \App\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+		// 消除请求参数左右空格
+        \App\Http\Middleware\TrimStrings::class,
+		//请求空值转为null
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\TrustProxies::class,
+    ];
+
+响应：在做接口开发中的重点。
+
+修改响应状态，内容：
+
+	Route::get('status',function(){
+		return response('hello world',500)->header('content-type','text/html');
+	})
+
+上传文件：
+
+下载文件：
+
+	Route::get('download', function(){
+		return response->download(public_path('images\timg.jpg'),'newname.jpg');
+	});
+
+预览文件：
+
+	Route::get('preview', function(){
+		return response()->file(public_path('images\timg.jpg'));
+	});
+
+重定向(重定向到外链)：
+
+	Route::get('away', function(){
+		return redirect()->away('http://www.baidu.com');
+		// return redirect('preview');
+	});
