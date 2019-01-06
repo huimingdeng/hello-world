@@ -109,12 +109,12 @@ ServiceMakeCommand.php 文件分析，如图所示：
 ## Laravel 控制器 ##
 大小驼峰命名法。 使用命令创建控制器 `php artisan make:controller <模块名>/<控制器名>Controller`
 
-大驼峰:每个单词首字母都大写  eg. HelloController
+大驼峰:每个单词首字母都大写  eg. `HelloController`
 
-小驼峰:第一个单词全小写。后续单词首字母大写 eg. helloController
+小驼峰:第一个单词全小写。后续单词首字母大写 eg. `helloController`
 
 
-创建成果后，如果没有写<模块名>，则在 app/Http/Controllers/ 目录下生成，如果有<模块名> eg. Login，则控制器生成在 app/Http/Controllers/Login/ 目录下。 同时一般默认添加Contrller后缀。
+创建成果后，如果没有写<模块名>，则在 `app/Http/Controllers/` 目录下生成，如果有<模块名> eg. Login，则控制器生成在 `app/Http/Controllers/Login/` 目录下。 同时一般默认添加Contrller后缀。
 
 ### 控制器分层定义 ###
 分层定义？什么是控制器分层？有何作用？
@@ -180,4 +180,12 @@ P.S. 注意，在测试验证调试 post 等非 get 动作，需要注释掉中�
 ![post 请求示例](https://i.imgur.com/bAXMUHQ.png)
 on Jan 6,2019 by huimingdeng
 
+## CSRF 保护 ##
+常见的攻击方式：SQL注入，xxs，dos，ddos，csrf等。
+
+- xss : 基于 dom 的 js 脚本攻击。转义处理
+- dos :
+- sql注入：
+- ddos : 
+- csrf : 伪造授权用户请求攻击网站。 
 
