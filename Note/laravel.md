@@ -25,7 +25,7 @@ laravel 框架下载安装部署项目方式。
 下载地址 [https://github.com/laravel/laravel](https://github.com/laravel/laravel "https://github.com/laravel/laravel")
 
 ### Windows7 使用PHPStudy2018 Nginx环境 ###
-启动 phpstduy2018 ，点击切换版本 `php7.2.10-nts + Nginx` ,然后打开Nginx多虚拟域名配置文件 `vhosts.conf` 本人安装路径为：`D:\phpStudy\PHPTutorial\nginx\conf\vhosts.conf`, 文件中进行如下配置：
+启动 phpstduy2018 ，点击切换版本 `php7.2.10-nts + Nginx` ,然后打开Nginx多虚拟域名配置文件 `vhosts.conf` 本人 Nginx 配置路径为：`D:\phpStudy\PHPTutorial\nginx\conf\vhosts.conf`, 文件中进行如下配置：
 
 	server{
 		listen 80;
@@ -100,7 +100,8 @@ ServiceMakeCommand.php 文件分析，如图所示：
 	- 在 `RouteServiceProvider.php` 中的 `map()` 地图函数中使用上一步定义的路由实现函数。
 	- -- writed by huimingdeng on Jan 4,2019
 - 路由优先级？
-	- 优先级是按照顺序排序？
+	- 后面定义的路由优先级覆盖前面定义的路由
+	- 示例说明图：![优先级说明示例图](https://i.imgur.com/2GHKeG3.png)
 
 
 
@@ -117,6 +118,8 @@ ServiceMakeCommand.php 文件分析，如图所示：
 
 ### 控制器分层定义 ###
 分层定义？什么是控制器分层？有何作用？
+
+控制器分层定义可以按功能模块创建，也可以服务等方式创建，分层作用是可以方便管理，文件功能一目了然。
 
 ### (单一)行为控制器 ###
 单一行为处理:定义一个只处理单个行为的控制器.
@@ -140,6 +143,19 @@ ServiceMakeCommand.php 文件分析，如图所示：
 
 	int(5)
 	bool(true)
+
+定义单一行为控制器；
+
+在 `routes/web.php` 中定义路由
+
+	// 单一行为控制器
+	Route::get('slip/{name?}', 'Only\SlipController');
+
+控制台中执行命令，创建单一行为控制器：`php artisan make:controller Only/SlipController --invokable`,示意图如下：
+
+![单一行为控制器案例](https://i.imgur.com/KI4cOW4.png)
+
+
 
 单一行为控制器参考：《[laravel5.7 中文文档](https://laravel-china.org/docs/laravel/5.7/controllers/2256#single-action-controllers)》
 
