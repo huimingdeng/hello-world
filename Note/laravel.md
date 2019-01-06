@@ -24,6 +24,44 @@ laravel 框架下载安装部署项目方式。
 ### GitHub 下载源码安装 ###
 下载地址 [https://github.com/laravel/laravel](https://github.com/laravel/laravel "https://github.com/laravel/laravel")
 
+### Windows7 使用PHPStudy2018 Nginx环境 ###
+启动 phpstduy2018 ，点击切换版本 `php7.2.10-nts + Nginx` ,然后打开Nginx多虚拟域名配置文件 `vhosts.conf` 本人安装路径为：`D:\phpStudy\PHPTutorial\nginx\conf\vhosts.conf`, 文件中进行如下配置：
+
+	server{
+		listen 80;
+		server_name	www.laravel57.com laravel57.com;
+	
+		#charset koi8-r;
+	
+		#access_log	logs/host.access.log	main;
+		root	"D:/PhpProject/laravel57/public";
+		location / {
+			index	index.html	index.htm	index.php	1.php;
+			autoindex	on;
+				try_files	$uri	$uri/	/index.php?$query_string;
+		}
+		#error_page 404		/404.html;
+	
+		# redirect server error pages to the static page /50x.html
+		#
+		error_page	500 502 503 504	/50x.html;
+		location	=	/50x.html {
+			root	html;
+		}
+		// 该部分可以复制 nginx.conf 中的
+		location ~ \.php(.*)$  {
+	            fastcgi_pass   127.0.0.1:9000;
+	            fastcgi_index  index.php;
+	            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+	            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+	            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+	            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+	            include        fastcgi_params;
+	        }
+	
+	}
+然后，本地环境就可浏览器输入 www.laravel57.com 或 laravel57.com 进行访问了。
+
 ## Laravel 路由<重点> ##
 
 - Laravel特性： 每个方法必须设置路由才可以访问，不设置路由则无法访问。
