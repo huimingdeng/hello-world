@@ -234,3 +234,27 @@ app/Http/Controller/kernel.php 中间件
 		return redirect()->away('http://www.baidu.com');
 		// return redirect('preview');
 	});
+
+### cookie 和 session ###
+laravel 中设置 cookie 不能够使用传统的原生方式设置。
+必须使用 request 中的方法设置。设置路由：
+
+	// cookie
+	Route::get('cookie', 'Login\LoginController@setcookie');
+	Route::get('getcookie', 'Login\LoginController@getcookie');
+
+	//--------- LoginController method -----------
+	use Illuminate\Support\Facades\Cookie; 或 use Cookie; (这是laravel的cookie类别名)
+	... 
+	public function setcookie(){
+    	// cookie();
+    	return response('')->cookie('laravel','laravel5719',10);
+    }
+
+    public function getcookie(){
+    	// return request()->cookie('laravel');
+    	return Cookie::get('laravel');
+    }
+
+session 设置：
+
