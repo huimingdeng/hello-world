@@ -104,7 +104,7 @@
 			$.fn.stop = function(){
 				var status = $("input[name=status]").val();
 				
-				if( 'start' == status ){
+				if( 'start' == status || 'pause' == status ){
 					var bool = confirm("停止游戏？");
 					if(bool){
 						$("input[name=status]").val('init');
@@ -155,6 +155,7 @@
 				time = 0;
 				$(".time").html('00:00:00');
 				clearTimeout(progress);
+				$.fn.initGame();
 			};
 			// 设置困难程度,游戏开启后困难度无法设置
 			$.fn.setLevel = function(){
@@ -166,22 +167,30 @@
 				});
 			};
 			// init 初始化游戏
-			$.fn.init = function(){
+			$.fn.initGame = function(){
 				$.ajax({
-					'url':'/games/minesweeper/classes/requests.class.php',
-					'type':'post',
-					'data':{
+					url:'/games/minesweeper/classes/requests.class.php',
+					type:'post',
+					dataType:'JSON',
+					data:{
 						'operation' : 'init',
 						'level' : $('input[name=level]').val(),
-						'status' : $('input[name=status]').val()
+						'type' : $('input[name=status]').val()
 					},
-					sussecc:function(json){
+					sussecc:function(msg){
+						
+					},
+					error:function(msg){
+						console.log(msg);
 
 					}
 				});
+
 			}
 			
+			$.fn.initGame();
 			$.fn.setLevel();
+
 
 			
 		});

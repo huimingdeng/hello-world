@@ -8,6 +8,7 @@ class Minesweeper{
 	private $res; //设置地雷
 	private $mine = "*";
 	private $mines = [];
+	private $win = false; //判定是否游戏获胜
 
 	// 
 	public function __construct(int $level=0){
@@ -68,21 +69,29 @@ class Minesweeper{
 		print_r($this->mines);*/
 	}
 
+	public function getMines(){
+		return $this->mines;
+	}
+
 	/**
 	 * 绘制表格
 	 * @return [type] [description]
 	 */
 	protected function map(){
-		// $table = "<table>\n %s \n</table>\n";
-		// $tr = "";
-		// for($row=1;$row<=$this->rows;$row++){
-		// 	$tr .= '<tr>'."\n";
-		// 	for ($col=1; $col <= $this->cols; $col++) { 
-		// 		$tr .= '<td>'. '<input class="btn" value="">' .'</td>'."\n";
-		// 	}
-		// 	$tr .= '</tr>'."\n";
-		// }
-		// $this->map = sprintf($table,$tr);
+		$table = "<table>\n %s \n</table>\n";
+		$tr = "";
+		for($row=1;$row<=$this->rows;$row++){
+			$tr .= "\t".'<tr>'."\n";
+			for ($col=1; $col <= $this->cols; $col++) { 
+				$tr .= "\t\t".'<td>'. '<input class="btn">' .'</td>'."\n";
+			}
+			$tr .= "\t".'</tr>'."\n";
+		}
+		$this->map = sprintf($table,$tr);
+	}
+
+	public function getMap(){
+		return $this->map;
 	}
 
 	public function resolve($x,$y){
@@ -91,7 +100,7 @@ class Minesweeper{
 	}
 
 	public function __destruct(){
-
+		$this->map = '';
 	}
 }
 
