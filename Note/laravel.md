@@ -258,3 +258,74 @@ laravel 中设置 cookie 不能够使用传统的原生方式设置。
 
 session 设置：
 
+
+
+### 验证器 ###
+`$request->validate()`: 传统方式：
+
+    php artisan make:request <model>\<name>Request //创建请求验证
+
+请求验证类： eg. LoginRequest.php
+
+	class LoginRequest extends FormRequest{
+		protected $redirect = 'error'; //重定向
+	    /**
+	     * Determine if the user is authorized to make this request.
+	     *
+	     * @return bool
+	     */
+	    public function authorize()
+	    {
+	        return true;
+	    }
+	
+	    /**
+	     * Get the validation rules that apply to the request.
+	     *
+	     * @return array
+	     */
+	    public function rules()
+	    {
+	        return [
+	            //
+	            'username'=>'required|max:16|min:4',
+	            'password'=>'required|min:8|max:16',
+	        ];
+	    }
+	}
+
+### 模板 ###
+模板指令 `@<name>` 符号开头， `@end<name>` 结束, 循环指令：
+
+	<div class="flex-center">
+        <dl>
+            @foreach($name as $v)
+                <dt>{{ $v['id'] }}</dt>
+                <dd>{{ $v['name'] }}</dd>
+                <dd>{{ $v['age'] }}</dd>
+            @endforeach
+        </dl>
+    </div>
+
+#### 模板传参 ####
+示例：路由设置
+
+	// 视图传参 view 直接传参 数组
+	Route::get('view', function(){
+		return view('view.index',['name'=>'huimingdeng']);
+	});
+	// with 传参：键值对
+	Route::get('admin', 'Admin\AdminController@admin');
+
+实现方法：
+
+	public function admin(){
+        return view('view.index')->with('name',[
+            0 => ['id'=>10,'name'=>'huimingdeng','age'=>26],
+            1 => ['id'=>9, 'name'=>'jiashideng', 'age'=>37],
+            2 => ['id'=>8, 'name'=>'liyaxie', 'age'=>37],
+            3 => ['id'=>7, 'name'=>'qidadeng', 'age'=>66]
+        ]);
+    }
+
+模板示例：模板指令示例
