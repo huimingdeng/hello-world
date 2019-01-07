@@ -328,4 +328,16 @@ session 设置：
         ]);
     }
 
-模板示例：模板指令示例
+模板示例：见上面的模板指令示例；`{{ }}`：表示的是对数据进行转义输出，若针对富文本则不需要转义情况，使用 ``。P.S. 下面代码为 `storage/framework/views/` 解析后的代码：
+
+	<div class="flex-center">
+        <dl>
+            <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <dt><?php echo e($v['id']); ?></dt>
+                <dd><?php echo e($v['name']); ?></dd>
+                <dd><?php echo e($v['age']); ?></dd>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </dl>
+    </div>
+
+#### 模板继承 ####
