@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Minesweeper 扫雷</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="assets/css/bootstrap.css">
+		<link rel="stylesheet" href="assets/css/minesweeper.css">
+		<script src="assets/js/jquery-3.2.1.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>扫雷游戏 (Minesweeper)</h1>
+			</header>
+			<article>
+				<form action="#">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="col-md-12"></div>
+							<div class="col-md-12">
+								<a href="javascript:void(0);" id="status-btn" class="btn btn-primary start"><span class="glyphicon glyphicon-play"></span></a>
+								<a href="javascript:void(0);" id="status-stop" class="btn btn-danger start"><span class="glyphicon glyphicon-stop"></span></a>
+								<input type="hidden" name="status" value="init">
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span class="time">00:00:00</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 level">
+							<div class="panel panel-primary">
+								<div class="panel-heading"><b>初级难度</b></div>
+								<div class="panel-body">
+						    		<p>初级：9*9,10个雷</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 level">
+							<div class="panel panel-warning">
+								<div class="panel-heading"><b>中级难度</b></div>
+								<div class="panel-body">
+						    		<p>中级：16*16,40个雷</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 level">
+							<div class="panel panel-danger">
+								<div class="panel-heading "><b>高级难度</b></div>
+								<div class="panel-body">
+						    		<p>高级级：16*30,99个雷</p>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" name="level" value="0">
+					</div>
+					<div class="row">
+						<div class="col-md-12" id="chessboard">
+							
+						</div>
+					</div>
+				</form>
+			</article>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var time = 0;
+			// 状态按钮
+			$('#status-btn').on('click', function(event) {
+				if($(this).hasClass('start')){
+					$(this).find('span').removeClass('glyphicon-play').addClass('glyphicon-pause');
+					$(this).removeClass('start').addClass('pause').removeClass('btn-primary').addClass('btn-danger');
+					// 启动游戏
+					$.fn.start();
+				}else if($(this).hasClass('pause')){
+					$(this).find('span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+					$(this).removeClass('pause').addClass('start').removeClass('btn-danger').addClass('btn-primary');
+					// 暂停游戏
+					$.fn.pause();
+				}
+			});
+
+			$('#status-stop').on('click', function(event){
+				$.fn.stop();
+			});
+
+			// 执行开启游戏
+			$.fn.start = function(){
+				$("input[name=status]").val('start');//启动
+				var status = $("input[name=status]").val();
+				$.fn.settime();
+				console.log(status);
+			};
+			// 暂停 
+			$.fn.pause = function(){
+				$("input[name=status]").val('pause');//暂停
+				var status = $("input[name=status]").val();
+				$.fn.cleartime();
+				console.log(status);
+			};
+			// 停止
+			$.fn.stop = function(){
+				var status = $("input[name=status]").val();
+				
+				if( 'start' == status ){
+					var bool = confirm("停止游戏？");
+					if(bool){
+						$("input[name=status]").val('init');
+						status = $("input[name=status]").val()
+						console.log(status);
+						$('#status-btn').removeClass('pause').addClass('start').removeClass('btn-danger').addClass('btn-primary').find('span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+						$.fn.stopGameTime();
+					}
+				}
+				
+			};
+			// 计算时间
+			$.fn.settime = function(){
+               	time += 1;
+               	var timestr = '00:00:00';
+               	var seconds = time;
+               	var minute = 0;
+               	var hour = 0;
+               	if(time>60){
+               		minute = parseInt(time/60);
+	               	seconds = parseInt(time%60);
+	               	timestr = (minute<10) ? ((seconds<10)?( '00<span class="text-danger">:</span>0'+minute+'<span class="text-danger">:</span>0'+seconds ):( '00<span class="text-danger">:</span>0'+minute+':'+seconds )) : ((seconds<10)?('00:'+minute+'<span class="text-danger">:</span>0'+seconds):('00<span class="text-danger">:</span>'+minute+'<span class="text-danger">:</span>'+seconds));
+	               	if(minute>=10){
+	               		$.fn.stopGameTime();
+	               	}
+	               	/*if(minute>60){
+               			hour = parseInt(minute/60);
+               			// timestr = (hour<10)?((minute<10) ? ((seconds<10)?( '0'+hour+':0'+minute+':0'+seconds ):( '0'+hour+':0'+minute+':'+seconds )) : ((seconds<10)?('0'+hour+':'+minute+':0'+seconds):('0'+hour+':'+minute+':'+seconds))) : ( (minute<10) ? ((seconds<10)?( hour+':0'+minute+':0'+seconds ):( hour+':0'+minute+':'+seconds )) : ((seconds<10)?(hour+':'+minute+':0'+seconds):(hour+':'+minute+':'+seconds)) );
+               			// 超时设置
+               			if(minute>=70){
+               				$.fn.stopGameTime();
+               			}
+	               	}*/
+               	}else{
+               		timestr = (seconds<10)?('00<span class="text-danger">:</span>00<span class="text-danger">:</span>0'+seconds):('00<span class="text-danger">:</span>00<span class="text-danger">:</span>'+seconds);
+               	}
+
+				$(".time").html(timestr);
+				progress = setTimeout($.fn.settime,1000);
+
+			};
+
+			$.fn.cleartime = function(){
+				clearTimeout(progress);
+			};
+			// 终止计时器
+			$.fn.stopGameTime = function(){
+				time = 0;
+				$(".time").html('00:00:00');
+				clearTimeout(progress);
+			};
+			// 设置困难程度,游戏开启后困难度无法设置
+			$.fn.setLevel = function(){
+				$('.level').each(function(index, el) {
+					$(this).click(function(event) {
+						console.log(index);
+						$('input[name=level').val(index);
+					});
+				});
+			};
+			// init 初始化游戏
+			$.fn.init = function(){
+				$.ajax({
+					'url':'/games/minesweeper/classes/requests.class.php',
+					'type':'post',
+					'data':{
+						'operation' : 'init',
+						'level' : $('input[name=level]').val(),
+						'status' : $('input[name=status]').val()
+					},
+					sussecc:function(json){
+
+					}
+				});
+			}
+			
+			$.fn.setLevel();
+
+			
+		});
+
+		
+	</script>
+</html>
