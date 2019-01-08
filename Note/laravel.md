@@ -191,6 +191,12 @@ on Jan 6,2019 by huimingdeng
 
 在模板表单中添加 @csrf 可以跳过中间件组 `$middlewareGroups` 中 `\App\Http\Middleware\VerifyCsrfToken::class,` 类的验证，否则表单 post 等非 get 跳转的路由路径中会报 419 错误。
 
+如果不想进入 csrf 验证，则可以在 `<project>/app/Http/Middleware/VerifyCsrfToken.php` 的数组中进行设置：
+
+	protected $except = [
+        //填写路由地址
+    ];
+
 ### requests 请求与 response 响应 ###
 控制器中使用 `Illuminate\Http\Request` 类获取请求数据。
 
@@ -216,7 +222,11 @@ app/Http/Controller/kernel.php 中间件
 		return response('hello world',500)->header('content-type','text/html');
 	})
 
-上传文件：
+上传文件,存储在 `storage/app/public`,命令创建存储链接 `php artisan storage:link` 在 `public` 目录中生成。
+
+
+
+	
 
 下载文件：
 
@@ -393,3 +403,5 @@ laravel提供新方式，首先创建请求验证：
     </div>
 
 #### 模板继承 ####
+
+
