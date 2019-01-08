@@ -24,7 +24,7 @@ laravel 框架下载安装部署项目方式。
 ### GitHub 下载源码安装 ###
 下载地址 [https://github.com/laravel/laravel](https://github.com/laravel/laravel "https://github.com/laravel/laravel")
 
-### Windows7 使用PHPStudy2018 Nginx环境 ###
+### P.S. Windows7 使用PHPStudy2018 Nginx环境 ###
 启动 phpstduy2018 ，点击切换版本 `php7.2.10-nts + Nginx` ,然后打开Nginx多虚拟域名配置文件 `vhosts.conf` 本人 Nginx 配置路径为：`D:\phpStudy\PHPTutorial\nginx\conf\vhosts.conf`, 文件中进行如下配置：
 
 	server{
@@ -456,8 +456,16 @@ laravel提供新方式，首先创建请求验证：
 #### 卡槽（slots）与组件（Components） ####
 要使用则先定义。卡槽相当于电商的弹窗提示功能。
 
+P.S. 自定义的卡槽匹配必须要全部匹配，不然报错。
+
 ### 流程控制语句 ###
-laravel流程控制语句举例。
+laravel流程控制语句举例。流程控制结束 `@end<process control>` eg. `@endif`、`@endforeach`
+
+	@if @elseif @else @endif
+	@foreach  @endforeach
+	@isset
+	@switch
+	... ... 
 
 ## 06. 数据库 ##
 laravel数据
