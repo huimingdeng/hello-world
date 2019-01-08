@@ -1,7 +1,7 @@
 # Laravel 学习笔记 #
 Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题处理方案。
 《[laravel5.7中文文档](https://laravel-china.org/docs/laravel/5.7 "文档")》
-## laravel5.7 下载与安装 ##
+## 01. laravel5.7 下载与安装 ##
 laravel 框架下载安装部署项目方式。
 
 ### composer 脚手架安装 laravel5.7 ###
@@ -62,7 +62,7 @@ laravel 框架下载安装部署项目方式。
 	}
 然后，本地环境就可浏览器输入 www.laravel57.com 或 laravel57.com 进行访问了。
 
-## Laravel 路由<重点> ##
+## 02. Laravel 路由<重点> ##
 
 - Laravel特性： 每个方法必须设置路由才可以访问，不设置路由则无法访问。
 - Laravel 不支持 pathinfo 模式
@@ -106,7 +106,7 @@ ServiceMakeCommand.php 文件分析，如图所示：
 
 
 
-## Laravel 控制器 ##
+## 03. Laravel 控制器 ##
 大小驼峰命名法。 使用命令创建控制器 `php artisan make:controller <模块名>/<控制器名>Controller`
 
 大驼峰:每个单词首字母都大写  eg. `HelloController`
@@ -180,7 +180,7 @@ P.S. 注意，在测试验证调试 post 等非 get 动作，需要注释掉中�
 ![post 请求示例](https://i.imgur.com/bAXMUHQ.png)
 on Jan 6,2019 by huimingdeng
 
-## CSRF 保护 ##
+## 04. CSRF 保护 ##
 常见的攻击方式：SQL注入，xxs，dos，ddos，csrf等。
 
 - xss : 基于 dom 的 js 脚本攻击。转义处理
@@ -356,7 +356,7 @@ laravel提供新方式，首先创建请求验证：
 	    }
 	}
 
-### 模板 ###
+## 05. 模板 ##
 模板指令 `@<name>` 符号开头， `@end<name>` 结束, 循环指令：
 
 	<div class="flex-center">
@@ -369,7 +369,7 @@ laravel提供新方式，首先创建请求验证：
         </dl>
     </div>
 
-#### 模板传参 ####
+### 模板传参 ###
 示例：路由设置
 
 	// 视图传参 view 直接传参 数组
@@ -456,4 +456,20 @@ laravel提供新方式，首先创建请求验证：
 #### 卡槽（slots）与组件（Components） ####
 要使用则先定义。卡槽相当于电商的弹窗提示功能。
 
+### 流程控制语句 ###
+laravel流程控制语句举例。
+
+## 06. 数据库 ##
+laravel数据
+
+## 07. Eloquent模型 ##
+laravel Eloquent 模型
+
+
+## 08. authorize 用户验证(Auth) ##
+laravel 用户验证。
+
+
+## laravel 项目 ##
+学习 laravel 基础后，进行项目实践。
 
