@@ -189,6 +189,8 @@ on Jan 6,2019 by huimingdeng
 - ddos : 分布式拒绝服务(DDoS:Distributed Denial of Service)攻击指借助于客户/服务器技术，将多个计算机联合起来作为攻击平台，对一个或多个目标发动DDoS攻击，从而成倍地提高拒绝服务攻击的威力。
 - csrf : 伪造授权用户请求攻击网站。 
 
+在模板表单中添加 @csrf 可以跳过中间件组 `$middlewareGroups` 中 `\App\Http\Middleware\VerifyCsrfToken::class,` 类的验证，否则表单 post 等非 get 跳转的路由路径中会报 419 错误。
+
 ### requests 请求与 response 响应 ###
 控制器中使用 `Illuminate\Http\Request` 类获取请求数据。
 
@@ -236,8 +238,7 @@ app/Http/Controller/kernel.php 中间件
 	});
 
 ### cookie 和 session ###
-laravel 中设置 cookie 不能够使用传统的原生方式设置。
-必须使用 request 中的方法设置。设置路由：
+laravel 中设置 cookie 不能够使用传统的原生方式设置。必须使用 request 中的方法设置。设置路由：
 
 	// cookie
 	Route::get('cookie', 'Login\LoginController@setcookie');
@@ -246,14 +247,25 @@ laravel 中设置 cookie 不能够使用传统的原生方式设置。
 	//--------- LoginController method -----------
 	use Illuminate\Support\Facades\Cookie; 或 use Cookie; (这是laravel的cookie类别名)
 	... 
-	public function setcookie(){
-    	// cookie();
-    	return response('')->cookie('laravel','laravel5719',10);
+	/**
+     * cookie 设置
+     * @param  Request $request larave 请求对象
+     * @param  string  $name    cookie名
+     * @param  string  $value   cookie值
+     * @param  integer $time    cookie周期
+     * @return void
+     */
+    public function setcookie(Request $request,$name='laravel',$value='laravel5719',$time=10){
+    	return response('')->cookie($name, $value, $time);
     }
-
-    public function getcookie(){
-    	// return request()->cookie('laravel');
-    	return Cookie::get('laravel');
+	//获取cookie
+    public function getcookie($name='laravel'){
+    	return Cookie::get($name);
+    }
+	//删除cookie
+	public function delcookie($name='laravel'){
+    	$cookie = Cookie::forget($name);
+    	return response('成功删除')->withCookie($cookie);
     }
 
 session 设置：
