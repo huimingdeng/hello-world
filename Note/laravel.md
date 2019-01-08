@@ -403,5 +403,57 @@ laravel提供新方式，首先创建请求验证：
     </div>
 
 #### 模板继承 ####
+`child.blade.php` 继承 `parent.blade.php` 父模板不要结束标签 eg. `@endsection` ,不然子模板无法使用。P.S. 父模板相当于在子模板做占位符的作用; 父模板的 `@show()`结束作为子模板内容输出。`@parent`：保留父模板。
+
+- `@yield`:内容无法保留父模板内容。
+- `@stop()`:可以结束标签。
+
+示例：child.blade.php
+
+	@extends('template/parent')
+
+	@section('head')
+		@yield('content', '我是子模板，不过使用的是 @section(\'head\'):则在父模板前面显示 ')
+	@stop()
+	
+	@section('bottom')
+	<div>
+		 @yield('content','我是子模板，继承了父模板, 不过使用的是 @section(\'bootom\'):在父模板后面显示 ') 
+		@parent
+		<div>我是子模板</div>
+	</div>
+	@stop()
+
+示例： template/parent.blade.php
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<title>@yield('title','parent template')</title>
+		</head>
+		<body>
+			@section('head')
+				@show()
+				<div>
+					@yield('content','我是父模板')
+				</div>
+			@section('bottom')
+			@show()
+		</body>
+	</html>
+
+路由调用子模板：
+
+	// 视图继承
+	Route::get('child',function(){
+		return view('child');
+	});
+效果图：
+
+![视图继承效果](https://i.imgur.com/iBaR57o.png)
+
+#### 卡槽（slots）与组件（Components） ####
+要使用则先定义。卡槽相当于电商的弹窗提示功能。
 
 
