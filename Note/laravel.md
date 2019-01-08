@@ -184,9 +184,9 @@ on Jan 6,2019 by huimingdeng
 常见的攻击方式：SQL注入，xxs，dos，ddos，csrf等。
 
 - xss : 基于 dom 的 js 脚本攻击。转义处理
-- dos :
-- sql注入：
-- ddos : 
+- dos : Denial of Service的简称，即拒绝服务，造成DoS的攻击行为被称为DoS攻击，其目的是使计算机或网络无法提供正常的服务。最常见的DoS攻击有计算机网络带宽攻击和连通性攻击。
+- sql注入：把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。
+- ddos : 分布式拒绝服务(DDoS:Distributed Denial of Service)攻击指借助于客户/服务器技术，将多个计算机联合起来作为攻击平台，对一个或多个目标发动DDoS攻击，从而成倍地提高拒绝服务攻击的威力。
 - csrf : 伪造授权用户请求攻击网站。 
 
 ### requests 请求与 response 响应 ###
@@ -263,12 +263,52 @@ session 设置：
 ### 验证器 ###
 `$request->validate()`: 传统方式：
 
+	public function login(Request $request)
+    {
+    	if($request->method() == 'POST'){
+    		$request->validate([
+    			'username' => 'required|min:4|max:20',
+    			'password' => 'required|min:6|max:32'
+    		]);
+
+    		return 'ok';
+    	}
+    	return view('login.login');
+    }
+
+laravel 模板设置：
+
+	<div class="content">
+        <form action="login" method="post">
+            @csrf
+            <div class="row">
+                User: <input type="text" name="username">
+                <br>
+                Pass: <input type="text" name="password">
+                <br>
+                <input type="submit" value="submit">
+            </div>
+        </form>
+    </div>
+	//判断是否存在错误信息
+    @if($errors->any())
+    <div class="error">
+        <ul>
+            @foreach ($errors->messages() as $key => $error)
+                <li>{{$key}} -->> {{$error[0]}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif	
+
+laravel提供新方式，首先创建请求验证：
+
     php artisan make:request <model>\<name>Request //创建请求验证
 
 请求验证类： eg. LoginRequest.php
 
 	class LoginRequest extends FormRequest{
-		protected $redirect = 'error'; //重定向
+		protected $redirect = 'error'; //实现设置父类的重定向验证跳转
 	    /**
 	     * Determine if the user is authorized to make this request.
 	     *
@@ -328,7 +368,7 @@ session 设置：
         ]);
     }
 
-模板示例：见上面的模板指令示例；`{{ }}`：表示的是对数据进行转义输出，若针对富文本则不需要转义情况，使用 ``。P.S. 下面代码为 `storage/framework/views/` 解析后的代码：
+模板示例：见上面的模板指令示例；`{{ }}`：表示的是对数据进行转义输出，若针对富文本则不需要转义情况，使用 `{!! !!}`。P.S. 下面代码为 `storage/framework/views/` 解析后的代码：
 
 	<div class="flex-center">
         <dl>
