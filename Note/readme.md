@@ -7,10 +7,14 @@ Linux centos7 学习笔记，含FTP服务配置等。 [进入](https://github.co
 使用 Windows7 安装 VMware 15 学习。
 
 ## nginx.Note.Oct.26.2018 ##
-Nginx学习笔记。[进入](https://github.com/huimingdeng/hello-world/blob/master/Note/nginx.Note.Oct.26.2018.md "Nginx 学习笔记")
+Jan 9,2019 整理创建目录 Nginx ，迁移相关笔记到 Nginx 目录。
+
+Nginx学习笔记。[进入](https://github.com/huimingdeng/hello-world/blob/master/Note/Nginx/nginx.Note.Oct.26.2018.md "Nginx 学习笔记")
 
 ## php-7.1.0-note.md ##
-该文件为 《PHP 7底层设计与源码实现》 一书的一些实践笔记。[进入](https://github.com/huimingdeng/hello-world/blob/master/Note/php-7.1.0-note.md "php7.1.0-源码分析")
+Jan 9,2019 整理创建 PHP 目录，迁移下面文件进入 PHP 目录。
+
+该文件为 《PHP 7底层设计与源码实现》 一书的一些实践笔记。[进入](https://github.com/huimingdeng/hello-world/blob/master/Note/PHP/php-7.1.0-note.md "php7.1.0-源码分析")
 
 php-7.1.0.tar.gz 配套源码
 
@@ -19,5 +23,10 @@ php-7.1.0.tar.gz 配套源码
 ## jquery.note.md ##
 jquery 复习笔记。 [进入](https://github.com/huimingdeng/hello-world/blob/master/Note/jquery.note.md "jQuery 复习笔记")
 
-## lavarel.md ##
-Jan 2,2019 新建 laravel 学习笔记。 [进入](https://github.com/huimingdeng/hello-world/blob/master/Note/laravel.md "Laravel 学习笔记")
+## Laravel 目录 ##
+Jan 9,2019 整理添加目录， laravel.md 迁移进入 Laravel 目录。
+
+Jan 2,2019 新建 laravel 学习笔记。 [进入](https://github.com/huimingdeng/hello-world/blob/master/Note/Laravel/laravel.md "Laravel 学习笔记")
+
+## WordPress ##
+Jan 9,2019 新建 Wordpress 目录：用于记录开发 WordPress和学习的笔记，进行总结。
