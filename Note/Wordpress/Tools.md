@@ -1,5 +1,6 @@
 # widgets（小工具）开发 #
 记录如何开发或二次开发一个主题小工具或者WordPress系统小工具。
+本教程仅是个人开发总结，其它详细学习文章可以观看：
 
 如何开发小工具参考文章 [创建你的第一个WordPress小工具](https://www.wpdaxue.com/creat-your-first-wordpress-widget.html "创建你的第一个WordPress小工具")
 
@@ -63,7 +64,7 @@
 
 ![widget-analyze](https://i.imgur.com/Jqg0sW1.png)
 
-#### MM: Double Column News 分析学习 ####
+#### 例子： MM: Double Column News 分析学习 ####
 以 `double-columns.php` 文件也就是类 `Mega_Magazine_Double_Columns`（部分代码见下面） 分析和继承的类 `WP_Widget` 学习。
 
 	if ( ! class_exists( 'Mega_Magazine_Double_Columns' ) ) :
