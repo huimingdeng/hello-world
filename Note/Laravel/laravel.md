@@ -468,7 +468,77 @@ laravel流程控制语句举例。流程控制结束 `@end<process control>` eg.
 	... ... 
 
 ## 06. 数据库 ##
-laravel数据
+laravel数据配置，建议使用 .env 进行配置，或使用 config() 函数动态配置数据库。创建的数据库类中要引用 DB 类(别名)进行数据库的操作。
+
+.env 配置，eg. 
+
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=laravel57
+	DB_USERNAME=laravel57
+	DB_PASSWORD=laravel5719
+
+config/database.php 文件说明及自定义配置：(P.S. `connections`数组中添加)
+
+	'mydb' => [ // 复制文件中 mysql 配置进行自定义设置
+        'driver' => 'mysql',
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => env('DB_PORT', '3306'),
+        'database' => env('DB_DATABASE', 'laravel57'),
+        'username' => env('DB_USERNAME', 'laravel57'),
+        'password' => env('DB_PASSWORD', 'laravel5719'),
+        'unix_socket' => env('DB_SOCKET', ''),	//连接的传输方式，比 host 好
+        'charset' => 'utf8mb4', // 数据库字符集
+        'collation' => 'utf8mb4_unicode_ci', //数据库连接编码
+        'prefix' => '', //数据表表前缀
+        'prefix_indexes' => true,
+        'strict' => true,	// 强制模式
+        'engine' => null, // 引擎
+    ],
+
+DB类位置：`vendor/framework/src/Illuminate/Soupport/Facades/DB.php` 该类实际调用了 `vendor/framework/src/Illuminate/Database/DatabaseManager.php`
+
+P.S. [MySQL字符集疑问](https://www.cnblogs.com/EasonJim/p/8128196.html "字符集问题")
+
+创建 `DBController.php` ，编写路由，并使用原生SQL进行测试。
+
+	use DB;
+	... ...
+	public function index(){
+		$res = DB::select('show tables');
+		dd($res); // 打印结果
+	}
+
+
+
+
+### CURD ###
+laravel 原生用法（灵活性>laravel的构造器查询，且利于SQL优化）,`select、insert、update、delete`自定义配置：
+
+占位符 `?`,数组传递值； :id
+
+eg. `DB:connection('mydb')->select('select * from goods id=?', ['id'=>1])`
+
+.env 默认配置：
+
+eg. `DB:select('select * from goods id=?', ['id'=>1]);`
+
+### INNODB 事物处理 ###
+事物处理，自动事物 `DB:transaction( ... );`
+
+	DB:transaction(
+		function(){
+			... ...
+			try{
+				... ... 
+			}catch(Exception $e){
+				$e->getMessage();
+			}
+		}
+	);
+
+
 
 ## 07. Eloquent模型 ##
 laravel Eloquent 模型
