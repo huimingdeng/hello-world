@@ -6,12 +6,14 @@
 或参考 [一步步创建你的第一个 WordPress 小工具](https://www.wpdaxue.com/series/creating-your-first-wordpress-widget/ "一步步创建你的第一个 WordPress 小工具") 系列文章。
 
 ## Mega-Magazine 主题二次开发 widgets ##
-因需求，需要进行 **`Mega Magazine`** 主题的二次开发，需要添加一个广告工具。当前主题为 1.1.0,可以下载主题研究学习。
+因需求，需要进行 **`Mega Magazine`** 主题的二次开发，需要添加一个广告工具。当前主题为 1.1.0,可以下载主题研究学习。以下为开发引导教程：
 
-### MM:AD Tool ###
-开发 **`MM:AD`** 广告挂件。
+### MM:Advertisement widget ###
+开发 **`MM:Advertisement`** 广告挂件。该广告插件要求可以修改宽高，以及选择类型，可以选择图片并设置链接等功能。
 
-#### 主题 widgets 分析 ####
+
+
+### 主题 widgets 分析 ###
 
 1、在主题 `mega-magazine` 目录中，找到 `function.php` 查看小工具初始化函数：
 
@@ -61,6 +63,46 @@
 
 ![widget-analyze](https://i.imgur.com/Jqg0sW1.png)
 
+#### MM: Double Column News 分析学习 ####
+以 `double-columns.php` 文件也就是类 `Mega_Magazine_Double_Columns`（部分代码见下面） 分析和继承的类 `WP_Widget` 学习。
 
+	if ( ! class_exists( 'Mega_Magazine_Double_Columns' ) ) :
 
+		class Mega_Magazine_Double_Columns extends WP_Widget {
+			function __construct(){
+				... ... // 该部分见下面序号 1、
+			}
+			... ...  
+		}
+	
+	endif;
+
+1、类 `Mega_Magazine_Double_Columns` 构造函数调用了父类 `WP_Widget` 中的构造函数 `__construct()` (此类中还保留着 PHP4 的构造函数：`WP_Widget` ，以下只分析`__construct()`,因为两者功能一样。)
+
+	// Mega_Magazine_Double_Columns 类的构造函数
+	function __construct() {
+		$opts = array(
+			// classname : 为前端HTML中 css 的class名
+			'classname'   => 'double-news',
+			// description : 为下面示意图中的红色矩形橙色高亮描述，图1
+			'description' => esc_html__( 
+				'Widget to display first two posts with large thumbnail and other with small thumbnail in double column', 
+				'mega-magazine' 
+			),
+		);
+		//调用了 WP_Widget 类的构造函数
+		parent::__construct( 
+			'mega-magazine-double-news', //Optional Base ID for the widget
+			esc_html__( 'MM: Double Column News', 'mega-magazine' ), //后台显示名称，图1红色矩形黑色粗体
+			$opts // 配置信息
+		);
+	}
+
+![widget 构造函数配置项说明示例](https://i.imgur.com/eTrTiRN.png "图1")
+
+### MM:Advertisement 开发 ###
+1、在 `mega-magazine/inc/widgets/` 目录新建 PHP 文件 `advertisement.php` ,定义类 `Mega_Magazine_Advertisement` ，然后在该类中实现方法。
+
+2、`Mega_Magazine_Advertisement` 类实现后再在 `widgets.php` 中引入 advertisement.php 文件。
+并在函数 `mega_magazine_custom_widgets()` 中注册类 `Mega_Magazine_Advertisement`
 
