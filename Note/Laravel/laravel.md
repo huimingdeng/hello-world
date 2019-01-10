@@ -1,6 +1,9 @@
 # Laravel 学习笔记 #
 Laravel学笔记，记录一些个人学习中遇到的知识点和遇到问题处理方案。
 《[laravel5.7中文文档](https://laravel-china.org/docs/laravel/5.7 "文档")》
+
+[Laravel调试工具](https://blog.csdn.net/qq_38365479/article/details/80340289 "laravel调试工具")
+
 ## 01. laravel5.7 下载与安装 ##
 laravel 框架下载安装部署项目方式。
 
