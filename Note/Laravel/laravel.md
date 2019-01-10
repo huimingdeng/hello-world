@@ -554,3 +554,11 @@ laravel 用户验证。
 ## laravel 项目 ##
 学习 laravel 基础后，进行项目实践。
 
+
+
+## 学习疑问+解答 ##
+1. 如何实现跨域请求？
+
+2. base64UrlEncode 和 base64Encode 区别？
+
+Jan 10,2019
