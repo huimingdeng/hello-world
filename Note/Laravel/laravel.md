@@ -527,6 +527,15 @@ eg. `DB:connection('mydb')->select('select * from goods id=?', ['id'=>1])`
 
 eg. `DB:select('select * from goods id=?', ['id'=>1]);`
 
+#### SQL 执行方法对比 ####
+
+DB::insert() 和 DB::select() 执行 INSERT 语句的返回结果不一样。
+
+DB::select() 方法执行 INSERT 语句使用laravel dd打印返回空数组 `[]`
+
+
+P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::select()` 执行原生SQL语句会报错 ，因为表单字段和数据库字段类型要一致。eg. `DB::insert("INSERT INTO goods(`goods_name`, `price`, `disprice`, `pubdate`, `editdate`) VALUES(?,?,?,?,?)",[$goods_name,$price,$disprice,$pubdate,$editdate])`：
+
 ### INNODB 事物处理 ###
 事物处理，自动事物 `DB:transaction( ... );`
 
@@ -557,8 +566,23 @@ laravel 用户验证。
 
 
 ## 学习疑问+解答 ##
-1. 如何实现跨域请求？
+1. 如何实现跨域请求？参考 [同源策略、跨域解决方案](https://www.cnblogs.com/rockmadman/p/6836834.html "同源策略、跨域解决方案")
+	1. 前后端完全分离后，由于前端项目运行在自己机器的指定端口(也可能是其他人的机器) ，例如：`localhost：8080` ,`laravel` 后台运行在其它机器或另一个端口，那么形成了跨域请求，而对浏览器来说，跨域请求是违法行为（[同源策略](https://baike.baidu.com/item/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/3927875?fr=aladdin "百度百科")：是浏览器的一个安全功能，不同源的客户端脚本在没有明确授权的情况下，不能读写对方资源。所以a.com下的js脚本采用ajax读取b.com里面的文件数据是会报错的。）
+	2. `laravel` 添加中间件处理跨域请求， `php artisan make:middleware EnableCrossRequestMiddleware`
+	3. 中间件实现可以参考文章 [Laravel 跨域解决方案](https://laravel-china.org/articles/6504/laravel-cross-domain-solution "Laravel 跨域解决方案")
+	4. 在内核文件`App\Http\Kernel.php` 中引入 `\App\Http\Middleware\EnableCrossRequestMiddleware::class`
 
-2. base64UrlEncode 和 base64Encode 区别？
+2. UrlEncode 和 base64Encode 区别？
+	1. base64Encode ： 
+		1. 包含A-Z a-z 0-9 和加号“+”，斜杠“/” 用来作为开始的64个数字. 等号“=”用来作为后缀用途。
+		2. 2进制的.
+		3. 要比源数据多33%
+		4. 常用于邮件。
+		5. = 号的个数是由 /3 的余数来决定的，最多能有 2 个 = 号；
+		6. 主要用于初步的加密（非明文可见）和安全的网络传输
+	2. urlencode ：
+		1. URL 只能使用 ASCII 字符集来通过因特网进行发送
+		2. 除了  -_.  等规定之外的所有非字母数字字符都将被替换成百分号（%）后跟两位十六进制数，空格则编码为加号（+）
+		3. 主要用于编码 url 和安全传输  url， RFC 1738做了硬性规定
 
 Jan 10,2019
