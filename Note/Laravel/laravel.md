@@ -458,6 +458,24 @@ laravel提供新方式，首先创建请求验证：
 
 #### 卡槽（slots）与组件（Components） ####
 要使用则先定义。卡槽相当于电商的弹窗提示功能。
+blade 模板中创建 slot ：`alert.blade.php`
+
+	<div class="alert alert-danger">
+	    <div class="alert-title">{{ $title }}</div>
+	
+	    {{ $slot }}
+	</div>
+
+在 component 中使用 slot ： 
+
+	@component('template.alert',['title'=>'test'])
+	    @slot('title')  
+	        Forbidden
+	    @endslot
+	
+	    You are not allowed to access this resource!
+	@endcomponent
+
 
 P.S. 自定义的卡槽匹配必须要全部匹配，不然报错。
 
