@@ -519,7 +519,7 @@ P.S. [MySQL字符集疑问](https://www.cnblogs.com/EasonJim/p/8128196.html "字
 ### CURD ###
 laravel 原生用法（灵活性>laravel的构造器查询，且利于SQL优化）,`select、insert、update、delete`自定义配置：
 
-占位符 `?`,数组传递值； :id
+占位符 `?`,数组传递值； :id 关联数组传递值
 
 eg. `DB:connection('mydb')->select('select * from goods id=?', ['id'=>1])`
 
@@ -529,9 +529,11 @@ eg. `DB:select('select * from goods id=?', ['id'=>1]);`
 
 #### SQL 执行方法对比 ####
 
-DB::insert() 和 DB::select() 执行 INSERT 语句的返回结果不一样。
+`DB::insert()` 和 `DB::select()` 执行 `INSERT` 语句的返回结果不一样。
 
-DB::select() 方法执行 INSERT 语句使用laravel dd打印返回空数组 `[]`
+`DB::select()` 方法执行 INSERT 语句使用laravel dd打印返回空数组，成功  `[]`
+
+`DB::insert()` 方法执行 INSERT 语句使用laravel dd打印返回布尔类型，成功 `true`
 
 
 P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::select()` 执行原生SQL语句会报错 ，因为表单字段和数据库字段类型要一致。eg. `DB::insert("INSERT INTO goods(`goods_name`, `price`, `disprice`, `pubdate`, `editdate`) VALUES(?,?,?,?,?)",[$goods_name,$price,$disprice,$pubdate,$editdate])`：
