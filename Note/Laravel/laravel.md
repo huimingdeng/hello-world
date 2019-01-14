@@ -570,7 +570,15 @@ P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::sele
 		}
 	);
 
+### laravel SQL构造器 ###
+链式查询，`DB::table('goods')->select('goods_name')->get()`,获取所有数据。
 
+构造器查询中使用原生条件，要用 `DB::raw()` 进行处理：
+
+#### 限制结果集 ####
+    DB::table('goods')->offset(2)->limit(2)->get(); // 查询到的结果获取2条返回
+	DB::table('goods')->skip(2)->take(2)->get(); //跳到指定数量2的位置，获取两条结果
+构造器 limit(offset) 和 take 的偏移量(skip)的差异，前者是查询所有结果后获取特定数量，而后者是直接跳到指定位置获取相应数量的信息，所以后者相对快很多。
 
 ## 07. Eloquent模型 ##
 laravel Eloquent 模型
