@@ -13,8 +13,8 @@
 2.  本人使用 `Sublime Text 3` 进行开发：因此使用快捷键 `Ctrl+P` 快速找到文件 `config\app.php` 进行配置：
 	1.  在数组键 `providers` 中添加 `Barryvdh\Debugbar\ServiceProvider::class,`
 	2.  在数组键 `aliases` 中添加 `'Debugbar' => Barryvdh\Debugbar\Facade::class,`
-3.  运行命令 `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` 生成 `laravel-debugbar` 的配置文件
-	1.  进入配置文件设置：
+3.  运行命令 `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` 生成 `laravel-debugbar` 的配置文件，
+	1.  `Ctrl+P` 进入配置文件 `config\debugbar.php` 设置：
 	2.  找到 `enabled` 项并修改为 `'enabled' => env('APP_DEBUG', false),`
 	3.  ![laravel-debugbar 效果图](https://i.imgur.com/d7yaQ0J.png)
 4.  配置完成后测试的效果图：
