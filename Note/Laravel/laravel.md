@@ -571,7 +571,9 @@ P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::sele
 	);
 
 ### laravel SQL构造器 ###
-链式查询，`DB::table('goods')->select('goods_name')->get()`,获取所有数据。
+链式查询，`DB::table('goods')->select('goods_name')->get()`,获取所有数据。示例：
+
+![laravel构造器查询数据库](https://i.imgur.com/MgUoLfm.png)
 
 构造器查询中使用原生条件，要用 `DB::raw()` 进行处理：
 
