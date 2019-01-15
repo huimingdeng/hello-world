@@ -532,7 +532,7 @@ P.S. [MySQL字符集疑问](https://www.cnblogs.com/EasonJim/p/8128196.html "字
 	}
 
 
-
+P.S. [MySQL 严格模式](https://blog.csdn.net/huangyuxin_/article/details/78359073 "MySQL 严格模式") 设置后执行 CURD 操作报错原因——后续学习的 CURD 操作要知道的知识点。
 
 ### CURD ###
 laravel 原生用法（灵活性>laravel的构造器查询，且利于SQL优化）,`select、insert、update、delete`自定义配置：
@@ -571,16 +571,18 @@ P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::sele
 	);
 
 ### laravel SQL构造器 ###
-链式查询，`DB::table('goods')->select('goods_name')->get()`,获取所有数据。示例：
+链式查询，`DB::table('goods')->select('goods_name')->get()`,获取所有数据。
 
-![laravel构造器查询数据库](https://i.imgur.com/MgUoLfm.png)
 
 构造器查询中使用原生条件，要用 `DB::raw()` 进行处理：
 
 #### 限制结果集 ####
     DB::table('goods')->offset(2)->limit(2)->get(); // 查询到的结果获取2条返回
-	DB::table('goods')->skip(2)->take(2)->get(); //跳到指定数量2的位置，获取两条结果
+	DB::table('goods')->skip(2)->take(2)->get(); //跳到指定数量2的位置，获取两条结果,改构造器速度比上面的快
 构造器 limit(offset) 和 take 的偏移量(skip)的差异，前者是查询所有结果后获取特定数量，而后者是直接跳到指定位置获取相应数量的信息，所以后者相对快很多。
+
+`DB::table()->select()->skip()->take()->get()` 限制查询，示例：
+![laravel构造器查询数据库](https://i.imgur.com/MgUoLfm.png)
 
 ## 07. Eloquent模型 ##
 laravel Eloquent 模型
