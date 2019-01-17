@@ -78,12 +78,14 @@ class Minesweeper{
 	 * @return [type] [description]
 	 */
 	protected function map(){
-		$table = "<table>\n %s \n</table>\n";
+		$table = "<table class='chessboard'>\n %s \n</table>\n";
 		$tr = "";
 		for($row=1;$row<=$this->rows;$row++){
 			$tr .= "\t".'<tr>'."\n";
 			for ($col=1; $col <= $this->cols; $col++) { 
-				$tr .= "\t\t".'<td>'. '<input class="btn">' .'</td>'."\n";
+				$tr .= "\t\t" . '<td>'. "\n";
+				$tr .= "\t\t\t" . '<input type="button" class="btn btn-default " id="test'. $row.'-'.$col .'" onclick="$.fn.check(this);">' . "\n";
+				$tr .= "\t\t" . '</td>'."\n";
 			}
 			$tr .= "\t".'</tr>'."\n";
 		}

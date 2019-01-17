@@ -177,8 +177,9 @@
 						'level' : $('input[name=level]').val(),
 						'type' : $('input[name=status]').val()
 					},
-					sussecc:function(msg){
-						
+					success:function(msg){
+						$("#chessboard").html('');
+						$("#chessboard").html(msg.chessboard);
 					},
 					error:function(msg){
 						console.log(msg);
@@ -187,6 +188,14 @@
 				});
 
 			}
+			// check
+			$.fn.check = function(obj){
+				var status = $(obj).hasClass('disabled');
+				console.log(status);
+				$(obj).addClass('disabled');
+
+				console.log($(obj).attr("id"));
+			};
 			
 			$.fn.initGame();
 			$.fn.setLevel();

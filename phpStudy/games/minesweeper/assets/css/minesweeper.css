@@ -1,2 +1,6 @@
 .row {margin-bottom: 10px;}
 .select .panel-heading {cursor: pointer;}
+table.chessboard  {
+	margin: 0 auto;
+	text-align: center;
+}

@@ -17,9 +17,9 @@ class Request{
 				case 'init':
 					$this->mines = $this->minesobj->getMines();
 					$map = $this->minesobj->getMap();
-					// echo json_encode( ['status'=>200, 'chessboard'=>$map] );
-					echo $map;
-					exit(0);
+					echo json_encode( ['status'=>200, 'chessboard'=>$map] );
+					// echo $map;
+					// exit(0);
 					break;
 
 				case 'check':
