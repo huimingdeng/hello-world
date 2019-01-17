@@ -180,6 +180,7 @@
 					success:function(msg){
 						$("#chessboard").html('');
 						$("#chessboard").html(msg.chessboard);
+						console.log(msg.res);
 					},
 					error:function(msg){
 						console.log(msg);
@@ -193,8 +194,27 @@
 				var status = $(obj).hasClass('disabled');
 				console.log(status);
 				$(obj).addClass('disabled');
-
-				console.log($(obj).attr("id"));
+				$(obj).removeAttr('onclick','');
+				if(!status){
+					// $(obj).attr("id")
+					$.ajax({
+						url: '/games/minesweeper/classes/requests.class.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {'operation' : 'get', 'position' : $(obj).attr('id')},
+					})
+					.done(function(msg) {
+						console.log(msg.res);
+					})
+					.fail(function() {
+						console.log("error");
+					})
+					.always(function() {
+						
+					});
+					
+				}
+				
 			};
 			
 			$.fn.initGame();
