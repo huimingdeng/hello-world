@@ -1,4 +1,5 @@
 <?php 
+session_start();
 class Request{
 	private static $_instance = null;
 	private $mines;
@@ -41,13 +42,17 @@ class Request{
 	}
 
 	private function initGame(){
+		global $mines;
 		$this->minesobj = new Minesweeper($this->level);
 		$this->mines = serialize($this->minesobj->getMines());
+		$mines = $this->mines;
 		$this->map = $this->minesobj->getMap();
 		echo json_encode( ['status'=>200, 'chessboard'=>$this->map, 'res'=>$this->mines] );
 	}
 
 	private function get(){//测试用
+		global $mines;
+		$this->mines = $mines;
 		echo json_encode(['status'=>200, 'res'=>unserialize($this->mines)]);
 	}
 
@@ -61,5 +66,8 @@ class Request{
 
 }
 
+
+global $mines;
 Request::getInstance();
 
+$_SESSION['mines'] = $mines;
