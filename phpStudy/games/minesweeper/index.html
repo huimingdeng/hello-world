@@ -91,14 +91,14 @@
 				$("input[name=status]").val('start');//启动
 				var status = $("input[name=status]").val();
 				$.fn.settime();
-				console.log(status);
+				$("input.mines").removeClass('disabled');
 			};
 			// 暂停 
 			$.fn.pause = function(){
 				$("input[name=status]").val('pause');//暂停
 				var status = $("input[name=status]").val();
 				$.fn.cleartime();
-				console.log(status);
+				$("input.mines").addClass('disabled');
 			};
 			// 停止
 			$.fn.stop = function(){
@@ -161,42 +161,45 @@
 			$.fn.setLevel = function(){
 				$('.level').each(function(index, el) {
 					$(this).click(function(event) {
-						console.log(index);
 						$('input[name=level').val(index);
+						$.fn.initGame();
 					});
 				});
 			};
 			// init 初始化游戏
 			$.fn.initGame = function(){
-				$.ajax({
-					url:'/games/minesweeper/classes/requests.class.php',
-					type:'post',
-					dataType:'JSON',
-					data:{
-						'operation' : 'init',
-						'level' : $('input[name=level]').val(),
-						'type' : $('input[name=status]').val()
-					},
-					success:function(msg){
-						$("#chessboard").html('');
-						$("#chessboard").html(msg.chessboard);
-						console.log(msg.res);
-					},
-					error:function(msg){
-						console.log(msg);
 
-					}
-				});
+				if('init'==$('input[name=status]').val()){
+					$.ajax({
+						url:'/games/minesweeper/classes/requests.class.php',
+						type:'post',
+						dataType:'JSON',
+						data:{
+							'operation' : 'init',
+							'level' : $('input[name=level]').val(),
+							'type' : $('input[name=status]').val()
+						},
+						success:function(msg){
+							$("#chessboard").html('');
+							$("#chessboard").html(msg.chessboard);
+							$("input.mines").addClass('disabled');
+							console.log(msg.res);//测试，打印地雷位置
+						},
+						error:function(msg){
+							console.log(msg);
 
+						}
+					});
+				}
 			}
-			// check
+			// check 是否踩雷
 			$.fn.check = function(obj){
 				var status = $(obj).hasClass('disabled');
-				console.log(status);
-				$(obj).addClass('disabled');
-				$(obj).removeAttr('onclick','');
-				if(!status){
+				
+				if(!status&&'init'!=$('input[name=status]').val()&&'pause'!=$('input[name=status]').val()){
 					// $(obj).attr("id")
+					$(obj).addClass('disabled');
+					$(obj).removeAttr('onclick','');//删除点击事件
 					$.ajax({
 						url: '/games/minesweeper/classes/requests.class.php',
 						type: 'POST',

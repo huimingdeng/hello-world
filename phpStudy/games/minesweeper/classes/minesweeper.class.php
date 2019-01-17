@@ -84,7 +84,7 @@ class Minesweeper{
 			$tr .= "\t".'<tr>'."\n";
 			for ($col=1; $col <= $this->cols; $col++) { 
 				$tr .= "\t\t" . '<td>'. "\n";
-				$tr .= "\t\t\t" . '<input type="button" class="btn btn-default " id="'. $row.'_'.$col .'" onclick="$.fn.check(this);">' . "\n";
+				$tr .= "\t\t\t" . '<input type="button" class="btn btn-default mines" id="'. $row.'_'.$col .'" onclick="$.fn.check(this);">' . "\n";
 				$tr .= "\t\t" . '</td>'."\n";
 			}
 			$tr .= "\t".'</tr>'."\n";
