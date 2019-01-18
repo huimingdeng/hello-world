@@ -584,6 +584,12 @@ P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::sele
 `DB::table()->select()->skip()->take()->get()` 限制查询，示例：
 ![laravel构造器查询数据库](https://i.imgur.com/MgUoLfm.png)
 
+#### 联合查询 ####
+构造器的联合查询：`DB::table('<table1>')->join('<table2>','<table1>.<field>','<condition>','<table2>.<field>')->first()`
+
+#### 数据库迁移 ####
+命令 `php artisan migrate` 进行数据库的迁移。
+
 ## 07. Eloquent模型 ##
 laravel Eloquent 模型
 
