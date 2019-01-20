@@ -38,3 +38,31 @@ Nginx学习笔记：安装 nginx-1.2.3 参考《Nginx高性能Web服务器详解
 	- nginx 运行时，会存在一个主进程和多个工作进程。`ps -ef | grep "nginx"` 查找 nginx 是否运行，也可得到：root主进程pid:69309 ，可以使用 `kill SIGNAL PID <pid>` 关闭。
 	- ![启动nginx](https://i.imgur.com/mafRlue.png)
 	
+
+
+## Linux服务器升级PHP ##
+因为当初腾讯云购买的时候选了 Ubuntu16.0.4 系统，搭配 lamp 环境，没有选择 lnmp 环境，导致今天升级 PHP 版本，折腾半天。（P.S. 虽然Apache处理PHP比Nginx好，但建议要考虑长远的情况，还是用Nginx更好，当初因为不会选，随便购买的服务，现在都是坑）
+
+安装升级：
+
+	sudo add-apt-repository ppa:ondrej/php //切换PHP库源，用于更新 PHP 版本
+	sudo apt-get update //命令升级
+	sudo apt-get upgrade php // PHP版本升级，然后是一大堆选择，本人都默认，下一步
+
+![PHP7.0升级到7.2](https://i.imgur.com/5assrmo.png)
+
+![升级后 cli 模式](https://i.imgur.com/LkX9JPo.png)
+
+注意时候如果使用 浏览器打开是不一样的，仍旧是 `php 7.0.5` 的版本，需要进行如下操作：
+
+Apache模块切换：（位置：`/etc/apache2/mods-available`)
+
+	sudo a2dismod php7.0
+	sudo a2denmod php7.2
+	sudo /etc/init.d/apache2 restart //重启Apache 
+
+输入域名，eg. http://xxx.com/phpinfo.php 查看信息。
+![PHPinfo -- 成功](https://i.imgur.com/aMb0y35.png)
+
+
+
