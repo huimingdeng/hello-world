@@ -591,8 +591,14 @@ P.S. 注意 mysql 的严格模式开启情况使用 `DB::insert()` 或 `DB::sele
 命令 `php artisan migrate` 进行数据库的迁移。
 
 ## 07. Eloquent模型 ##
-laravel Eloquent 模型
+laravel Eloquent 模型：一种面向对象编程处理不同系统（Java、PHP）的数据转换方法
 
+### 模型映射关系 ###
+默认为数据库表名=模块名+s eg. Admin(模型) => admins(表名)；使用则 `use <model namespace>`
+
+模型添加操作需要关闭自身的创建时间 `create_at`
+
+设置模型对应数据表的主键 `protected $primaryKey`
 
 ## 08. authorize 用户验证(Auth) ##
 laravel 用户验证。
