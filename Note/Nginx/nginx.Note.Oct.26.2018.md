@@ -68,3 +68,73 @@ Apache模块切换：（位置：`/etc/apache2/mods-available`)
 ## backup ##
 因决定使用 Nginx 替换腾讯云服务器中的 lamp 环境，使用 lnmp 环境，但因为 PHP7.0 升级到 PHP7.2 过程中，在 `/etc/php/7.2` 目录中没有 `fpm/` 目录，缺失相关文件 `php-fpm.conf` 文件，导致 Nginx 无法解析PHP7.2版本，因此备份文件，卸载 Apache + nginx + php + mysql 重新安装 lnmp 环境。
 
+### 卸载程序 ###
+安装 lnmp 环境，先卸载 Apache 和安装错误的 PHP 版本，以及Nginx和mysql等，然后重新安装。
+
+1. 卸载 `apache`：
+	1. `sudo apt-get --purge remove apache2*` //卸载掉Apache
+	2. `sudo apt-get autoremove apache2`
+2. 卸载 `nginx`：
+	1. `sudo apt-get remove nginx*`
+	2. `sudo apt-get purge nginx*`
+3. 卸载 `php` :
+	1. `sudo apt-get --purge remove php*` // 因为从`5.6` 到 `7.3` 版本都有，所以所有都卸载，如果没有多版本可以使用 `sudo apt-get --purge remove php<version>*`
+	2. `sudo apt-get autoremove php*` // 原因同上
+4. 卸载 `mysql`:
+	1. `sudo apt-get --purge remove mysql*`
+	2. `sudo apt-get autoremove mysql*`
+5. 卸载完成后，会提示有残留，需要执行命令进行清除：`dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P`
+6. 使用命令 `whereis php|nginx|apach2` 查看是否完全删除，没有完全删除的部分（一般是因为目录中有备份文件引起），可以直接删除。
+
+### 重新安装 ###
+这里不再使用编译安装，直接使用命令安装：
+
+1. 安装 `mysql` : `sudo apt install mysql-server`
+2. 安装 `Nginx` : 要按照稳定版
+	1. `sudo apt-add-repository ppa:nginx/stable` 添加镜像库
+	2. `sudo apt-add-repository ppa:ondrej/php`
+	3. `sudo apt update` 添加镜像库后要记得更新一下
+	4. `sudo apt install nginx` 安装 Nginx
+	5. `sudo service nginx start` 启动 Nginx，查看能否在浏览器打开，能打开表示成功，（不过有特殊情况是需要进行配置了server后才可以，卸载前安装的版本就是这种情况）
+3.  安装 `PHP7.2` : `sudo apt-get install php7.2-fpm`
+4.  `sudo vim /etc/nginx/sites-enabled/default` 编辑 Nginx 配置文件，映射到 PHP7.2 中，在 ubuntu 中查看 `ls /var/run/php/` 是否已经有相关文件 `php7.2-fpm.sock`
+
+设置如下：
+
+	server{
+        listen 80;
+        server_name     192.168.159.118;
+
+        #charset koi8-r;
+
+        #access_log     logs/host.access.log    main;
+        root    /home/ubuntu/httpdocs/;
+        location / {
+                index   index.html      index.htm       index.php       1.php;
+                autoindex       on;
+                        try_files       $uri    $uri/   /index.php?$query_string;
+        }
+
+        error_page      500 502 503 504 /50x.html;
+
+        location        =       /50x.html {
+                root    html;
+        }
+		location ~ \.php(.*)$  {
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock; # 原来的升级后的PHP7.2缺失该文件
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+	}
+
+On Jan,21,2019 write by huimindeng.
+
+
+
+
+
+
+
+
+
