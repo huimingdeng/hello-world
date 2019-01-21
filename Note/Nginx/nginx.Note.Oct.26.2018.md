@@ -65,4 +65,6 @@ Apache模块切换：（位置：`/etc/apache2/mods-available`)
 ![PHPinfo -- 成功](https://i.imgur.com/aMb0y35.png)
 
 
+## backup ##
+因决定使用 Nginx 替换腾讯云服务器中的 lamp 环境，使用 lnmp 环境，但因为 PHP7.0 升级到 PHP7.2 过程中，在 `/etc/php/7.2` 目录中没有 `fpm/` 目录，缺失相关文件 `php-fpm.conf` 文件，导致 Nginx 无法解析PHP7.2版本，因此备份文件，卸载 Apache + nginx + php + mysql 重新安装 lnmp 环境。
 
