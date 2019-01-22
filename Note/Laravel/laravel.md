@@ -599,6 +599,9 @@ laravel Eloquent 模型：一种面向对象编程处理不同系统（Java、PH
 ### 模型操作（curd） ###
 模型添加操作需要关闭自身的创建时间 `create_at` `updated_at` 等默认字段，则需要在模型中定义 `public $timestamps = false;` 如此模型对象默认对应数据表字段会忽略。
 
+
+
+#### 模型添加 ####
 设置模型对应数据表的主键 `protected $primaryKey`
 
 	// 添加分类
