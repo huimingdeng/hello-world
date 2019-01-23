@@ -717,7 +717,10 @@ P.S. 软删除可用于回收站，商品下架等功能。
 
 在一对一关联模型中， hasOne 方法中的第一个参数会对模型实例化，因此要有模型绝对路径。
 
+![一对一关联](https://i.imgur.com/7OC8QlD.png)
+
 反向关联：（和一对一差不多，这里通过分类找产品）
+![反向关联示例](https://i.imgur.com/LsT2gIe.png)
 
 ## 08. authorize 用户验证(Auth) ##
 laravel 用户验证。
