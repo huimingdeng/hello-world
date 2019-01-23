@@ -599,9 +599,7 @@ laravel Eloquent 模型：一种面向对象编程处理不同系统（Java、PH
 ### 模型操作（curd） ###
 模型添加操作需要关闭自身的创建时间 `create_at` `updated_at` 等默认字段，则需要在模型中定义 `public $timestamps = false;` 如此模型对象默认对应数据表字段会忽略。
 
-
-
-#### 模型添加 ####
+#### 模型添加数据 ####
 设置模型对应数据表的主键 `protected $primaryKey`
 
 	// 添加分类
@@ -615,10 +613,72 @@ laravel Eloquent 模型：一种面向对象编程处理不同系统（Java、PH
     dump($bool);
 
 `$model->find($id)` 获取指定数据，如果不是使用指定 id 用 `$model->where(['name'=>'abc'])->get()` 方式查询。
+#### 模型修改数据 ####
 
-### 模型关联（一对一） ###
+	// 修改货品价格
+	$goods = Goods::find(9);
+    $goods->disprice = 900;
+    $t = $goods->save();
+    dump($t);
 
+#### 模型查询数据 ####
+创建模型后就可以获取关联的数据库表数据，如果表明不一致，可以在具体的模型类中设置属性 `protected $table;` 
 
+	$goods = Goods::select(['id','goods_name'])->get()->toArray();
+    dump($goods);
+	$goods_obj = Goods::all(); 
+
+#### 模型删除数据 ####
+删除操作：软删除，需要引入类（特性） `Illuminate\Database\Eloquent\SoftDeletes` 且模型对应的数据表中要有 `deleted_at` 字段。（字段创建，则需要操作的控制器或脚本引入`Illuminate\Support\Facades\Schema;`，然后可以执行代码添加字段：
+
+	// 软删除创建 deleted_at 字段
+    Schema::table('<tablename>', function ($table) { //eg. <tablename> => goods
+        $table->softDeletes();
+    });	
+或者其它方式创建字段亦可。）
+
+设置后，在控制器类中进行操作：
+
+	$deletedRows = Goods::where('id', 10)->delete();
+    dump($deletedRows);
+
+![Soft Delete](https://i.imgur.com/5vbXVNU.png)
+
+P.S. 软删除可用于回收站，商品下架等功能。
+
+直接删除（模型中不引入软删除特性则直接删除）：
+
+	$deletedRows = Goods::where('id', 11)->delete();
+    dump($deletedRows);
+	
+
+### 模型关联 ###
+数据表常用的关系：一对一、一对多喝多对多的数据表关系。
+
+一对一：（有外键的数据表中定义关联模型的方法）
+
+	public function catagory(){
+        // 第一个参数为模型
+        // 第二个参数为关联模型 Catagories 的关联字段
+        // 第三个参数为当前模型 Goods 的关联字段 -- 建议要写，不然默认的是 id
+    	return $this->hasOne('App\Model\Catagories','id','cid');
+    }
+
+或者：
+
+	use App\Model\Catagories;
+	class Goods extends Model{
+		... ...
+		public function catagory(){
+	        // 第一个参数为模型
+	        // 第二个参数为关联模型 Catagories 的关联字段
+	        // 第三个参数为当前模型 Goods 的关联字段 -- 建议要写，不然默认的是 id
+	    	return $this->hasOne(Catagories::class,'id','cid');
+	    }
+
+在一对一关联模型中， hasOne 方法中的第一个参数会对模型实例化，因此要有模型绝对路径。
+
+反向关联：（和一对一差不多，这里通过分类找产品）
 
 ## 08. authorize 用户验证(Auth) ##
 laravel 用户验证。
