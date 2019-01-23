@@ -641,6 +641,10 @@ laravel Eloquent 模型：一种面向对象编程处理不同系统（Java、PH
 
 	$deletedRows = Goods::where('id', 10)->delete();
     dump($deletedRows);
+	或：
+	$flight = Goods::find(1);
+    $t = $flight->delete();
+    dump($t);
 
 ![Soft Delete](https://i.imgur.com/5vbXVNU.png)
 
@@ -650,7 +654,42 @@ P.S. 软删除可用于回收站，商品下架等功能。
 
 	$deletedRows = Goods::where('id', 11)->delete();
     dump($deletedRows);
-	
+
+#### 软删除数据查询 ####
+进行了软删除操作后，例如实现回收站功能，要进入回收站，这需要用 `onlyTrashed()`
+
+	$goods = Goods::onlyTrashed()
+                ->where('id', 1)
+                ->get()
+                ->toArray();
+
+如果是包含非软删除的进行查询：`withTrashed()`
+
+	goods = Goods::withTrashed()
+                ->where('id', 1)
+                ->get()->toArray();
+
+软删除回复（回收站恢复，产品重新上架等）：
+
+	$goods = Goods::withTrashed()
+                ->where('id', 1)
+                ->restore();
+    dump($goods); // 返回 1 ： 非布尔类型，返回的是恢复的数量
+
+如果，引用了软删除特性，但又想实现硬删除（永久删除），如清空回收站功能，可以实现：`forceDelete()`
+
+	// 如果没有软删除的使用 forceDelete() 直接删除
+    $goods = Goods::find(14);
+    $bool = $goods->forceDelete();
+    dump($bool);
+
+如果是数据已经是软删除数据（`deleted_at` is not null) 上面的执行无法成功，要使用强制删除：
+
+	// 强制删除
+    $goods = Goods::withTrashed()->find(13);
+    // dump($goods);
+    $bool = $goods->forceDelete();
+    dump($bool); // 布尔型
 
 ### 模型关联 ###
 数据表常用的关系：一对一、一对多喝多对多的数据表关系。
