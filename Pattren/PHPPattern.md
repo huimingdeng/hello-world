@@ -17,10 +17,78 @@
 用例图：必需涵盖功能总体流程，一个生命周期或多个生命周期。
 
 ## 单例模式 ##
-一个类最多只能创建出一个对象实例（三私一公）。框架中 `kernel::single('system_item_info)` PSR-4: 根据文件夹名称和下划线分割，重写 spl_autoload_register 实现。
+一个类最多只能创建出一个对象实例（三私一公）。
 
-1. 为什么要这样做？
-2. 有什么好处？
+框架中 `kernel::single('system_item_info)` PSR-4: 根据文件夹名称和下划线分割，重写 `spl_autoload_register` 实现。 类似 `TPSHOP` 的 service 图层。
+
+1. 为什么要这样做？—— 解决多线程并发访问的问题；节约系统内存，提交系统运行的效率，提高系统性能。
+2. 静态属性数组？—— 常驻内存，直到页面关闭。
+
+示例：把所有实例化对象的动作都封掉，只有一个门进出，且只实例化一次。
+
+应用场景：加载配置、数据库链接
+	
+	class Single{
+		//私有的成员静态变量(属性)，保存自身实例化对象
+		private static $single;
+		// 私有化构造方法，子类、其它类不能实例化等
+		private function __construct(){ ... }
+		// 防止对象的克隆
+		private function __clone(){ ... }
+		// 定义一个方法，实现 Single 类只能定义一次，作为入口
+		public static function getInstance( $classname ){
+			//定义一个静态属性保存实例对象
+			// 如果不是指实现自身，则根据参数 $classname （类名和路径）用于实现自动加载
+			... ... 
+			if(self::$single){
+			}else{//对象不存在
+				self::$single = new Single();
+			}
+			return self::$single;
+		}
+		// 统计类的数量或其它操作
+		... ...
+	}
+	$singleObj = Single::getInstance();
+
+在实际开发中，可能存在大量使用 单例模式的，因此可能 成员变量  $single 是一个数组。
+
+TP: input 获取参数， Laravel： request 获取参数，然后传金 single 类中。
+
+
+## 简单工厂模式 ##
+是属于创建型模式，又叫做静态工厂方法（Static Factory Method）模式，不属于23种GOF设计模式之一；简单工厂模式是由一个工厂对象决定创建出哪一种产品类的实例。
+
+接口和抽象类的区别？
+
+参考框架 DB 类（TP5 用 PDO），模仿示例：
+
+	interface DB{
+		protected function parseDsn();
+		... ...
+	}
+	
+	class Pgsql implements DB{
+		protected function parseDsn(){
+		}
+	}
+
+	class Oracle implements DB{
+		protected function parseDsn(){
+		}
+	}
+
+	class Factory{
+		static $db = NULL;
+		public static function getConnect( $type ){
+			//根据 $type 实例化不同对象
+			if( $type == 'Pgsql'){
+				self::$db = new $type();
+			}
+			... ...
+			return self::$db;
+		}
+	}
 
 
 
