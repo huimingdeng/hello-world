@@ -1,6 +1,12 @@
 # MySQL 优化 #
 记录学习 MySQL 优化的笔记，方便复习。
 
+DML(data manipulation language):它们是SELECT、UPDATE、INSERT、DELETE，就象它的名字一样，这4条命令是用来对数据库里的数据进行操作的语言
+
+DDL(data definition language):有CREATE、ALTER、DROP等，DDL主要是用在定义或改变表（TABLE）的结构，数据类型，表之间的链接和约束等初始化工作上，他们大多在建立表时使用
+
+DCL(data control language):设置或更改数据库用户或角色权限的语句，包括（grant,deny,revoke等）语句。在默认状态下，只有sysadmin,dbcreator,db_owner或db_securityadmin等人员才有权力执行DCL
+
 ## MySQL 工作原理 ##
 mysql工作原理：连接请求->连接池存储->服务管理器等功能处理->SQL接口调用->解析SQL语句并预处理->执行和优化查询->读取缓存或字节流写入->按照引擎对文件进行操作。
 
