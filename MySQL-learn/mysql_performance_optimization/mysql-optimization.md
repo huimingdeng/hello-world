@@ -50,7 +50,8 @@ mysql数据库控制台重要操作：
 
 mysql 操作：（要关闭事务自动提交）
 
-	SELECT @@tx_isolation // 查看当前隔离级别
+	SELECT @@tx_isolation // 查看当前会话隔离级别
+	select @@global.tx_isolation //查看系统当前隔离级别
 	SHOW VARIABLES LIKE "autocommit"; //查看事务自动提交
 	set @@autocommit = 0; // 设置关闭事务的自动提交
 
@@ -88,5 +89,21 @@ mysql 操作：（要关闭事务自动提交）
 线程1 添加条记录
 
 线程2 添加相同记录->返回报错信息
+
+### innodb 日志 ###
+没有配置则 innodb 数据与日志都保存在一个文件中。
+
+二进制文件日志：所有查询等操作可以在二进制文件中查找。eg. 慢查询
+
+数据文件：存储保存的数据
+
+数据库设定了隔离级别后，可以自己变更
+	
+	// 设置当前会话隔离级别
+	set session transaction isolation level repeatable read;
+	// 设置系统当前隔离级别
+	set global transaction isolation level repeatable read;
+
+或者根据业务需求，单独部署一台服务器设置高/低级别的隔离级别 
 
 
