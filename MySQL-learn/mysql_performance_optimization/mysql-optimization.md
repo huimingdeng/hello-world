@@ -107,3 +107,33 @@ mysql 操作：（要关闭事务自动提交）
 或者根据业务需求，单独部署一台服务器设置高/低级别的隔离级别 
 
 
+## 存储过程 ##
+函数：PHP 调用函数，用SQL语句 `SELECT <functionname>`
+
+	日期函数
+	自定义函数
+
+存储过程，要用PHP代码调用，不能写在SQL语句里面
+
+优点：
+
+1. 根据存储过程名字调用，内部代码修改，不影响调用(无需修改PHP调用的业务代码)，不需要重启服务，相当于调用接口
+2. 执行速度快
+3. 减少网络传输量
+
+缺点：
+
+1. 不能使用缓存，所有动作都在存储过程中，性能堪忧
+2. 不能处理复杂业务
+3. 移植性不好
+
+存储引擎的创建：
+	
+	create procedure <procedure_name>(arvg1,...)
+	begin
+		delete <variablename> type;
+		exec statement
+	end$$
+
+	call <procedure_name>(arvg1,...)
+
