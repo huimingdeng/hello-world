@@ -130,13 +130,14 @@ mysql 操作：（要关闭事务自动提交）
 4. 不利于分库分表
 5. 不利于调试(SQL过多，无注释)
 
-存储引擎的创建：
+### 存储引擎的创建 ###
 	
 	create procedure <procedure_name>(arvg1,...)
 	begin
 		delete <variablename> type;
 		exec statement
-	end$$
+	end
+	$$
 
 	call <procedure_name>(arvg1,...)
 
@@ -148,7 +149,23 @@ out 可以被改变，可以返回
 inout 调用时指定，可以被改变和返回
 
 #### 存储过程中数据类型 ####
-数值类型： int、float、double
+数值类型： int、float、double、decimal
+
+日期类型： timestamp、date、year
+
+字符串： char、varchar、text（容易产生慢查询，单独获取对应类型的字段）
+
+#### 存储过程的注释 ####
+因为存储过程代码大量且混乱，因此编写注释是必要的，方便后续的维护工作。
+
+#### 存储过程的调用 ####
+php 调用：
+	
+	$sql = 'call test(4);';
+	$resource = mysql_query($sql);
+	$result = mysql_fetch_array($resource);
+	var_dump($result);
+
 
 ### 创建视图 ###
 MySQL视图：提高重用性，类似于函数；数据库重构不影响程序运行；提高安全性，针对不同用户；数据更清晰。
