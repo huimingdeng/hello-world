@@ -1,12 +1,17 @@
 # MySQL-learn #
-数据库连接方式，
+数据库连接方式，pdo :
 
+config.php 测试使用的配置;
 
-config.php 测试使用的配置
+PdoMySQL.class.php PDO 链接模式；
 
+db.class.php mysqli 对象模式；
+
+## MySQL 优化知识 ##
+见目录：`mysql_performance_optimization`下的 `*.md` 文件
 
 ## 备注知识点 ##
-mysql升级问题。
+windows mysql 升级问题。
 
 ### P.S. windows phpStudy2018 软件升级 mysql 版本到5.7： ###
 
