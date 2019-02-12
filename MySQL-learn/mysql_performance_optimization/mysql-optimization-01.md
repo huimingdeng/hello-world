@@ -167,9 +167,45 @@ php 调用：
 	$result = mysql_fetch_array($resource);
 	var_dump($result);
 
+### 游标与指针 ###
+类似数组指针的操作。指针从上往下移动，取出数组中的数据。定义游标获取查询数据，取到某一个位置，则添加一个标志，方便灵活的操作获取数据的结果集。-- 结合存储过程、函数、触发器等使用。
+
+游标的声明添加(消耗 MySQL 性能)：
+
+	DECLARE <cursor name> CURSOR FOR <ResultSet>
+
+	OPEN <cursor name> // 开启游标，资源操作有对应的关闭操作
+	CLOSE <cursor name> // 关闭游标
+	DECLARE CONTINUE HANDLER FOR <...> NOT FOUND // 设置句柄，结果集查询不到数据自动跳出
+
+以上建议简易业务使用，复杂业务不用；示例：
+
+	CREATE procedure test1()
+	BEGIN
+	DECLARE res_status INT DEFAULT 200;
+	DECLARE a INT; // 声明变量 a
+	DECLARE b VARCHAR(20); // 声明变量 b 对应表 tb 字段 b
+	DECLARE test_cursor CURSOR FOR SELECT a,b FROM tb;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET res_status = 404;
+	OPEN test_cursor;
+		loop_label:loop
+		FETCH test_cursor INTO a,b;// 获取数据
+		... ... // 业务操作
+		IF res_status = 404 THEN
+		leave loop_label // 跳出循环
+		END IF;
+		end loop; //结束循环
+	CLOSE test_cursor;
+	END;
+	
+游标的好处：不满足条件可以弃用数据。
+
+P.S. 结果存储在临时表，不用每次查询获取。
 
 ### 创建视图 ###
 MySQL视图：提高重用性，类似于函数；数据库重构不影响程序运行；提高安全性，针对不同用户；数据更清晰。
 
 视图本质是通过视图（虚拟表）定义更新操作基本表；可进行更新操作的叫可更新视图。
+
+使用场景：
 
