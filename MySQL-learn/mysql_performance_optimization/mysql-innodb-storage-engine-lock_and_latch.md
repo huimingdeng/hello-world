@@ -8,3 +8,14 @@ lock 对象是事务，用来锁定数据库中的对象，表、页、行。一
 
 ![The comparison of lock and latch](https://i.imgur.com/jk5DrLl.png)
 
+### latch 信息查看 ###
+InnoDB 存储引擎latch信息：
+
+![show engine innodb mutex](https://i.imgur.com/6ULQvVd.png)
+
+MySQL 的 DEBUG 版本 latch 详细信息：
+
+![SHOW ENGINE INNODB MUTEX](https://i.imgur.com/h7zxJgG.jpg)
+
+
+### lock 信息查看 ###
