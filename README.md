@@ -65,3 +65,6 @@ php 日常使用函数和案例，进入 [php-doc](https://github.com/huimingden
 5. huarongdao.class.php 根据 CSDN Java源码改编，目前程序未优化，需要消耗大量内存，而且容易死循环。
 6. learn more study less.txt 《如何高效学习》一书的笔记，没有编写完整。
 7. resolve2.py 一个测试回调函数，处理多层结构的 json 数据，处理方法没有编写，该方案也是一个未完成版本。
+
+
+P.S. Markdown Pad2 在 Windows10 无法渲染问题，国外镜像下载：`To fix this issue, please try installing the Awesomium 1.6.6 SDK.`
