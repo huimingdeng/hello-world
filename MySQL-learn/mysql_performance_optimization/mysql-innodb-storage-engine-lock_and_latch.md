@@ -29,3 +29,21 @@ MySQL 的 DEBUG 版本 latch 详细信息：
 共享锁(S Lock),允许事务读取一行数据。
 
 排他锁(X Lock),允许事务删除或更新一行数据。
+
+
+## 事务(Transactions) ##
+是数据库区别文件系统的重要特性之一。
+
+[事务特性](https://github.com/huimingdeng/hello-world/blob/master/MySQL-learn/mysql_performance_optimization/mysql-optimization-01.md#%E4%BA%8B%E5%8A%A1%E7%89%B9%E6%80%A7acid "事务特性ACID"):
+
+- 原子性(A atomicity)
+- 一致性(C consistency)
+- 隔离性(I isolation) —— 前面的锁实现的是事务的隔离性
+- 持久性(D durability)
+
+1. 扁平事务 (Flat Transactions)
+2. 带保存点扁平事务 (Flat Transactions with Savepoints)
+3. 链事务 (Chained Transactions)
+4. 嵌套事务 (Nested Transactions)
+5. 分布式事务 (Distributed Transactions)
+
