@@ -45,7 +45,12 @@ composer 应用市场即镜像源：`repo.packagist.org`
 	composer config repo.packagist composer https://packagist.phpcomposer.com
 
 ## GitHub 项目仓库 ##
-上传项目到 GitHub 上
+上传项目到 GitHub 上，项目发布到 https://packagist.org/ 。
+
+### 项目发布 ###
+GitHub 项目发布到镜像市场中，每次项目更新，都需要在 https://packagist.org/ 中更新应用，否则下载的项目是旧版本。
+
+![镜像市场](https://i.imgur.com/hK2rsXe.png)
 
 ### 创建 composer.json ###
 composer.json 文件创建，镜像源 `composer.json` 生成。
@@ -77,3 +82,7 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
 
 ### composer 安装项目 ###
 测试使用 composer 安装测试用的项目。`composer create-project huimingdeng/mingframework test dev-master --prefer-dist` 
+
+![composer 案例](https://i.imgur.com/tntD9FH.png)
+![项目展示](https://i.imgur.com/C7SR6er.png)
+
