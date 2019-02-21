@@ -6,11 +6,29 @@ composer 安装，参考 composer 中文网（官网）安装，Linux 建议全�
 
 版本需求，`PHP5.3+` `OPENSSL` 必须开启。 
 
+打开命令行并依次执行下列命令安装最新版本的 Composer：
+
+	php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" //下载安装脚本 － composer-setup.php － 到当前目录 
+	php composer-setup.php //执行安装过程。
+	php -r "unlink('composer-setup.php');" //删除安装脚本。
+
+### 局部安装 ###
+上述下载 Composer 的过程正确执行完毕后，可以将 composer.phar 文件复制到任意目录（比如项目根目录下），然后通过 php composer.phar 指令即可使用 Composer 了！
+
+### 全局安装 ###
+全局安装是将 Composer 安装到系统环境变量 PATH 所包含的路径下面，然后就能够在命令行窗口中直接执行 composer 命令了。 `P.S. 个人喜欢这种`
+
+#### MAC&Linux ####
+将文件 `composer.phar` 移动到 `/usr/local/bin/` 中即可：`sudo mv composer.phar /usr/local/bin/composer`
+
+Windows 直接下载相关文件安装即可。
+
 ## composer 访问的原理 ##
 composer 命令执行，访问 composer 的应用市场，应用市场搜索应用，然后访问 GitHub 的代码，然后下载返回用户。
 
 ![composer 访问原理](https://i.imgur.com/lsw16yv.png)
 
+composer 应用市场即镜像源：`repo.packagist.org`
 
 ### 镜像源修改命令 ###
 因为国外镜像延迟问题，可以使用国内镜像
