@@ -72,3 +72,5 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
 	    "minimum-stability": "dev",
 	    "require": {}
 	}
+
+初始化中项目开源协议参考：[https://spdx.org/licenses/](https://spdx.org/licenses/ "镜像开源协议")
