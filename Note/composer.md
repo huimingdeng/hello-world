@@ -11,8 +11,20 @@ composer 命令执行，访问 composer 的应用市场，应用市场搜索应�
 
 ![composer 访问原理](https://i.imgur.com/lsw16yv.png)
 
+
+### 镜像源修改命令 ###
 因为国外镜像延迟问题，可以使用国内镜像
 
+1. 国外镜像源：[https://repo.packagist.org/](https://repo.packagist.org/ "国外镜像源")
+2. 国内镜像源：[https://packagist.phpcomposer.com/](https://packagist.phpcomposer.com "国内镜像源")
+
+全局修改，官方推荐方式：
+
+	composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+修改项目中的 `composer.json` 文件的镜像源
+
+	composer config repo.packagist composer https://packagist.phpcomposer.com
 
 ## GitHub 项目仓库 ##
 上传项目到 GitHub 上
