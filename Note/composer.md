@@ -48,4 +48,27 @@ composer 应用市场即镜像源：`repo.packagist.org`
 上传项目到 GitHub 上
 
 ### 创建 composer.json ###
-composer.json 文件创建，管理应用。
+composer.json 文件创建，镜像源 `composer.json` 生成。
+
+1. `composer init` 初始化
+
+![composer init](https://i.imgur.com/a08Qozr.png)
+
+![composer.json 生成](https://i.imgur.com/tdLZqwX.png)
+
+测试项目发布到镜像源中
+
+	{
+	    "name": "huimingdeng/genecopoeia",
+	    "description": "WordPress plugin development by genecopoeia",
+	    "type": "project",
+	    "license": "proprietary",
+	    "authors": [
+	        {
+	            "name": "huimingdeng",
+	            "email": "test@test.com"
+	        }
+	    ],
+	    "minimum-stability": "dev",
+	    "require": {}
+	}
