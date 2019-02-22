@@ -24,6 +24,11 @@ laravel 框架下载安装部署项目方式。
 
 ![laravel57 vendor](https://i.imgur.com/mneguVr.png)
 
+### composer 指定版本安装 ###
+使用命令 `composer create-project laravel/laravel demo --prefer-dist "5.7.19"` 指定安装 GitHub 上 tag = v5.7.19 的版本。
+
+![指定版本安装](https://i.imgur.com/Sp9IdN5.png)
+
 ### GitHub 下载源码安装 ###
 下载地址 [https://github.com/laravel/laravel](https://github.com/laravel/laravel "https://github.com/laravel/laravel")
 
