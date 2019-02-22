@@ -90,6 +90,7 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
         "php":  ">=5.3.*" // 错误，导致镜像市场包损毁，>=5.4.0 或 5.3.*
     }
 
+P.S. `composer.json` 文件参考学习项目 [`laravel/laravel`](https://packagist.org/packages/laravel/laravel "laravel/laravel")
 
 ### composer 安装项目 ###
 测试使用 composer 安装测试用的项目。`composer create-project huimingdeng/mingframework test dev-master --prefer-dist` 
@@ -99,3 +100,5 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
 
 ### composer 安装库 ###
 composer 安装库(library)的命令`composer require gregwar/captcha`
+
+
