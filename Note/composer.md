@@ -83,6 +83,14 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
 
 初始化中项目开源协议参考：[https://spdx.org/licenses/](https://spdx.org/licenses/ "镜像开源协议")
 
+### composer.json 错误点 ###
+注意，创建的 composer.json 文件中错误示例：
+
+	"require": {
+        "php":  ">=5.3.*" // 错误，导致镜像市场包损毁，>=5.4.0 或 5.3.*
+    }
+
+
 ### composer 安装项目 ###
 测试使用 composer 安装测试用的项目。`composer create-project huimingdeng/mingframework test dev-master --prefer-dist` 
 

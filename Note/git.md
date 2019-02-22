@@ -27,3 +27,17 @@ git 操作知识点备忘录
 常用命令 `git merge dev` ： 将`dev`分支合并到当前分支；注意要切换到非`dev`分支。
 
 一般不确定情况,可以本地分支和远程分支比对：`git diff dev origin/dev`
+
+### 分支重命名 ###
+远程分支的重命名一般是下载到本地，然后删除远程分支，将重命名后的本地分支重新推送。
+
+	git branch -m dev dev-develop
+	git push origin --delete dev 
+	git branch -a //查看删除后效果
+	git push origin dev-develop //推送重命名后的分支，需要切换到 dev-develop 分支进行推送
+
+![删除远程分支](https://i.imgur.com/PGOerWL.png)
+
+![查看远程分支删除后效果](https://i.imgur.com/8B0M0Gj.png)
+
+	git branch -d dev //删除本地分支，注意不要在 dev 分支中进行，切换到主分支进行
