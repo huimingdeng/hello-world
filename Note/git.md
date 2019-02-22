@@ -15,3 +15,13 @@ git 操作知识点备忘录
 ![错误信息](https://i.imgur.com/I2Y2hh3.png)
 
 	git push -u origin master // 推送分支到远程仓库
+
+
+### 分支创建 ###
+常用命令 `git checkout -b dev` ：创建分支`dev`并切换到分支`dev`中，相当于：
+
+	git brach dev // 创建分支
+	git checkout dev // 切换到分支
+
+### 分支合并 ###
+常用命令 `git merge dev` ： 将`dev`分支合并到当前分支；注意要切换到非`dev`分支。
