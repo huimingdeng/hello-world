@@ -53,7 +53,7 @@ GitHub 项目发布到镜像市场中，每次项目更新，都需要在 https:
 ![镜像市场](https://i.imgur.com/hK2rsXe.png)
 
 #### 使用 GitHub 的更新钩子 ####
-旧版 GitHub 网站可以使用 Webhooks 进行自动同步到应用市场。目前亲测会制动更新到镜像源中。
+旧版 GitHub 网站可以使用 Webhooks 进行自动同步到应用市场。目前亲测会自动更新到镜像源中。
 
 ### 创建 composer.json ###
 composer.json 文件创建，镜像源 `composer.json` 生成。
@@ -89,3 +89,5 @@ composer.json 文件创建，镜像源 `composer.json` 生成。
 ![composer 案例](https://i.imgur.com/tntD9FH.png)
 ![项目展示](https://i.imgur.com/C7SR6er.png)
 
+### composer 安装库 ###
+composer 安装库(library)的命令`composer require gregwar/captcha`
