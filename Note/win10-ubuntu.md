@@ -24,7 +24,10 @@ win10 打开控制面板->程序->程序或功能->启用或关闭window功能->
 安装成功：
 ![宝塔安装成功，显示账号和密码](https://i.imgur.com/XZBsLEm.png)
 
-登陆界面：http://127.0.0.1:8888 ，选择 lnmp 或 lamp 部署，本人选择了 lnmp 部署；然后就是等待了（网络好就等待短，本人宿舍网络慢，因此等到天长地久 /(ㄒoㄒ)/~~）
+登陆界面：http://127.0.0.1:8888 ，选择 lnmp 或 lamp 部署，本人选择了 lnmp 部署；然后就是等待了（网络好就等待短，本人宿舍网络慢，因此等到天长地久 /(ㄒoㄒ)/~~）—— 后续因为无法安装，极速安装和编译安装都无法，所以卸载掉了。
 ![lnmp安装](https://i.imgur.com/HGowgHP.png)
 
 详细教程：[BT.Cn/宝塔Linux面板的安装脚本+教程](https://www.gigsgigscloud.com/cn/tutorials/article/bt-panel/ "BT.Cn/宝塔Linux面板的安装脚本+教程")
+
+	wget http://download.bt.cn/install/bt-uninstall.sh
+	sudo sh bt-uninstall.sh //卸载宝塔面板和服务
