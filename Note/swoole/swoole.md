@@ -1,6 +1,11 @@
 # swoole 学习笔记 #
 因工作原因，落后太多，学习记录笔记，积累补充学习。
 
+## swoole 安装 ##
+腾讯云安装 swoole 
+
+docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolbox)
+
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
 
@@ -19,3 +24,11 @@
 ## swoole server&client ##
 
 
+
+
+## docker ##
+win10家庭版安装 docker 的坑，需要使用 dockertoolbox 安装 docker ；但该工具安装 docker 启动后报错：
+
+![docker-win10 errors](https://i.imgur.com/8qUv8EG.png)
+
+### docker 处理 ###
