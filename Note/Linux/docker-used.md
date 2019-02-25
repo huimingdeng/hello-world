@@ -77,6 +77,20 @@ P.S. docker 可能没装 vim 编辑器，需要更新一下源，然后安装 `a
 
 若在 localhost 中启动没有打开 phpinfo() 信息则 default.conf 配置错误
 
+## docker 安装 centos7 ##
+因为在 docker 中分别启动 php7 mysql5.7 nginx 等服务，在不熟悉参数情况下映射目标，没有达到自身想要的结果，因此使用 d`ocker pull centos7` 下载.
+
+运行镜像，生成容器
+
+	docker run -it centos:7 /bin/bash
+
+在 centos7 中 `yum update` 更新源，然后安装各中库，编译安装 lnmp 环境：
+
+	[root@92c2211a9b36 ~]# yum -y install gcc automake autoconf libtool make
+	[root@92c2211a9b36 ~]# yum -y install gcc gcc-c++ glibc
+
+P.S. 退出后可执行 `docker attach 92c2211a9b36 ` 再次进入
+
 
 
 
