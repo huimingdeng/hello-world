@@ -16,7 +16,8 @@ windows `cmd` 中输入 `docker version` 查看是否正确安装。
 ## docker 常用命令 ##
 经常使用的命令备忘：
 
-	docker run
+	docker run <images> 创建并运行容器
+	docker create <images> 创建容器但不运行
     docker ps|docker ps -a 查找运行中的容器|查找所有容器
 	docker rm -[f|l|v] <containername> 删除容器
 	docker <command> --help 命令帮助查看
@@ -25,5 +26,18 @@ windows `cmd` 中输入 `docker version` 查看是否正确安装。
 P.S. 命令详细请查看菜鸟 docker 教程查找——[docker 命令大全](http://www.runoob.com/docker/docker-command-manual.html "docker命令大全")
 
 ## docker 安装 mysql ##
+docker 下载MySQL `docker pull mysql:5.7` 或 `sudo docker pull mysql:5.7`。
+
+创建MySQL容器：
+
+	docker run -d -v E:/docker-setting/conf/mysql-log:/var/log/mysql -v E:/docker-setting/conf/mysql-conf:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql57 mysql:5.7
+	-d: 后台运行容器
+	-v: 绑定挂载到指定盘符位置
+	-p: 设置端口,将容器中的端口发布到该容器（mysql）
+	-e: 设置环境变量
+
+## docker 安装 php ##
+
+
 
 
