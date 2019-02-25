@@ -23,9 +23,15 @@
 追踪错误信息：`sudo make test >> test.log` 输出错误信息，方便跟踪
 
 切换方式，按照官方文档下载 GitHub 中的 swoole-4.2.13 进行编译安装。
+
+	git clone https://github.com/swoole/swoole-src.git 
+
+使用 git 下载，默认是最新版本，目前为 swoole-alpha-3.0 版本，新手简易安装，可以使用
 	
 
 P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolbox)
+
+
 
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
