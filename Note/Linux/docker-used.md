@@ -38,7 +38,47 @@ docker 下载MySQL `docker pull mysql:5.7` 或 `sudo docker pull mysql:5.7`。
 	-e: 设置环境变量
 
 ## docker 安装 php ##
-docker 下载 PHP `docker pull php:7.2.15`
+docker 下载 PHP `docker pull php:7.2.15-fpm`
+
+	docker run -d -v E:/docker-setting/www:/var/www/html -p 9000:9000 --link mysql57:mysql --name php72 php:7.2.15-fpm  
+	-d 让容器在后台运行
+	-v 添加目录映射
+	-p 添加宿主机到容器的端口映射(宿主机端口:容器端口)
+	--link 与另外一个容器建立起联系 
+	–name 容器的名字
+
+运行 php72 进入Linux 安装MySQL扩展：
+
+	docker exec -ti php72 /bin/bash //root,进入docker Linux
+	root@cc073b681e2c:/# docker-php-ext-install pdo_mysql    
+	root@cc073b681e2c:/# docker-php-ext-install mysqli 
+	root@cc073b681e2c:/# php-m // 查看扩展安装情况
+
+## docker 安装 nginx ##
+使用 docker 安装 nginx `docker pull nginx:1.10.3 `
+
+	docker run -d -p 80:80 -v E:/docker-setting/www:/var/www/html --link php72:phpfpm --name nginx110 nginx:1.10.3  
+	-d 让容器在后台运行
+	-v 添加目录映射(这里的宿主路径一定要与php的一致)
+	-p 添加宿主机到容器的端口映射(宿主机端口:容器端口)
+	--link 与另外一个容器建立起联系 
+	–name 容器的名字
+
+进入配置 nginx
+
+	docker exec -it nginx110 /bin/bash
+	root@cc73b681e2c:/# vim /etc/nginx/conf.d/default.conf
+
+P.S. docker 可能没装 vim 编辑器，需要更新一下源，然后安装 `apt-get update` `apt-get -y install vim` --  Unable to locate package vim
+
+修改配置文件：
+
+	 root@cc073b681e2c:/# /etc/init.d/nginx reload  //配置完后重启 nginx
+
+若在 localhost 中启动没有打开 phpinfo() 信息则 default.conf 配置错误
+
+
+
 
 
 
