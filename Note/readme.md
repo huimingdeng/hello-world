@@ -32,6 +32,9 @@ Jan 2,2019 新建 laravel 学习笔记。 [进入](https://github.com/huimingden
 Jan 9,2019 新建 Wordpress 目录：用于记录开发 WordPress和学习的笔记，进行总结。
 
 
+## sublime Text3 ##
+https://packagecontrol.io/ 出错，无法连接，导致 package control 无法使用到 channel_v3.json ，而 CSDN 的一份 channel_v3.json 要 42 币，而且不知道是否可用，现找到一份亲测可用的，可自行部署到自己的机子上进行访问。 -- February,25,2019
+
 ## 其它知识 ##
 
 一、将IP地址转化成整数的方法如下：
