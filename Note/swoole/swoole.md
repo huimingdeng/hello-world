@@ -20,6 +20,11 @@
 	Makefile:134: recipe for target 'test' failed
 	make: *** [test] Error 1
 
+追踪错误信息：`sudo make test >> test.log` 输出错误信息，方便跟踪
+
+切换方式，按照官方文档下载 GitHub 中的 swoole-4.2.13 进行编译安装。
+	
+
 P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolbox)
 
 ## swoole 心跳检测 ##
