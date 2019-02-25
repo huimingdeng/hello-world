@@ -20,6 +20,7 @@ windows `cmd` 中输入 `docker version` 查看是否正确安装。
 	docker create <images> 创建容器但不运行
     docker ps|docker ps -a 查找运行中的容器|查找所有容器
 	docker rm -[f|l|v] <containername> 删除容器
+	docker rmi <images> 删除本地镜像，不在使用状态的
 	docker <command> --help 命令帮助查看
 	... ...
 
@@ -37,7 +38,7 @@ docker 下载MySQL `docker pull mysql:5.7` 或 `sudo docker pull mysql:5.7`。
 	-e: 设置环境变量
 
 ## docker 安装 php ##
-
+docker 下载 PHP `docker pull php:7.2.15`
 
 
 
