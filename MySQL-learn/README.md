@@ -59,4 +59,4 @@ windows mysql 升级问题。
 直接下载，下载成功后解压重命名为 `phpMyAdmin` ,覆盖旧版本的 `phpMyAdmin` 即可。
 
 
-** mysql5.7.17 编译安装需要库 boost **
+**mysql5.7.17 编译安装需要库 boost**

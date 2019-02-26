@@ -1,5 +1,5 @@
 # Nginx 学习 #
-编译安装学习，理解和学习各模块。 参考学习文章 [Nginx模块讲解](https://www.jianshu.com/p/921b238e51dd "Nginx模块讲解")、[nginx---模块介绍](https://blog.csdn.net/moonhmilyms/article/details/19838283 "nginx--模块介绍")
+编译安装学习，理解和学习各模块。 参考学习文章 [Nginx模块讲解](https://www.jianshu.com/p/921b238e51dd "Nginx模块讲解")、[nginx---模块介绍](https://blog.csdn.net/moonhmilyms/article/details/19838283 "nginx--模块介绍")、《深入理解 Nginx 模块开发与架构解析》、《实战Nginx：取代Apache的高性能Web服务器》
 
 ## 模块 ##
 Nginx 编译模块学习： 模块 -- 作用
