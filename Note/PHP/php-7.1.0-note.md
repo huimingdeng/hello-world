@@ -14,3 +14,5 @@
 
 	./configure --prefix=$HOME/php7/book/php-7.1.0/output --enable-fpm
 	make && make install
+
+**P.S. 压缩包上传到了百度云**
