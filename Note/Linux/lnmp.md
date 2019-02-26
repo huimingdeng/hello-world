@@ -87,6 +87,60 @@
 
 测试 `make`：`22% Linking CXX static library libinnobase.a`
 
+#### 修改数据库目录权限 ####
+	chown -R mysql:mysql /usr/local/mysql/
+
+mysql 5.7 版本和以前的有所不同，如果配置文件不做修改，则服务启动失败
+
+	vim /etc/my.cnf
+	[client]
+	port = 3306
+	default-character-set=utf8
+	socket = /usr/local/mysql/mysql.sock
+	[mysql]
+	port = 3306
+	default-character-set=utf8
+	socket = /usr/local/mysql/mysql.sock
+	[mysqld]
+	user = mysql
+	basedir = /usr/local/mysql
+	datadir = /usr/local/mysql/data
+	port = 3306
+	character_set_server=utf8
+	pid-file = /usr/local/mysql/mysqld.pid
+	socket = /usr/local/mysql/mysql.sock
+	server-id = 1
+	sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_AUTO_VALUE_ON_ZERO,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,PIPES_AS_CONCAT,ANSI_QUOTES
+
+修改完后，将配置文件权限修改：
+
+	chown mysql:mysql /etc/my.cnf   //修改配置文件的权限
+
+#### 设置环境变量 ####
+	echo 'PATH=/usr/local/mysql/bin:/usr/local/mysql/lib:$PATH' >> /etc/profile
+	echo 'export PATH' >> /etc/profile
+	source /etc/profile   //使写入生效
+
+#### 初始化数据库 ####
+	cd /usr/local/mysql/
+	bin/mysqld \
+		--initialize-insecure \         //生成初始化密码（5.7版本才有），实际会生成空密码
+		--user=mysql \                  //指定管理用户
+		--basedir=/usr/local/mysql \    //指定工作目录
+		--datadir=/usr/local/mysql/data //指定数据文件目录
+或直接运行：
+
+	/usr/local/mysql/bin/mysqld  --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+
+#### 添加系统服务 ####
+	cp /usr/local/mysql/usr/lib/systemd/system/mysqld.service /usr/lib/systemd/system/
+	systemctl daemon-reload    //刷新识别mysqld.service服务
+	systemctl enable mysqld    //加入系统自启动
+	systemctl start mysqld     //启动服务
+	netstat -anpt | grep 3306
+
+P.S. `systemctl enable mysqld` 命令失败则用 `systemctl list-unit-files` 命令查看是否在 `/usr/lib/systemd/system/` 目录,如果不再，则再次复制 `mysqld.service` 文件到该目录。
+
 ### PHP 编译安装 ###
 下载 `wget  http://cn2.php.net/distributions/php-7.2.15.tar.gz`
 
