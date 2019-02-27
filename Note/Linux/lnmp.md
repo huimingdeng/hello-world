@@ -141,6 +141,8 @@ mysql 5.7 版本和以前的有所不同，如果配置文件不做修改，则�
 
 P.S. `systemctl enable mysqld` 命令失败则用 `systemctl list-unit-files` 命令查看是否在 `/usr/lib/systemd/system/` 目录,如果不再，则再次复制 `mysqld.service` 文件到该目录。
 
+![mysql 启动测试](https://i.imgur.com/nchRR8Z.png)
+
 ### PHP 编译安装 ###
 下载 `wget  http://cn2.php.net/distributions/php-7.2.15.tar.gz`
 
