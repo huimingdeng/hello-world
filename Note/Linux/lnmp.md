@@ -143,6 +143,19 @@ P.S. `systemctl enable mysqld` 命令失败则用 `systemctl list-unit-files` �
 
 ![mysql 启动测试](https://i.imgur.com/nchRR8Z.png)
 
+#### 后续 ####
+编译安装，默认数据库密码为空，修改密码命令：`mysqladmin -u root -p password "root" ` -u 指定登陆用户为 root ，密码为 root
+
+授权远程登录：`grant all privileges on *.* to 'root'@'%' identified by 'root' with grant option`
+
+防火墙处理：
+	
+	systemctl disable firewalld.service 
+	systemctl stop firewalld.service
+	setenforce 0
+
+
+
 ### PHP 编译安装 ###
 下载 `wget  http://cn2.php.net/distributions/php-7.2.15.tar.gz`
 
