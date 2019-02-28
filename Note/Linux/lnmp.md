@@ -176,6 +176,34 @@
     firewall-cmd --reload
     firewall-cmd --list-all #查看开放服务、端口中是否有http服务和80端口。
 
+端口开放前：
+
+![端口发放前](https://i.imgur.com/HUoWcWv.png)
+
+端口开放后：
+
+![端口开放后](https://i.imgur.com/pEXvsle.png)
+
+启动 Nginx 进行测试： `/usr/local/nginx/sbin/nginx` -- 默认配置，`/usr/local/nginx/conf/nginx.conf`
+
+启动使用自定义配置：`/usr/local/nginx/sbin/nginx -C /<path>`
+
+停止 Nginx `/usr/local/nginx/sbin/nginx -s quit`，然后进行网站配置。
+
+#### Nginx 配置文件路径更改 ####
+设置配置 ` vi  /usr/local/nginx/conf/nginx.conf`
+
+	server {
+    listen       80;
+    server_name  localhost;
+    location / {                  
+        root  /home/weixin/httpdocs/;               #新的根目录
+        index  index.html index.htm index.jpg;   #添加一张图片，测试用。
+    }
+	
+	chmod  -R 755  /home/weixin/httpdocs/
+	service nginx restart
+
 ### MySQL5.7.17 编译安装 ###
 
 与MySQL5.7相对应的版本是boost_1_59_0
