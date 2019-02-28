@@ -211,7 +211,7 @@ PHP 一般情况，有以下依赖库即可：
 				\--with-gettext 
 				\--enable-session
 
-错误示例：执行以上编译命令，我的虚拟机中反馈信息（缺失部分）：
+错误示例：执行以上配置命令，我的虚拟机中反馈信息（缺失部分）：
 
 	config.status: creating php7.spec
 	config.status: creating main/build-defs.h
@@ -277,10 +277,38 @@ PHP 一般情况，有以下依赖库即可：
 上面错误信息，mysql 部分是因为未安装 mysql。
 
 #### 根据报错信息补充库 ####
-编译一遍后，安装提示，补充依赖库，安装 libmcrypt mhash mcrypt
+运行配置后，根据提示错误提示补充依赖库，没问题后重新生成配置文件，然后编译 `make`，已经测试编译安装 `make test`。
+
+1. 生成配置文件：
+![生成配置文件](https://i.imgur.com/8BxaBcO.png)
+可以暂时 `--without-pear --disable-phar ` ，因为phar 属于pear的一个库 ，所以不将phar关闭掉，同时还会报这个错误，同时需要使用 --disable-phar   编译参数编译安装后补充安装，修改后命令：
+
+		./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc  --with-libxml-dir=/usr  --with-iconv-dir --with-mhash --with-openssl --with-mysqli=shared,mysqlnd --with-pdo-mysql=shared,mysqlnd   --with-zlib --enable-zip --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-xml --enable-bcmath  --enable-shmop --enable-sysvsem --enable-mbregex  --enable-pcntl --enable-sockets --with-gettext --enable-session --without-pear --disable-phar
+
+2. 编译 `make`
+![make error](https://i.imgur.com/CM6uWAL.png)
+根据提示，补充 `--without-pear --disable-phar ` 参数，重新 `./configure --without-pear --disable-phar ` 然后编译。
+
+二次错误：
+
+	FAILED TEST SUMMARY
+	---------------------------------------------------------------------
+	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
+	file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
 
 
+3. 编译安装测试 `make test`
 
+4. `make install`编译安装成功后，补充安装：
+
+	    wget  http://pear.php.net/go-pear.phar 
+	    /usr/local/bin/php go-pear.phar
+5. 设置环境变量
+	`vim /etc/profile`	添加如下信息到文件最后：
+
+		PATH=$PATH:/usr/local/php/bin
+		export PATH
+保存文件，`source /etc/profile` 应用配置，测试PHP：
 
 
 ## 参考学习文章 ##
