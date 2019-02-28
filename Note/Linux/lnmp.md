@@ -310,9 +310,13 @@ P.S. `systemctl enable mysqld` 命令失败则用 `systemctl list-unit-files` �
 	setenforce 0
 
 
-
 ### PHP 编译安装 ###
 下载 `wget  http://cn2.php.net/distributions/php-7.2.15.tar.gz`
+
+P.S. 由于初次编译安装 PHP 踩了个大坑，忘记启用 PHP-fpm 导致浏览器无法解析，而编译前忘记记录日志，导致卸载 PHP 可能不完整，特记录：
+
+	make >& LOG_make &
+	make install >& LOG_install & 
 
 粗暴方式，不知道情况安装依赖的库：
 
@@ -338,7 +342,7 @@ PHP 一般情况，有以下依赖库即可：
 
 创建目录 `mkdir -p /usr/local/php/etc` , 否则编译下面命令会报 `--prefix=/usr/local/php: No such file or directory` 错误
 
-生成 makefile 文件，然后编译：
+生成配置文件，然后编译（以下没有启用php-fpm）：
 	
 	./configure --prefix=/usr/local/php
 				\--prefix=/usr/local/php
@@ -439,7 +443,7 @@ PHP 一般情况，有以下依赖库即可：
 可以暂时 `--without-pear --disable-phar ` ，因为phar 属于pear的一个库 ，所以不将phar关闭掉，同时还会报这个错误，同时需要使用 --disable-phar   编译参数编译安装后补充安装，修改后命令：
 
 		./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc  --with-libxml-dir=/usr  --with-iconv-dir --with-mhash --with-openssl --with-mysqli=shared,mysqlnd --with-pdo-mysql=shared,mysqlnd   --with-zlib --enable-zip --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-xml --enable-bcmath  --enable-shmop --enable-sysvsem --enable-mbregex  --enable-pcntl --enable-sockets --with-gettext --enable-session --without-pear --disable-phar
-
+若需要启用 fpm 则需添加： `--enable-fpm --with-fpm-user=www --with-fpm-group=www`
 2. 编译 `make`
 ![make error](https://i.imgur.com/CM6uWAL.png)
 根据提示，补充 `--without-pear --disable-phar ` 参数，重新 `./configure --without-pear --disable-phar ` 然后编译。
@@ -465,6 +469,79 @@ PHP 一般情况，有以下依赖库即可：
 保存文件，`source /etc/profile` 应用配置，测试PHP：
 ![PHP编译安装后测试](https://i.imgur.com/qHFKqNN.png)
 
+### PHP-FPM 配置：浏览器访问 ###
+在源码目录中复制配置文件到`/etc/` 中 `cp php.ini-production /etc/php.ini`
+
+	./configure --help 可以查看对应说明：
+
+	./configure \
+		--prefix=/usr/local/php \
+		--with-config-file-path=/etc \
+		--enable-fpm \
+		--with-fpm-user=www  \
+		--with-fpm-group=www \
+		--enable-inline-optimization \
+		--disable-debug \
+		--disable-rpath \
+		--enable-shared  \
+		--enable-soap \
+		--with-libxml-dir \
+		--with-xmlrpc \
+		--with-openssl \
+		--with-mcrypt \
+		--with-mhash \
+		--with-pcre-regex \
+		--with-sqlite3 \
+		--with-zlib \
+		--enable-bcmath \
+		--with-iconv \
+		--with-bz2 \
+		--enable-calendar \
+		--with-curl \
+		--with-cdb \
+		--enable-dom \
+		--enable-exif \
+		--enable-fileinfo \
+		--enable-filter \
+		--with-pcre-dir \
+		--enable-ftp \
+		--with-gd \
+		--with-openssl-dir \
+		--with-jpeg-dir \
+		--with-png-dir \
+		--with-zlib-dir  \
+		--with-freetype-dir \
+		--enable-gd-native-ttf \
+		--enable-gd-jis-conv \
+		--with-gettext \
+		--with-gmp \
+		--with-mhash \
+		--enable-json \
+		--enable-mbstring \
+		--enable-mbregex \
+		--enable-mbregex-backtrack \
+		--with-libmbfl \
+		--with-onig \
+		--enable-pdo \
+		--with-mysqli=mysqlnd \
+		--with-pdo-mysql=mysqlnd \
+		--with-zlib-dir \
+		--with-pdo-sqlite \
+		--with-readline \
+		--enable-session \
+		--enable-shmop \
+		--enable-simplexml \
+		--enable-sockets  \
+		--enable-sysvmsg \
+		--enable-sysvsem \
+		--enable-sysvshm \
+		--enable-wddx \
+		--with-libxml-dir \
+		--with-xsl \
+		--enable-zip \
+		--enable-mysqlnd-compression-support \
+		--with-pear \
+		--enable-opcache
 ## 参考学习文章 ##
 
 1. [centOS下编译安装Nginx](https://www.jianshu.com/p/078083f76324 "centOS下编译安装Nginx")
