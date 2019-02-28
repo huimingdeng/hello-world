@@ -32,22 +32,149 @@
 	yum install -y gcc gcc-c++ make cmake automake autoconf gd file bison patch mlocate flex diffutils zlib zlib-devel pcre pcre-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel libcurl libcurl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openldap-devellibxslt-devel kernel-devel libtool-libs readline-devel gettext-devel libcap-devel php-mcrypt libmcrypt libmcrypt-devel recode-devel gmp-devel icu libxslt libxslt-devel
 
 ### Nginx 搭建 ###
+下载 Nginx `wget -c https://nginx.org/download/nginx-1.10.1.tar.gz`
+命令生成配置文件 ：
 
-命令编译生成 Makefile ：
+	[root@ming nginx-1.10.1]# ./configure 	查看默认配置信息，若符合需求则可以直接编译安装
+	checking for OS
+	 + Linux 3.10.0-957.1.3.el7.x86_64 x86_64
+	checking for C compiler ... found
+	 + using GNU C compiler
+	 + gcc version: 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC)
+	checking for gcc -pipe switch ... found
+	checking for -Wl,-E switch ... found
+	checking for gcc builtin atomic operations ... found
+	checking for C99 variadic macros ... found
+	checking for gcc variadic macros ... found
+	checking for gcc builtin 64 bit byteswap ... found
+	checking for unistd.h ... found
+	checking for inttypes.h ... found
+	checking for limits.h ... found
+	checking for sys/filio.h ... not found
+	checking for sys/param.h ... found
+	checking for sys/mount.h ... found
+	checking for sys/statvfs.h ... found
+	checking for crypt.h ... found
+	checking for Linux specific features
+	checking for epoll ... found
+	checking for EPOLLRDHUP ... found
+	checking for O_PATH ... found
+	checking for sendfile() ... found
+	checking for sendfile64() ... found
+	checking for sys/prctl.h ... found
+	checking for prctl(PR_SET_DUMPABLE) ... found
+	checking for sched_setaffinity() ... found
+	checking for crypt_r() ... found
+	checking for sys/vfs.h ... found
+	checking for nobody group ... found
+	checking for poll() ... found
+	checking for /dev/poll ... not found
+	checking for kqueue ... not found
+	checking for crypt() ... not found
+	checking for crypt() in libcrypt ... found
+	checking for F_READAHEAD ... not found
+	checking for posix_fadvise() ... found
+	checking for O_DIRECT ... found
+	checking for F_NOCACHE ... not found
+	checking for directio() ... not found
+	checking for statfs() ... found
+	checking for statvfs() ... found
+	checking for dlopen() ... not found
+	checking for dlopen() in libdl ... found
+	checking for sched_yield() ... found
+	checking for SO_SETFIB ... not found
+	checking for SO_REUSEPORT ... found
+	checking for SO_ACCEPTFILTER ... not found
+	checking for IP_RECVDSTADDR ... not found
+	checking for IP_PKTINFO ... found
+	checking for IPV6_RECVPKTINFO ... found
+	checking for TCP_DEFER_ACCEPT ... found
+	checking for TCP_KEEPIDLE ... found
+	checking for TCP_FASTOPEN ... found
+	checking for TCP_INFO ... found
+	
+	checking for accept4() ... found
+	checking for eventfd() ... found
+	checking for int size ... 4 bytes
+	checking for long size ... 8 bytes
+	checking for long long size ... 8 bytes
+	checking for void * size ... 8 bytes
+	checking for uint32_t ... found
+	checking for uint64_t ... found
+	checking for sig_atomic_t ... found
+	checking for sig_atomic_t size ... 4 bytes
+	checking for socklen_t ... found
+	checking for in_addr_t ... found
+	checking for in_port_t ... found
+	checking for rlim_t ... found
+	checking for uintptr_t ... uintptr_t found
+	checking for system byte ordering ... little endian
+	checking for size_t size ... 8 bytes
+	checking for off_t size ... 8 bytes
+	checking for time_t size ... 8 bytes
+	checking for setproctitle() ... not found
+	checking for pread() ... found
+	checking for pwrite() ... found
+	checking for pwritev() ... found
+	checking for sys_nerr ... found
+	checking for localtime_r() ... found
+	checking for posix_memalign() ... found
+	checking for memalign() ... found
+	checking for mmap(MAP_ANON|MAP_SHARED) ... found
+	checking for mmap("/dev/zero", MAP_SHARED) ... found
+	checking for System V shared memory ... found
+	checking for POSIX semaphores ... not found
+	checking for POSIX semaphores in libpthread ... found
+	checking for struct msghdr.msg_control ... found
+	checking for ioctl(FIONBIO) ... found
+	checking for struct tm.tm_gmtoff ... found
+	checking for struct dirent.d_namlen ... not found
+	
+	checking for struct dirent.d_type ... found
+	checking for sysconf(_SC_NPROCESSORS_ONLN) ... found
+	checking for openat(), fstatat() ... found
+	checking for getaddrinfo() ... found
+	checking for PCRE library ... found
+	checking for PCRE JIT support ... found
+	checking for md5 in system md library ... not found
+	checking for md5 in system md5 library ... not found
+	checking for md5 in system OpenSSL crypto library ... found
+	checking for sha1 in system md library ... not found
+	checking for sha1 in system OpenSSL crypto library ... found
+	checking for zlib library ... found
+	 creating objs/Makefile
 
-	./configure --prefix=/usr/local/nginx   
-				\--with-http_ssl_module 		
-				\--with-pcre=../pcre-8.39    
-				\--with-zlib=../zlib-1.2.8	 
+	Configuration summary
+	  + using system PCRE library
+	  + OpenSSL library is not used
+	  + md5: using system crypto library
+	  + sha1: using system crypto library
+	  + using system zlib library
+	
+	  nginx path prefix: "/usr/local/nginx"
+	  nginx binary file: "/usr/local/nginx/sbin/nginx"
+	  nginx modules path: "/usr/local/nginx/modules"
+	  nginx configuration prefix: "/usr/local/nginx/conf"
+	  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+	  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+	  nginx error log file: "/usr/local/nginx/logs/error.log"
+	  nginx http access log file: "/usr/local/nginx/logs/access.log"
+	  nginx http client request body temporary files: "client_body_temp"
+	  nginx http proxy temporary files: "proxy_temp"
+	  nginx http fastcgi temporary files: "fastcgi_temp"
+	  nginx http uwsgi temporary files: "uwsgi_temp"
+	  nginx http scgi temporary files: "scgi_temp"
 
-	1 ---- // nginx 安装到的目录
-	2 ---- // 安装 ssl 模块，ssl证书等
-	3 ---- // pcre: Perl Compatible Regular Expressions
-	4 ---- // 压缩包
+#### make 编译配置文件（默认） ####
+编译后如果只出现： `make[1]: Leaving directory `/root/nginx-1.10.1'` 可以直接安装。
 
-生成 Makefile 文件后使用 `make test` 测试查看是否还需要安装缺失的依赖库。
+#### 开放 80 端口 ####
+对 Nginx 开放 80 端口，便于访问：
 
-若需补充则需要 `make clean` 清除 Makefile 文件，重新编译生成。
+ 	firewall-cmd --zone=public --add-port=80/tcp --permanent 
+    firewall-cmd --permanent --zone=public --add-service=http
+    firewall-cmd --reload
+    firewall-cmd --list-all #查看开放服务、端口中是否有http服务和80端口。
 
 ### MySQL5.7.17 编译安装 ###
 
@@ -288,17 +415,16 @@ PHP 一般情况，有以下依赖库即可：
 2. 编译 `make`
 ![make error](https://i.imgur.com/CM6uWAL.png)
 根据提示，补充 `--without-pear --disable-phar ` 参数，重新 `./configure --without-pear --disable-phar ` 然后编译。
+二次错误：（第3点）
 
-二次错误：
-
-	FAILED TEST SUMMARY
-	---------------------------------------------------------------------
-	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
-	file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
+		FAILED TEST SUMMARY
+		---------------------------------------------------------------------
+		Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
+		file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
 
 
 3. 编译安装测试 `make test`
-
+	[Test Failure Report for ext/sockets/tests/mcast_ipv6_recv.phpt ('Multicast support: IPv6 receive options')](http://gcov.php.net/viewer.php?version=PHP_7_1&func=tests&file=ext%2Fsockets%2Ftests%2Fmcast_ipv6_recv.phpt "test Failure")
 4. `make install`编译安装成功后，补充安装：
 
 	    wget  http://pear.php.net/go-pear.phar 
@@ -316,3 +442,4 @@ PHP 一般情况，有以下依赖库即可：
 1. [centOS下编译安装Nginx](https://www.jianshu.com/p/078083f76324 "centOS下编译安装Nginx")
 2. [编译安装MySQL](https://blog.51cto.com/13643643/2132594 "编译安装MySQL5.7")
 3. [编译安装PHP7](https://www.jianshu.com/p/fc69f47fb7b8 "编译安装PHP7")
+4. [Centos7 编译安装PHP7](https://www.cnblogs.com/liubaoqing/p/9030277.html "Centos7 编译安装PHP7")
