@@ -309,7 +309,7 @@ PHP 一般情况，有以下依赖库即可：
 		PATH=$PATH:/usr/local/php/bin
 		export PATH
 保存文件，`source /etc/profile` 应用配置，测试PHP：
-
+![PHP编译安装后测试](https://i.imgur.com/qHFKqNN.png)
 
 ## 参考学习文章 ##
 
