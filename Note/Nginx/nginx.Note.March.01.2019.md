@@ -171,3 +171,74 @@ CentOS7 补充在 `/etc/init.d/nginx` 执行的脚本：
 ## Nginx 配置 ##
 对Nginx 添加 vhosts.conf 的配置（多服务），参考博客文章：[nginx配置文件nginx.conf超详细讲解](https://www.cnblogs.com/liang-wei/p/5849771.html "nginx配置文件nginx.conf超详细讲解")
 
+	cat /usr/local/nginx/conf/nginx.conf | grep vhosts 查看虚拟配置是否重复
+
+Nginx 配置 vhosts.conf 失效：vhosts 中的配置无法覆盖 nginx.conf 中的配置，导致访问出错或访问nginx默认页面。
+
+nginx.conf:
+
+	...
+	server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+        root /usr/local/nginx/html;
+
+        location / {
+            #root   html;
+            index  index.html index.htm;
+    	}
+		... ...
+		error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+		... ...
+		location ~ \.php$ {
+        #    root           html;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+		... ...
+	include vhosts.conf;
+	}
+
+vhosts.conf 配置：
+
+	server{
+        listen 80;
+        server_name     192.168.159.128;
+
+        #charset koi8-r;
+
+        #access_log     logs/host.access.log    main;
+        root    /home/weixin/httpdocs;
+
+        location / {
+                index   index.html      index.htm       index.php       1.php;
+                autoindex       on;
+                try_files       $uri    $uri/   /index.php?$query_string;
+        }
+        #error_page 404         /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page      500 502 503 504 /50x.html;
+        location        =       /50x.html {
+                root    html;
+        }
+		location ~ \.php(.*)$  {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+	}
