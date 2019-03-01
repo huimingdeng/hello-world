@@ -186,7 +186,7 @@
 
 启动 Nginx 进行测试： `/usr/local/nginx/sbin/nginx` -- 默认配置，`/usr/local/nginx/conf/nginx.conf`
 
-启动使用自定义配置：`/usr/local/nginx/sbin/nginx -C /<path>`
+启动使用自定义配置：`/usr/local/nginx/sbin/nginx -c /<path>`
 
 停止 Nginx `/usr/local/nginx/sbin/nginx -s quit`，然后进行网站配置。
 
