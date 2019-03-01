@@ -450,11 +450,6 @@ PHP 一般情况，有以下依赖库即可：
 根据提示，补充 `--without-pear --disable-phar ` 参数，重新 `./configure --without-pear --disable-phar ` 然后编译。
 二次错误：（第3点）
 
-	FAILED TEST SUMMARY
-	---------------------------------------------------------------------
-	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
-	file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
-
 
 3. 编译安装测试 `make test`
 	[Test Failure Report for ext/sockets/tests/mcast_ipv6_recv.phpt ('Multicast support: IPv6 receive options')](http://gcov.php.net/viewer.php?version=PHP_7_1&func=tests&file=ext%2Fsockets%2Ftests%2Fmcast_ipv6_recv.phpt "test Failure")
@@ -473,7 +468,9 @@ PHP 一般情况，有以下依赖库即可：
 ### PHP-FPM 配置：浏览器访问 ###
 在源码目录中复制配置文件到`/etc/` 中 `cp php.ini-production /etc/php.ini`
 
-	./configure --help 可以查看对应说明：
+![PHP FPM](https://i.imgur.com/spG4jPr.png)
+
+./configure --help 可以查看对应说明：
 
 	./configure \
 		--prefix=/usr/local/php \
@@ -543,9 +540,43 @@ PHP 一般情况，有以下依赖库即可：
 		--enable-mysqlnd-compression-support \
 		--with-pear \
 		--enable-opcache
+
+#### 设置启动 PHP-FPM ####
+正确安装完成后，执行如下命令：
+	
+	[root@ming ~]# cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+	[root@ming ~]# cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+	[root@ming ~]# cd php-7.2.15/
+	[root@ming php-7.2.15]# cp php.ini-production /etc/php.ini
+	[root@ming php-7.2.15]# cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+	[root@ming php-7.2.15]# chmod +x /etc/init.d/php-fpm
+	[root@ming php-7.2.15]#
+
+启动 php-fpm 程序： `service php-fpm start` 或 `/etc/init.d/php-fpm start`，报错则是因为前面忘记创建 `www` 用户导致的，因此需要添加 `www` 用户，然后重新启动 `php-fpm`：
+
+	groupadd www
+	useradd -g www www
+
 ## 参考学习文章 ##
 
 1. [centOS下编译安装Nginx](https://www.jianshu.com/p/078083f76324 "centOS下编译安装Nginx")
 2. [编译安装MySQL](https://blog.51cto.com/13643643/2132594 "编译安装MySQL5.7")
 3. [编译安装PHP7](https://www.jianshu.com/p/fc69f47fb7b8 "编译安装PHP7")
 4. [Centos7 编译安装PHP7](https://www.cnblogs.com/liubaoqing/p/9030277.html "Centos7 编译安装PHP7")
+
+## 编译错误信息 ##
+运行 `make test` 的错误信息：
+ 
+IPv6 错误：
+
+	FAILED TEST SUMMARY
+	---------------------------------------------------------------------
+	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
+	file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
+
+	=====================================================================
+	FAILED TEST SUMMARY
+	---------------------------------------------------------------------
+	pcntl: pcntl_sigprocmask(), pcntl_sigwaitinfo(), pcntl_sigtimedwait() [ext/pcntl    /tests/002.phpt] //删除后，再次忘记创建目录，创建后无该错误。
+	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
+	=====================================================================
