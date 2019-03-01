@@ -444,15 +444,16 @@ PHP 一般情况，有以下依赖库即可：
 
 		./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc  --with-libxml-dir=/usr  --with-iconv-dir --with-mhash --with-openssl --with-mysqli=shared,mysqlnd --with-pdo-mysql=shared,mysqlnd   --with-zlib --enable-zip --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-xml --enable-bcmath  --enable-shmop --enable-sysvsem --enable-mbregex  --enable-pcntl --enable-sockets --with-gettext --enable-session --without-pear --disable-phar
 若需要启用 fpm 则需添加： `--enable-fpm --with-fpm-user=www --with-fpm-group=www`
+
 2. 编译 `make`
 ![make error](https://i.imgur.com/CM6uWAL.png)
 根据提示，补充 `--without-pear --disable-phar ` 参数，重新 `./configure --without-pear --disable-phar ` 然后编译。
 二次错误：（第3点）
 
-		FAILED TEST SUMMARY
-		---------------------------------------------------------------------
-		Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
-		file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
+	FAILED TEST SUMMARY
+	---------------------------------------------------------------------
+	Multicast support: IPv6 receive options [ext/sockets/tests/mcast_ipv6_recv.phpt]
+	file_get_contents() test using offset parameter out of range [ext/standard/tests/file/file_get_contents_error001.phpt]
 
 
 3. 编译安装测试 `make test`
