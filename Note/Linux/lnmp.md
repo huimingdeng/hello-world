@@ -190,6 +190,176 @@
 
 停止 Nginx `/usr/local/nginx/sbin/nginx -s quit`，然后进行网站配置。
 
+如果启用命令 `service nginx restart` 报错，需要创建 Nginx 执行文件： `/etc/init.d/nginx`，内容：
+
+	#!/bin/sh
+	# nginx - this script starts and stops the nginx daemin
+	#
+	# chkconfig:   - 85 15
+	
+	# description:  Nginx is an HTTP(S) server, HTTP(S) reverse \
+	#               proxy and IMAP/POP3 proxy server
+	
+	# processname: nginx
+	# config:      /usr/local/nginx/conf/nginx.conf
+	# pidfile:     /usr/local/nginx/logs/nginx.pid
+	
+	# Source function library.
+	
+	. /etc/rc.d/init.d/functions
+	
+	# Source networking configuration.
+	
+	. /etc/sysconfig/network
+	
+	# Check that networking is up.
+	
+	[ "$NETWORKING" = "no" ] && exit 0
+	
+	nginx="/usr/local/nginx/sbin/nginx"
+	
+	prog=$(basename $nginx)
+	
+	NGINX_CONF_FILE="/usr/local/nginx/conf/nginx.conf"
+	
+	lockfile=/var/lock/subsys/nginx
+	
+	start() {
+	
+	    [ -x $nginx ] || exit 5
+	
+	    [ -f $NGINX_CONF_FILE ] || exit 6
+	
+	    echo -n $"Starting $prog: "
+	
+	    daemon $nginx -c $NGINX_CONF_FILE
+	
+	    retval=$?
+	
+	    echo
+	
+	    [ $retval -eq 0 ] && touch $lockfile
+	
+	    return $retval
+	
+	}
+	
+	stop() {
+	
+	    echo -n $"Stopping $prog: "
+	
+	    killproc $prog -QUIT
+	
+	    retval=$?
+	
+	    echo
+	
+	    [ $retval -eq 0 ] && rm -f $lockfile
+	
+	    return $retval
+	
+	}
+	
+	restart() {
+	
+	    configtest || return $?
+	
+	    stop
+	
+	    start
+	
+	}
+	
+	reload() {
+	
+	    configtest || return $?
+	
+	    echo -n $"Reloading $prog: "
+	
+	    killproc $nginx -HUP
+	
+	    RETVAL=$?
+	
+	    echo
+	
+	}
+	
+	force_reload() {
+	
+	    restart
+	
+	}
+	
+	
+	configtest() {
+	
+	  $nginx -t -c $NGINX_CONF_FILE
+	
+	}
+	
+	
+	
+	rh_status() {
+	
+	    status $prog
+	
+	}
+	
+	
+	rh_status_q() {
+	
+	    rh_status >/dev/null 2>&1
+	
+	}
+	
+	case "$1" in
+	
+	    start)
+	
+	        rh_status_q && exit 0
+	        $1
+	        ;;
+	
+	    stop)
+	
+	
+	        rh_status_q || exit 0
+	        $1
+	        ;;
+	
+	    restart|configtest)
+	        $1
+	        ;;
+	
+	    reload)
+	        rh_status_q || exit 7
+	        $1
+	        ;;
+	
+	
+	    force-reload)
+	        force_reload
+	        ;;
+	    status)
+	        rh_status
+	        ;;
+	
+	
+	    condrestart|try-restart)
+	
+	        rh_status_q || exit 0
+	            ;;
+	
+	    *)
+	
+	        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
+	        exit 2
+	
+	esac 
+
+`env: /etc/init.d/nginx: Permission denied` 请添加可执行`chmod +x /etc/init.d/nginx`
+
+
 #### Nginx 配置文件路径更改 ####
 设置配置 ` vi  /usr/local/nginx/conf/nginx.conf`
 
@@ -556,6 +726,12 @@ PHP 一般情况，有以下依赖库即可：
 
 	groupadd www
 	useradd -g www www
+	chkconfig --add php-fpm //开机启动
+	chkconfig php-fpm on
+	service php-fpm start                      #启动php-fpm
+	ps -ef | grep php-fpm                      #查看php-fpm启动状态
+
+**P.S.非常重要的事情是，要把;pid = run/php-fpm.pid的分号去掉，不然配置无法解析PHP**
 
 ## 参考学习文章 ##
 
