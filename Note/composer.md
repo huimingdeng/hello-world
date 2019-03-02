@@ -104,4 +104,4 @@ composer 安装库(library)的命令`composer require gregwar/captcha`
 ### vendor 目录 ###
 在创建项目（未发布到镜像前的开发）如何生成 composer 的 vendor 目录呢？
 
-其实是编写好 composer.json 文件后执行 `composer install` 命令生成的，该目录下会根据 composer.json 文件的设置下载相关依赖库。
+其实是编写好 composer.json 文件后执行 `composer install` 命令生成的，该目录下会根据 composer.json 文件的设置下载相关依赖库，同时产生 composer.lock 文件，当二次修改了 composer.json 文件后，此时就需要使用 `composer update` 命令更新项目库了，P.S. 生产环境中就不建议使用`composer update`命令。
