@@ -101,4 +101,7 @@ P.S. `composer.json` 文件参考学习项目 [`laravel/laravel`](https://packag
 ### composer 安装库 ###
 composer 安装库(library)的命令`composer require gregwar/captcha`
 
+### vendor 目录 ###
+在创建项目（未发布到镜像前的开发）如何生成 composer 的 vendor 目录呢？
 
+其实是编写好 composer.json 文件后执行 `composer install` 命令生成的，该目录下会根据 composer.json 文件的设置下载相关依赖库。
