@@ -47,3 +47,15 @@ VMware12.5 以上版本才会出现这种问题，因为最近想从 win7 迁移
 ### Hyper-V 安装 CentOS ###
 因为需要使用 docker 和虚拟机技术，因此启用 Hyper-V 弃用 VMware ，用Hyper-V 安装 CentOS7 ，搭建 lnmp 环境。
 
+
+#### 网络配置 ####
+安装好 centos 后配置网络，使之可以通信。
+
+1. 查看本机的IP地址: `ifconfig`
+![查看本机IP](https://i.imgur.com/Is1rm6T.png)
+2. 修改虚拟机网络配置: `vi /etc/sysconfig/network-scripts/ifcfg-eth0`
+![修改虚拟机IP](https://i.imgur.com/EG7MK8u.png)
+3. 重启网络配置: `systemctl restart network`
+4. 测试互联网通信状态: `ping -c 3 baidu.com` -c 捉取包的个数，如果没有这个需要 `CTRL+C` 中断 `ping` 指令
+
+
