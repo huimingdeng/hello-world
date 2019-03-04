@@ -31,3 +31,15 @@ win10 打开控制面板->程序->程序或功能->启用或关闭window功能->
 
 	wget http://download.bt.cn/install/bt-uninstall.sh
 	sudo sh bt-uninstall.sh //卸载宝塔面板和服务
+
+
+## Hyer-V ##
+微软的虚拟化技术，安装 docker 需要启用 Hyper-V 否则无法使用，如果启用 Hyper-V 但使用 VMware 虚拟机，则会报错：
+
+	VMware Workstation 与 Device/Credential Guard 不兼容。在禁用 Device/Credential Guard 后，可以运行 VMware Workstation。
+
+因此，目前 docker 和 VMware 只能使用其中一款，推荐使用 docker 不过若使用 VMware 则要关闭 Hyper-V 弃用 win10 的 docker 了。
+
+VMware12.5 以上版本才会出现这种问题，因为最近想从 win7 迁移虚拟机到 win10 系统，而 win10 中已经开启了 Hyper-V 并安装了 docker ，从而导致迁移后的虚拟机无法使用。如图，取消 Hyper-V 重启电脑，测试能否使用 VMware.
+
+![Hyper-V 和 VMware 冲突](https://i.imgur.com/Ozo4TJI.png)
