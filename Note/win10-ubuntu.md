@@ -53,9 +53,15 @@ VMware12.5 以上版本才会出现这种问题，因为最近想从 win7 迁移
 
 1. 查看本机的IP地址: `ifconfig`
 ![查看本机IP](https://i.imgur.com/Is1rm6T.png)
-2. 修改虚拟机网络配置: `vi /etc/sysconfig/network-scripts/ifcfg-eth0`
+2. 创建虚拟交换机：示意图
+![创建虚拟交换机](https://i.imgur.com/kZNiy14.png)
+3. 设置虚拟交换机信息：
+![设置虚拟交换机](https://i.imgur.com/Fr1oHw5.png)
+4. 应用虚拟交换机，在centos 中选择`设置`流程：
+![设置适配器流程](https://i.imgur.com/awpu0i2.png)
+5. 修改虚拟机网络配置: `vi /etc/sysconfig/network-scripts/ifcfg-eth0`
 ![修改虚拟机IP](https://i.imgur.com/EG7MK8u.png)
-3. 重启网络配置: `systemctl restart network`
-4. 测试互联网通信状态: `ping -c 3 baidu.com` -c 捉取包的个数，如果没有这个需要 `CTRL+C` 中断 `ping` 指令
+6. 重启网络配置: `systemctl restart network`
+7. 测试互联网通信状态: `ping -c 3 baidu.com` -c 捉取包的个数，如果没有这个需要 `CTRL+C` 中断 `ping` 指令
 ![网络连接测试](https://i.imgur.com/4wZ2UOP.png)
 
