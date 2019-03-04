@@ -57,5 +57,5 @@ VMware12.5 以上版本才会出现这种问题，因为最近想从 win7 迁移
 ![修改虚拟机IP](https://i.imgur.com/EG7MK8u.png)
 3. 重启网络配置: `systemctl restart network`
 4. 测试互联网通信状态: `ping -c 3 baidu.com` -c 捉取包的个数，如果没有这个需要 `CTRL+C` 中断 `ping` 指令
-
+![网络连接测试](https://i.imgur.com/4wZ2UOP.png)
 
