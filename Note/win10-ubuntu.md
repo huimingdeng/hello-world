@@ -43,3 +43,7 @@ win10 打开控制面板->程序->程序或功能->启用或关闭window功能->
 VMware12.5 以上版本才会出现这种问题，因为最近想从 win7 迁移虚拟机到 win10 系统，而 win10 中已经开启了 Hyper-V 并安装了 docker ，从而导致迁移后的虚拟机无法使用。如图，取消 Hyper-V 重启电脑，测试能否使用 VMware.
 
 ![Hyper-V 和 VMware 冲突](https://i.imgur.com/Ozo4TJI.png)
+
+### Hyper-V 安装 CentOS ###
+因为需要使用 docker 和虚拟机技术，因此启用 Hyper-V 弃用 VMware ，用Hyper-V 安装 CentOS7 ，搭建 lnmp 环境。
+
