@@ -36,6 +36,10 @@ Jan 9,2019 新建 Wordpress 目录：用于记录开发 WordPress和学习的笔
 https://packagecontrol.io/ 出错，无法连接，导致 package control 无法使用到 channel_v3.json ，而 CSDN 的一份 channel_v3.json 要 42 币，而且不知道是否可用，现找到一份亲测可用的，可自行部署到自己的机子上进行访问。 -- February,25,2019
 
 ## 其它知识 ##
+Google 访问助手无法同步其它设备最新书签解决方案：
+1. 浏览器输入 `chrome://flags/#account-consistency`
+2. 选择高亮选项 `Identity consistency between browser and cookie jar` 设置为 `Disabled`，点击 `RELAUNCH NOW`,重启后，重新设置为 `Default`，再重启，即可解决。
+
 
 一、将IP地址转化成整数的方法如下：
 
