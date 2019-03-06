@@ -262,3 +262,19 @@ vhosts.conf 配置：
 	
 使用命令 `yum search nginx` 查看镜像源是否安装，存在后则执行`yum -y install nginx` 命令，等待安装。
 
+### 开机启动 ###
+
+启动测试：`systemctl {start|stop|restart} nginx.service`
+创建快捷方式：`systemctl enable nginx.service` 
+
+nginx   启动
+
+nginx -t  测试命令
+
+nginx -s relaod 修改nginx.conf之后，可以重载
+
+	ps -ef|grep nginx
+	firewall-cmd --zone=public --add-port=80/tcp --permanent //开放80端口
+	systemctl stop firewalld.service
+	systemctl start firewalld.service
+	firewall-cmd --reload //systemctl 命令失败则使用
