@@ -77,3 +77,5 @@ mysql安装成功后创建的超级用户'root'@'localhost'的密码会被存储
 设置iptables开放3306端口：
 
 安装参考 [https://www.cnblogs.com/luohanguo/p/9045391.html](https://www.cnblogs.com/luohanguo/p/9045391.html "CentOS7 yum方式安装MySQL5.7")
+
+P.S. mysql 安装完成后密码设置问题，参考：[centos7 安装MySQL7 并更改初始化密码](https://www.cnblogs.com/shihuibei/p/9249155.html "centos7 安装MySQL7 并更改初始化密码")
