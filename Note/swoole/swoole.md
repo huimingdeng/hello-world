@@ -76,6 +76,9 @@ inotify 安装，监视进程，处理僵尸进程；调用 swoole_event_add ，
 
 SIGINI `CTRL+C`
 
+### task ###
+异步任务，实现 `task` ，掌握消息队列，进程间通信。 `task_worker`
+
 ## docker ##
 win10家庭版安装 docker 的坑，需要使用 dockertoolbox 安装 docker ；但该工具安装 docker 启动后报错：
 
