@@ -69,6 +69,13 @@ swoole 进程图
 平滑重启服务：
 swoole 常驻内存（减少文件加载），主进程需要发送，worker 进程进行重启。`kill` 终止可能会中断代码执行，swoole 保证执行代码完毕再终止。`kill -USR1 |-10 master_pid` 重启所有 worker 进程。
 
+    kill -SIGTERM|-15 master_pid //终止Swoole ，平滑终止。
+
+## swoole--March,9 ##
+inotify 安装，监视进程，处理僵尸进程；调用 swoole_event_add ，在关闭时需要关闭该事件，如果没有关闭，造成事件不断监听。`ctrl+c` 关闭服务后需删除事件： `swoole_event_del($this->watch_fd)`
+
+SIGINI `CTRL+C`
+
 ## docker ##
 win10家庭版安装 docker 的坑，需要使用 dockertoolbox 安装 docker ；但该工具安装 docker 启动后报错：
 
