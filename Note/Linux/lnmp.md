@@ -731,7 +731,7 @@ PHP 一般情况，有以下依赖库即可：
 	service php-fpm start                      #启动php-fpm
 	ps -ef | grep php-fpm                      #查看php-fpm启动状态
 
-**P.S.非常重要的事情是，要把;pid = run/php-fpm.pid的分号去掉，不然配置无法解析PHP**
+**P.S.非常重要的事情是，要把;pid = run/php-fpm.pid (php-fpm.conf)的分号去掉，不然配置无法解析PHP**
 
 ## 参考学习文章 ##
 
