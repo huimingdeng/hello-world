@@ -65,7 +65,7 @@ class Db {
             return 'text';
         }
         // 数据库类型不止以上这些，其他的请自行补充
-        ...
+        // ...
     }
 
     // 格式化值：也就是自动决定是否给值加 引号
@@ -75,12 +75,12 @@ class Db {
         // 等等之类，其他的请自行补充
         $add_quote_type_range = array('char' , 'varchar' , 'text');
 
-        foreach ($c as $k => $v)
+        foreach ($c as $k => $type)
         {
             if ($k === $key) {
-                foreach ($add_quote_type_range as $v1)
+                foreach ($add_quote_type_range as $def)
                 {
-                    if ($key === $v1){
+                    if ($type === $def){
                         return "'" . $val . "'";
                     }
                 }
