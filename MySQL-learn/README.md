@@ -47,7 +47,7 @@ windows mysql 升级问题。
 
 ![添加mysql服务](https://i.imgur.com/wrc0BFE.png)
 
-### 1050 error ###
+### 1055 error ###
 window 的 mysql 升级后执行 update 语句或出现错误：`#1050 ...` 错误，需要取消 `ONLY_FULL_GROUP_BY`，在 `PHPStudy` 中如下图所示位置设置：
 
 ![sql mode 设置](https://i.imgur.com/pezAbYd.png)
