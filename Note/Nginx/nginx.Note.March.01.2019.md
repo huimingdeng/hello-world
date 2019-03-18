@@ -242,3 +242,39 @@ vhosts.conf 配置：
             include        fastcgi_params;
         }
 	}
+
+## centos7 yum 安装 nginx ##
+直接执行 `yum install -y nginx` 会显示如下信息；
+
+	Loaded plugins: fastestmirror
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.njupt.edu.cn
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
+	No package nginx available.
+	Error: Nothing to do
+
+因为 centos 无镜像包，需到 nginx 网站上查找设置 `rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm`
+
+	-U : {-U|--upgrade}
+	-v : Print verbose information - normally routine  progress  messages will be displayed.
+	-h :  Print 50 hash marks as the package  archive  is  unpacked.   Use with -v|--verbose for a nicer display.
+	
+使用命令 `yum search nginx` 查看镜像源是否安装，存在后则执行`yum -y install nginx` 命令，等待安装。
+
+### 开机启动 ###
+
+启动测试：`systemctl {start|stop|restart} nginx.service`
+创建快捷方式：`systemctl enable nginx.service` 
+
+nginx   启动
+
+nginx -t  测试命令
+
+nginx -s relaod 修改nginx.conf之后，可以重载
+
+	ps -ef|grep nginx
+	firewall-cmd --zone=public --add-port=80/tcp --permanent //开放80端口
+	systemctl stop firewalld.service
+	systemctl start firewalld.service
+	firewall-cmd --reload //systemctl 命令失败则使用

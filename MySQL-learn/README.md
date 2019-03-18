@@ -66,3 +66,22 @@ window 的 mysql 升级后执行 update 语句或出现错误：`#1050 ...` 错�
 
 
 **mysql5.7.17 编译安装需要库 boost 压缩包迁移到百度云盘中不再上传到GitHub上**
+
+### yum 安装 mysql5.7 ###
+不使用编译安装，使用命令安装则需 rpm(镜像管理工具) ：`wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm` （rmp 源可在MySQL官网中按需查找）
+
+制定源：`rpm -Uvh mysql57-community-release-el7-10.noarch.rpm ` 或 `yum -y install mysql57-community-release-el7-10.noarch.rpm`
+
+安装：`yum -y install mysql-community-server`
+
+启动：`service mysqld start`
+
+mysql安装成功后创建的超级用户'root'@'localhost'的密码会被存储在/var/log/mysqld.log，可以使用如下命令查看密码：
+
+	grep 'temporary password' /var/log/mysqld.log
+
+设置iptables开放3306端口：
+
+安装参考 [https://www.cnblogs.com/luohanguo/p/9045391.html](https://www.cnblogs.com/luohanguo/p/9045391.html "CentOS7 yum方式安装MySQL5.7")
+
+P.S. mysql 安装完成后密码设置问题，参考：[centos7 安装MySQL7 并更改初始化密码](https://www.cnblogs.com/shihuibei/p/9249155.html "centos7 安装MySQL7 并更改初始化密码")
