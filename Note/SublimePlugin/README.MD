@@ -10,6 +10,9 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 	{
 		"show_debug": true,
 		"php_cs_fixer_show_quick_panel":true,
+		"php_cs_fixer_executable_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php-cs-fixer-v2.phar",
 		"phpcs_executable_path":"C:\\Users\\DHM\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat",
 		"phpcs_php_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
 	}
+
+参考文章：[sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
