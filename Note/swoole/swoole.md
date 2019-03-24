@@ -89,7 +89,32 @@ P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolb
 	Build complete.
 	Don't forget to run 'make test'.
 
-执行 `make test`
+执行 `make test` 提示：
+
+	swoole_feature: cross_close: full duplex [tests/swoole_feature/cross_close/full_duplex.phpt]
+	swoole_feature: cross_close: full duplex and close by server [tests/swoole_feature/cross_close/full_duplex_by_server.phpt]
+	swoole_feature: cross_close: stream [tests/swoole_feature/cross_close/stream.phpt]
+	{{test_name}}: {{test_intro}} [tests/template.phpt]
+
+	You may have found a problem in PHP.
+	This report can be automatically sent to the PHP QA team at
+	http://qa.php.net/reports and http://news.php.net/php.qa.reports
+	This gives us a better understanding of PHP's behavior.
+	If you don't want to send the report immediately you can choose
+	option "s" to save it.  You can then email it to qa-reports@lists.php.net later.
+
+	Warning: fsockopen(): unable to connect to qa.php.net:80 (Connection timed out) in /root/swoole-4.3.0/run-tests.php on line 1053
+
+	The test script was unable to automatically send the report to PHP's QA Team
+	Please send /root/swoole-4.3.0/php_test_results_20190307_0612.txt to qa-reports@lists.php.net manually, thank you.
+	make: *** [test] Error 1
+
+忽略`make test`执行`make install`
+
+	[root@localhost swoole-4.3.0]# make install
+	Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-non-zts-20170718/
+	Installing header files:          /usr/local/php/include/php/
+	[root@localhost swoole-4.3.0]#
 
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
