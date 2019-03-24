@@ -34,7 +34,20 @@ P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolb
 ### 虚拟机安装 swoole ###
 因为腾讯云编译安装 swoole 失败而默认安装了 `swoole-alpha-3.0` 版本，学习不是很方便，因此笔记本安装了 lnmp 环境后，扩展编译安装 swoole . -- March 24,2019
 
+安装swoole 官网，使用新手安装，以后深入学习后可以重新编译安装更新。`./configure`执行后，发现提示警告信息：
 
+	... ...
+	configure: WARNING: You will need re2c 0.13.4 or later if you want to regenerate PHP parsers.
+	... ... 
+	configure: creating ./config.status
+	config.status: creating config.h
+
+参考处理方案：
+
+	wget https://sourceforge.net/projects/re2c/files/0.16/re2c-0.16.tar.gz   // 目前查看有了1.0.1版本 https://sourceforge.net/projects/re2c/files/1.0.1/re2c-1.0.1.tar.gz 采用的是该版本
+	tar zxf re2c-0.16.tar.gz && cd re2c-0.16
+	./configure
+	make && make install
 
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
