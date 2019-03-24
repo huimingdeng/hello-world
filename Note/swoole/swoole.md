@@ -42,12 +42,26 @@ P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolb
 	configure: creating ./config.status
 	config.status: creating config.h
 
-参考处理方案：
+参考[处理方案](https://www.phpsong.com/2220.html "处理方案") ：
 
 	wget https://sourceforge.net/projects/re2c/files/0.16/re2c-0.16.tar.gz   // 目前查看有了1.0.1版本 https://sourceforge.net/projects/re2c/files/1.0.1/re2c-1.0.1.tar.gz 采用的是该版本
 	tar zxf re2c-0.16.tar.gz && cd re2c-0.16
-	./configure
+	./configure 
 	make && make install
+
+个人在执行处理方案中，安装 re2c1.0.1 编译 `make && make test` 过程中，再次出现警告信息。 `make test` 无测试，可忽略警告信息按照参考处理执行 `make && make install`
+
+#### 不忽略情况： ####
+亦可以根据反馈信息如下，进一步按照提示修改 
+
+	Reconfigure to rebuild docs: ./configure --enable-docs
+	make[1]: Leaving directory `/root/re2c-1.0.1'
+
+添加执行 `./configure --enable-docs` 后，提示配置错误:
+
+	configure: error: need rst2man or rst2man.py for --enable-docs 
+
+
 
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
