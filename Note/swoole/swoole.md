@@ -116,6 +116,9 @@ P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolb
 	Installing header files:          /usr/local/php/include/php/
 	[root@localhost swoole-4.3.0]#
 
+安装完成后，添加 swoole 扩展，`php -m` 查看
+![扩展添加](https://i.imgur.com/Iv4F1qi.png)
+
 ## swoole 心跳检测 ##
 心跳：判断事物生死的标准，判断一个连接是否正常还是断开。
 
