@@ -1,5 +1,5 @@
 # swoole 学习笔记 #
-因工作原因，落后太多，学习记录笔记，积累补充学习。[swoole入门指引](https://wiki.swoole.com/wiki/page/1.html "swoole入门指引")
+因工作原因，落后太多，学习 swoole 记录笔记，积累补充学习。[swoole入门指引](https://wiki.swoole.com/wiki/page/1.html "swoole入门指引")
 
 ## swoole 安装 ##
 目前下载的 swoole 版本为 swoole-4.2.13  `wget  https://pecl.php.net/get/swoole-4.2.13.tgz`
@@ -30,6 +30,9 @@
 	
 
 P.S. docker 安装lnmp+swoole:(windows10家庭版 docker 需要安装DockerToolbox)
+
+### 虚拟机安装 swoole ###
+因为腾讯云编译安装 swoole 失败而默认安装了 `swoole-alpha-3.0` 版本，学习不是很方便，因此笔记本安装了 lnmp 环境后，扩展编译安装 swoole . -- March 24,2019
 
 
 
