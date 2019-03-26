@@ -72,3 +72,9 @@
 
 案例 `2` -- 创建多张表 （结合钩子 `dbdelta_create_queries` 和函数 `add_filter` 的案例，还是 MyFAQs 的数据表为例）：
 
+
+## 插件激活，弃用和卸载 ##
+一般在安装插件后首次激活安装数据表，设置配置信息等。插件弃用则修改配置信息的可用状态，而卸载则删除配置信息，删除创建的数据表。分别： `register_activation_hook`、`register_deactivation_hook` 和 `register_uninstall_hook`
+
+
+
