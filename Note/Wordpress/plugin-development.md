@@ -76,5 +76,11 @@
 ## 插件激活，弃用和卸载 ##
 一般在安装插件后首次激活安装数据表，设置配置信息等。插件弃用则修改配置信息的可用状态，而卸载则删除配置信息，删除创建的数据表。分别： `register_activation_hook`、`register_deactivation_hook` 和 `register_uninstall_hook`
 
+### `register_activation_hook` ###
+注册后，在插件激活的时候会执行的函数。
 
+### `register_deactivation_hook` ###
+注册后，在插件弃用使用会执行的回调函数。
 
+### `register_uninstall_hook` ###
+注册后，在卸载插件时候执行的回调函数。
