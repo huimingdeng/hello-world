@@ -83,4 +83,8 @@
 注册后，在插件弃用使用会执行的回调函数。
 
 ### `register_uninstall_hook` ###
-注册后，在卸载插件时候执行的回调函数。
+注册后，在卸载插件时候执行的回调函数。该函数目前无法在类的内部调用，只能在类外部调用
+
+如果存在命名空间：  `register_uninstall_hook(__FILE__, array('MyFAQs\MyFAQs', 'deactivate'));`-- 命名空间\类名
+
+不存在命名空间: `register_uninstall_hook(__FILE__, array('MyFAQs', 'deactivate'));` --类名
