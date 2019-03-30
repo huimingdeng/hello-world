@@ -12,3 +12,6 @@ WordPress 中一套主题首页可以设置最新文章或默认首页的方式�
 		template-parts/
 		templates/
 			home.php -- 为后台首页模板，因此开发主题模板在主题目录上的templates目录中创建模板
+		... 
+
+对应 wordpress 后台编辑页面中的`页面属性`，如果一套主题没有模板，那么 Page 的页面属性就没有模板选项，剩下`父级`和`排序`选项。
