@@ -15,7 +15,7 @@ windows mysql 升级问题。
 
 ### P.S. windows phpStudy2018 软件升级 mysql 版本到5.7： ###
 
-进入 `F:/phpStudy/PHPTutorial/` 目录，将`MySQL`目录重命名备份，将下载的 mysql5.7 压缩包解压并重命名为 `MySQL` ；复制备份的 `my.ini` 文件到 5.7 的bin目录下(`F:/phpStudy/PHPTutorial/MySQL/bin`) 添加代码：
+进入 `F:/phpStudy/PHPTutorial/` 目录，将`MySQL`目录重命名备份，将下载的 [mysql5.7](https://dev.mysql.com/downloads/file/?id=467269 "MySQL5.7.17") 压缩包解压并重命名为 `MySQL` ；复制备份的 `my.ini` 文件到 5.7 的bin目录下(`F:/phpStudy/PHPTutorial/MySQL/bin`) 添加代码：
 
 	skip-grant-tables = 0
 	explicit_defaults_for_timestamp=true
