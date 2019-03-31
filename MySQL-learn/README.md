@@ -23,6 +23,7 @@ windows mysql 升级问题。
 	log-error = "F:/phpstudy/PHPTutorial/MySQL/data/error.log"
 
 然后 `cmd` 在 `F:/phpstudy/PHPTutorial/MySQL/bin` 目录下执行代码：
+
 	mysqld -remove //卸载旧服务，非常重要，忘记那么 phpstudy 无法启动 mysql
 	mysqld --initialize-insecure --user=mysql
 	mysqld --install
