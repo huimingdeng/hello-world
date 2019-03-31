@@ -23,12 +23,13 @@ windows mysql 升级问题。
 	log-error = "F:/phpstudy/PHPTutorial/MySQL/data/error.log"
 
 然后 `cmd` 在 `F:/phpstudy/PHPTutorial/MySQL/bin` 目录下执行代码：
-
+	mysqld -remove //卸载旧服务，非常重要，忘记那么 phpstudy 无法启动 mysql
 	mysqld --initialize-insecure --user=mysql
 	mysqld --install
 	//安装成功会显示 successful xxx
 	net start mysql
 	//登陆 mysql，可能密码为空或生成随机密码，注意获取，然后登陆
+	mysql -hlocalhost -uroot -p
 	use mysql
 	
 	update user set authentication_string = password('root'),
@@ -38,10 +39,17 @@ windows mysql 升级问题。
 
 因为 password 高版本被更换，可以查看警告信息，执行设置密码语句要注意是否 CHANGE=1,如果是 CHANGE=0 在不成功的
 
-	SHOW WARNINGS; 
+	SHOW WARNINGS;  --  'PASSWORD' is deprecated and will be removed in a future release.
 
 	//重启mysql，要将 my.ini skip-grant-tables = 0 注释掉
-	net restart mysql
+	(net restart mysql)
+	F:\coding\phpStudy\PHPTutorial\MySQL\bin> net restart mysql
+	此命令的语法是:
+	
+	NET
+	    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+	      HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START |
+	      STATISTICS | STOP | TIME | USE | USER | VIEW ]
 
 打开我的电脑-管理-服务，查看系统服务，如果没有mysqla服务，用`sc delete mysql`命令删除已有MySQL服务；然后如下图，添加新的mysql服务，这样PHPstudy就可以重启mysql了。
 
