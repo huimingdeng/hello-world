@@ -28,7 +28,7 @@ windows mysql 升级问题。
 	mysqld --install
 	//安装成功会显示 successful xxx
 	net start mysql
-	//登陆mysql，可能密码为空或生成随机密码，注意获取，然后登陆
+	//登陆 mysql，可能密码为空或生成随机密码，注意获取，然后登陆
 	use mysql
 	
 	update user set authentication_string = password('root'),
@@ -40,7 +40,7 @@ windows mysql 升级问题。
 
 	SHOW WARNINGS; 
 
-	//重启mysql，要讲my.ini skip-grant-tables = 0注释掉
+	//重启mysql，要将 my.ini skip-grant-tables = 0 注释掉
 	net restart mysql
 
 打开我的电脑-管理-服务，查看系统服务，如果没有mysqla服务，用`sc delete mysql`命令删除已有MySQL服务；然后如下图，添加新的mysql服务，这样PHPstudy就可以重启mysql了。
@@ -58,7 +58,7 @@ window 的 mysql 升级后执行 update 语句或出现错误：`#1050 ...` 错�
 
 因为新版的mysql换了user表的表结构，去除了password字段，换成了authentication_string。而phpstudy自带的phpmyadmin，为了适应老版本的php，使用了比较古老的版本。所以，就不认识新的mysql结构了。
 
-升级服务 mysql_upgrade -uroot -p 不成功，升级 phpmyadmin 登陆 phpmyadmin 
+升级服务 `mysql_upgrade -uroot -p` 不成功，升级 `phpmyadmin` 登陆 `phpmyadmin` 
 
 ![phpMyAdmin 升级](https://i.imgur.com/DRPrbY9.png)
 
