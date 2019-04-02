@@ -88,3 +88,24 @@
 如果存在命名空间：  `register_uninstall_hook(__FILE__, array('MyFAQs\MyFAQs', 'deactivate'));`-- 命名空间\类名
 
 不存在命名空间: `register_uninstall_hook(__FILE__, array('MyFAQs', 'deactivate'));` --类名
+
+## `add_meta_box()` ##
+给插件开发者添加 Meta模块 到管理界面。
+
+	add_meta_box( string $id, string $title, callable $callback, 
+		string|array|WP_Screen $screen = null, string $context = 'advanced', 
+		string $priority = 'default', array $callback_args = null )
+	$id
+		（string）（必需）Meta模块的 HTML“ID”属性
+	$title
+		(string)（必需）Meta模块的标题，对用户可见
+	$callback
+		(callback) （必需）为Meta模块输出 HTML代码的函数
+	$screen
+		(mixed)（必需）显示Meta模块的文章类型，可以是文章（post）、页面（page）、链接（link）、附件（attachment） 或 自定义文章类型（自定义文章类型的别名）
+	$context 
+		(string) （可选）Meta模块的显示位置（’normal’,’advanced’, 或 ‘side’）
+	$priority
+		(string) （可选）Meta模块显示的优先级别（’high’, ‘core’, ‘default’or ‘low’）
+	$callback_args
+		(array) （可选）传递到 callback 函数的参数。callback 函数将接收 $post 对象和其他由这个变量传递的任何参数。
