@@ -91,7 +91,7 @@ P.S. docker 可能没装 vim 编辑器，需要更新一下源，然后安装 `a
 
 P.S. 退出后可执行 `docker attach 92c2211a9b36 ` 再次进入
 
-
+[基于docker，lnmp+https搭建](https://segmentfault.com/a/1190000018729523 "基于docker, 快速搭建Nginx+Php+https本地开发环境, 免于手动安装PHP扩展")
 
 
 
