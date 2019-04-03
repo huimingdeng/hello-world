@@ -137,3 +137,5 @@ Jan 9,2019 插件开发笔记。
 		'http://www.lifeomics.com/',
 		'https://www.lifeomics.com/'
 	);
+
+P.S. 使用 update 语句修改序列化后的 option_value 值的http协议为 https 容易出错，因为字符统计错误，如原来的 {... s:86:"http://....."} 替换为 https 后实际长度为 87，那么就会报错。
