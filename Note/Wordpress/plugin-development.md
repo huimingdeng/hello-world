@@ -109,3 +109,5 @@
 		(string) （可选）Meta模块显示的优先级别（’high’, ‘core’, ‘default’or ‘low’）
 	$callback_args
 		(array) （可选）传递到 callback 函数的参数。callback 函数将接收 $post 对象和其他由这个变量传递的任何参数。
+
+函数中参数 `callback` 使用数组定义当前类对象只能用 $this, 如果使用命名空间类则致命错误 eg. `array($this, 'metaBox')`
