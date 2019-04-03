@@ -122,3 +122,18 @@ Jan 9,2019 插件开发笔记。
 3. 然后浏览器打开升级 eg. `https://example.org/wp-admin` 则自动提示是否升级，点击升级数据库
 
 参考 [手动升级 `WordPress`](https://www.cnblogs.com/wphunk/p/7979389.html "WordPress手动升级")
+
+### http 协议升级 https ###
+`http` 协议替换 `https` :
+
+	UPDATE wp_posts SET post_content = REPLACE (
+		post_content,
+		'http://www.lifeomics.com/',
+		'https://www.lifeomics.com/'
+	);
+
+	UPDATE wp_options SET option_value = REPLACE (
+		option_value,
+		'http://www.lifeomics.com/',
+		'https://www.lifeomics.com/'
+	);
