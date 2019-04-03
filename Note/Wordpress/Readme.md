@@ -110,4 +110,13 @@ Jan 9,2019 主题小工具开发。
 ## 插件开发 ##
 Jan 9,2019 插件开发笔记。
 
-曾开发插件参考：[genecopoeia 库](https://github.com/huimingdeng/genecopoeia "插件案例")
+开发插件案例参考：[genecopoeia 库](https://github.com/huimingdeng/genecopoeia "插件案例")
+
+
+## wordpress 手动升级 ##
+
+手动升级，请备份站点数据库和 wordpress 的相关文件及目录。
+
+1. [WordPress 官网](https://wordpress.org/download/releases/ "WordPress版本")下载对应版本的压缩文件，eg. `wordpress-3.8.29.zip` ,解压出来 `wordpress` 目录，进入 `wordpress` 目录中删除 `wp-content` 目录，然后 `window` 中安装 `git` 的可打开 `git` 执行命令压缩 eg. `tar -zcvf wordpress-3.8.29.tar.gz *`
+2. 上传压缩文件 eg. `wordpress-3.8.29.tar.gz` 到服务器 `/home/www/`，解压文件 eg. `tar -zxf wordpress-3.8.29.tar.gz` ; 如果没有压缩，可以直接上传删除 `wp-content` 目录后端 `WordPress` 文件及目录到服务器站点根目录中 eg. `/home/www/` 
+3. 然后浏览器打开升级 eg. `https://example.org/wp-admin` 则自动提示是否升级，点击升级数据库
