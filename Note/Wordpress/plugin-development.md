@@ -111,3 +111,59 @@
 		(array) （可选）传递到 callback 函数的参数。callback 函数将接收 $post 对象和其他由这个变量传递的任何参数。
 
 函数中参数 `callback` 使用数组定义当前类对象只能用 $this, 如果使用命名空间类则致命错误 eg. `array($this, 'metaBox')`
+
+## 管理页面添加菜单 ##
+如果在后台中添加插件菜单页面，使用函数 `add_menu_page()` 添加顶级菜单页，`add_submenu_page()`函数添加子菜单。
+
+	add_menu_page( string $page_title, string $menu_title, string $capability, 
+		string $menu_slug, callable $function = '', string $icon_url = '', 
+		int $position = null )
+	$page_title
+		(string) (必须) 菜单页面标题 title 信息
+	$menu_title
+		(string) (必须) 菜单在顶级菜单中显示的名称/标题
+	$capability
+		(string) (必须) 菜单权限
+	$menu_slug
+		(string) (必须) 菜单名，用于页面链接组装，打开菜单页
+	$function
+		(callable) (可选) 回调函数，用于展示页面函数
+	$icon_url
+		(string) (可选) 图标路径，无则默认为系统样式图标，宽高为16px
+	$position
+		(integer) (可选) 显示菜单的位置。常用位置，4或者59或者99
+	
+	
+添加子菜单页：
+
+	add_submenu_page( string $parent_slug, string $page_title, string $menu_title, 
+		string $capability, string $menu_slug, callable $function = '' )
+	$parent_slug
+		(string) (必须) 顶级菜单名
+	$page_title
+		(string) (必须) 子菜单页面标题 title 信息
+	$menu_title
+		(string) (必须) 子菜单在顶级菜单中显示的名称/标题
+	$capability
+		(string) (必须) 子菜单权限
+	$menu_slug
+		(string) (必须) 子菜单名，用于页面链接组装，打开子菜单页
+	$function
+		(callable) (可选) 回调函数，用于展示页面函数
+	
+
+P.S. 内置菜单添加子菜单案例：
+
+	1、在仪表盘添加子菜单: add_submenu_page( 'index.php', … );
+	2、在文章处添加子菜单: add_submenu_page( 'edit.php', … );
+	3、在媒体处添加子菜单: add_submenu_page( 'upload.php', … );
+	4、在链接处添加子菜单: add_submenu_page( 'link-manager.php', … );
+	5、在页面处添加子菜单: add_submenu_page( 'edit.php?post_type=page', … );
+	6、在评论处添加子菜单: add_submenu_page( 'edit-comments.php', … );
+	7、在你自定义文章类型处添加子菜单: add_submenu_page('edit.php?post_type=your_post_type',…)
+	8、在外观处添加子菜单: add_submenu_page( 'themes.php', … );
+	9、在插件处添加子菜单: add_submenu_page( 'plugins.php', … );
+	10、在用户处添加子菜单: add_submenu_page( 'users.php', … );
+	11、在工具处添加子菜单: add_submenu_page( 'tools.php', … );
+	12、在设置处添加子菜单: add_submenu_page( 'options-general.php', … );
+
