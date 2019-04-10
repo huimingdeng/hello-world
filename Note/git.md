@@ -66,3 +66,22 @@ git 操作知识点备忘录
 
 如果执行了`git add` 后，但未执行 `git commit` 则查看当前和上一版本的差异只能使用 `git diff HEAD -- <filename>` 而 `git diff <filename>` 失效。
 
+### 回退操作 ###
+日常需要回退操作的命令记录，如果下，未执行 `git commit` 已经执行 `git add` 操作：
+
+	A --> B --> C --> D --> E --> F'(HEAD)
+
+执行：
+
+1. `git reset --hard` 回滚到最近一次的代码，到未add.状态，回复代码为原来状态
+2. `git reset --mixed` 回到add状态 == --hard
+3. `git reset HEAD`
+
+如下，已经执行`git commit`命令
+
+	A --> B --> C --> D --> E(HEAD)
+
+想还原到 `git add` 操作：
+
+1. `git reset --soft HEAD^` 回滚最近一次的 commit,到add.状态
+2. `git reset --soft HEAD~3` 回滚最近三次的 commit
