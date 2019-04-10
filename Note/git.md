@@ -60,8 +60,9 @@ git 操作知识点备忘录
 	A --> B --> C --> D --> E --> F'(HEAD)
 
 1. 执行 `git diff <filename>` 或 `git diff HEAD -- <filename>` 可以查看 `F'` 和 `E` 版本的差异。
-![版本F'和D的差别](https://i.imgur.com/EgiWhzB.png)
+![版本F'和E的差别](https://i.imgur.com/EgiWhzB.png)
 2. 执行 `git diff HEAD^ -- <filename>` 则显示的是 `F'` 和 `D` 的差异
+![版本F'和D的差别](https://i.imgur.com/8MjapML.png)
 
-
+如果执行了`git add` 后，则查看当前和上一版本的差异只能使用 `git diff HEAD -- <filename>` ，`git diff <filename>` 失效。
 
