@@ -41,3 +41,27 @@ git 操作知识点备忘录
 ![查看远程分支删除后效果](https://i.imgur.com/8B0M0Gj.png)
 
 	git branch -d dev //删除本地分支，注意不要在 dev 分支中进行，切换到主分支进行
+
+## 历史版本 ##
+查看历史版本 `git log` 
+
+### 对比差异 ###
+对比文件历史版本中的差异：`git diff`, 假设当前分支的历史版本如下：
+
+	A --> B --> C --> D --> E(HEAD)
+
+1. 对比当前和上一历史版本的差异（E和D的差异）：`git diff HEAD^ -- <filename>`
+2. 对比当前和上一历史版本的再上一版本的差异（E和C的差异）：`git diff HEAD^ -- <filename>`
+3. 对比当前和 B 历史版本的差异: `git diff HEAD^^^ -- <filename>`
+4. 对比当前和 A 历史版本的差异: `git diff HEAD~4 -- <filename>`
+
+历史版本中新增文件修改，但未执行`git add`，历史版本为 `F'`:
+
+	A --> B --> C --> D --> E --> F'(HEAD)
+
+1. 执行 `git diff <filename>` 或 `git diff HEAD -- <filename>` 可以查看 `F'` 和 `E` 版本的差异。
+![版本F'和D的差别](https://i.imgur.com/EgiWhzB.png)
+2. 执行 `git diff HEAD^ -- <filename>` 则显示的是 `F'` 和 `D` 的差异
+
+
+
