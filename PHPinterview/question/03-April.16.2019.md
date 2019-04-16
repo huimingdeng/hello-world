@@ -18,6 +18,10 @@
 
 八、 Redis 的默认数据类型有哪些？说出一个常见的应用场景。
 
+redis基本数据类型 string list set zset hash
+
 九、 Git 版本控制中，常见的命令有哪些？
 
 十、 `Swoole` 和 `Workman` 有哪些异同
+	
+`Workman` 依赖php的扩展 `swoole` 是c和c++编写的一个PHP扩展，支持协程
