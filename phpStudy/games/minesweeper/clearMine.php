@@ -26,6 +26,7 @@ if($init){// is initialization
         }  
     }  
     $i=0;//reset the index,and set the mines(Random setting)  
+    //循环随机设置地雷
     while($i < $num){//number of mine  
         $r = rand(0,$rows - 1);//row's index  
         $c = rand(0,$cols - 1);//col's index  
@@ -33,7 +34,8 @@ if($init){// is initialization
             $data["data".$r."_".$c] = 100;//set the node with a mine  
             $i++;  
         }  
-    }  
+    }
+    // 遍历设置好雷后的地图，地雷临近节点显示地雷数量
     for($i=0;$i<$rows;$i++){//all the rows  
         for($j=0;$j<$cols;$j++){//all the cols  
             if($data["data".$i."_".$j] == 100)continue;//is not a mine , set number of adjacent mines   
