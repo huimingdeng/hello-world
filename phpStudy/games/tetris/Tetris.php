@@ -24,12 +24,7 @@ class Tetris{
 	 * @return matrix 返回初始化矩阵信息
 	 */
 	public function init(){
-		for ($i=0; $i < self::MATRIX_HEIGHT; $i++) { 
-			for ($j=0; $j < self::MATRIX_WIDTH; $j++) { 
-				self::$matrix[$i][$j] = CellStatus::GAP;
-			}
-		}
-		return self::$matrix;
+		
 	}
 	/**
 	 * 矩阵表格渲染
