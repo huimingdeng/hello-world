@@ -16,3 +16,7 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 	}
 
 参考文章：[sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
+
+
+### PHP Companion ###
+命名空间查找补全插件，鼠标选择类名 eg. `Command` 执行 `Ctrl+shif+P` 输入 `fine use` 则自动查找补充命名空间。 
