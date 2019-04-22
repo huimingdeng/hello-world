@@ -24,5 +24,12 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 ### phpfmt ###
 `PHP` 代码规范自动修补插件。
 
+`settings-user`:
+
+	{
+		"php_bin":"F:/coding/phpStudy/PHPTutorial/php/php-7.2.1-nts/php.exe",
+		"version": 4
+	}
+
 ### PHPNamespace ###
-`PHP` 命名空间自动载入插件
+`PHP` 命名空间自动载入插件,当前默认 `Settings-default` 的设置
