@@ -33,3 +33,6 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 
 ### PHPNamespace ###
 `PHP` 命名空间自动载入插件,当前默认 `Settings-default` 的设置
+
+### docBlockr ###
+PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
