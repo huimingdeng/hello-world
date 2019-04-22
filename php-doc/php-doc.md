@@ -80,4 +80,4 @@
 </table>
 
 ## 面向对象链式操作 ##
-`__call` 和 `call_user_func` 等函数实现。 参考[PHP 三种方式实现链式操作](https://blog.csdn.net/cain_123456/article/details/54632574 "PHP 三种方式实现链式操作")
+`__call` 和 `call_user_func` 等函数实现。 参考[PHP 三种方式实现链式操作](https://blog.csdn.net/cain_123456/article/details/54632574 "PHP 三种方式实现链式操作")、[PHP对象链式操作实现原理分析](https://www.jb51.net/article/94282.htm "PHP对象链式操作实现原理分析") 和 [如何在PHP中实现链式方法调用](https://blog.51cto.com/momodev/843999 "如何在PHP中实现链式方法调用")
