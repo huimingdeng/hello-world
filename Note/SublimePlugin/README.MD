@@ -20,3 +20,9 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 
 ### PHP Companion ###
 命名空间查找补全插件，鼠标选择类名 eg. `Command` 执行 `Ctrl+shif+P` 输入 `fine use` 则自动查找补充命名空间。 
+
+### phpfmt ###
+`PHP` 代码规范自动修补插件。
+
+### PHPNamespace ###
+`PHP` 命名空间自动载入插件
