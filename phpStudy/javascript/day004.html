@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form>
+<select name = "edu" id = "edu">
+	<option value = "博士">博士</option>
+	<option value = "博士">硕士</option>
+	<option value = "博士">本科</option>
+	<option value = "博士">幼儿园</option>
+</select>
+</form>
+</body>
+<script type="text/javascript">
+	var optionElement = document.createElement("option");
+	optionElement.setAttribute("value","大专");
+	var textElement = document.createTextNode("大专");
+	optionElement.appendChild(textElement);
+	var eduElement = document.getElementById("edu");
+	eduElement.appendChild(optionElement);
+</script>
+</html>
