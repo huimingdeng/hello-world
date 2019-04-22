@@ -85,3 +85,7 @@ git 操作知识点备忘录
 
 1. `git reset --soft HEAD^` 回滚最近一次的 commit,到add.状态
 2. `git reset --soft HEAD~3` 回滚最近三次的 commit
+
+
+
+P.S. 处理 windows 中 git add 中的警告信息：[https://blog.csdn.net/unityoxb/article/details/20768687](https://blog.csdn.net/unityoxb/article/details/20768687 "windows使用git时出现：warning: LF will be replaced by CRLF")
