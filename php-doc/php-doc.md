@@ -79,3 +79,5 @@
 	</tbody>
 </table>
 
+## 面向对象链式操作 ##
+`__call` 和 `call_user_func` 等函数实现。
