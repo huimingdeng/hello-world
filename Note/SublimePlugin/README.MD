@@ -119,6 +119,11 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 	    }
 	}
 
+`phpcs` 相关配置和软件安装参考 [sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
+
+设置好后，`PHP` 注释补充 `@pacage`、 `@author` 等会自动补充 <name> [<email>] 等信息
+
+
 ### JavaScript Completions 设置 ###
 
 	{
