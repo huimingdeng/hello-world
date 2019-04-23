@@ -118,3 +118,12 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 	        }
 	    }
 	}
+
+### JavaScript Completions 设置 ###
+
+	{
+		"completion_active_list": {
+			"jQuery": true,
+			"CSS": true,
+		}
+	}
