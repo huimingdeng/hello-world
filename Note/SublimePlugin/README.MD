@@ -95,3 +95,26 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 ### P.S.  ###
 
 [https://packagecontrol.io/](https://packagecontrol.io/ "ERROR") 出错，无法连接，导致 package control 无法使用到 channel_v3.json ，而 CSDN 的一份 channel_v3.json 要 42 币，而且不知道是否可用，现找到一份亲测可用的，可自行部署到自己的机子上进行访问。 -- February,25,2019
+
+
+### sublimeLinter 设置 ###
+
+	// SublimeLinter Settings - User
+	{
+		
+		"paths": {
+	        "linux": [],
+	        "osx": [],
+	        "windows": [
+	            "F:/phpStudy/PHPTutorial/php/php-7.2.1-nts",
+	        	"F:/wamp/bin/php/php7.0.4",
+	        	"F:/wamp/bin/php/php5.6.19"
+	        ]
+	    },
+	    "linters": {
+	        "phpcs": {
+	            "disable":true,
+	            "standard": "${folder}/phpcs.xml"
+	        }
+	    }
+	}
