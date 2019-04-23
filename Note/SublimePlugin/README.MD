@@ -43,3 +43,55 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 
 ### docBlockr ###
 PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
+
+
+
+## 我的常用插件： ##
+
+	"channels":
+	[
+		"https://raw.githubusercontent.com/HBLong/channel_v3_daily/master/channel_v3.json"
+	],
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alignment",
+		"AlignTab",
+		"All Autocomplete",
+		"AutoFileName",
+		"BracketHighlighter",
+		"ChineseLocalizations",
+		"Color Highlight",
+		"ColorPicker",
+		"ConvertToUTF8",
+		"CTags",
+		"DocBlockr",
+		"Emmet",
+		"Emmet Css Snippets",
+		"FTPSync",
+		"Git",
+		"JavaScript Completions",
+		"JavaScript Console",
+		"jQuery",
+		"JsFormat",
+		"Package Control",
+		"PHP Companion",
+		"Phpcs",
+		"phpfmt",
+		"PhpNamespace",
+		"Pretty JSON",
+		"SFTP",
+		"SublimeLinter",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jscs",
+		"SublimeLinter-jshint",
+		"SublimeLinter-php",
+		"SublimeLinter-phpcs",
+		"SublimeREPL"
+	]
+
+### P.S.  ###
+
+[https://packagecontrol.io/](https://packagecontrol.io/ "ERROR") 出错，无法连接，导致 package control 无法使用到 channel_v3.json ，而 CSDN 的一份 channel_v3.json 要 42 币，而且不知道是否可用，现找到一份亲测可用的，可自行部署到自己的机子上进行访问。 -- February,25,2019
