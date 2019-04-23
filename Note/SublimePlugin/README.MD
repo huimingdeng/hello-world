@@ -27,7 +27,14 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 `settings-user`:
 
 	{
-		"php_bin":"F:/coding/phpStudy/PHPTutorial/php/php-7.2.1-nts/php.exe",
+		"autocomplete": true,
+		"enable_auto_align": true,
+		"format_on_save": true,
+		"indent_with_space": true,
+		"php_bin": "F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
+	// 或 "php_bin":"F:/coding/phpStudy/PHPTutorial/php/php-7.2.1-nts/php.exe",
+		"psr1_naming": false,
+		"psr2": true,
 		"version": 4
 	}
 
