@@ -89,3 +89,9 @@ git 操作知识点备忘录
 
 
 P.S. 处理 windows 中 git add 中的警告信息：[https://blog.csdn.net/unityoxb/article/details/20768687](https://blog.csdn.net/unityoxb/article/details/20768687 "windows使用git时出现：warning: LF will be replaced by CRLF")
+
+### 历史版本commit详情查看 ###
+如果想查看某一次commit有哪些文件可以使用如下命令：
+
+1. 查看最近几次commit信息 `git log -n --stat`
+2. 查看某次commit详细信息 `git show <commit-id> --stat`
