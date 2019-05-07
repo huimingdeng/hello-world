@@ -50,7 +50,7 @@ class Split
      * 分割字符串成字母
      * @param  int|Integer $start     分割起始位置
      * @param  string $character 编码字符集
-     * @return [type]            [description]
+     * @return string            返回单个字符(字母)
      */
     private function splitStr2letter($start, $character = 'utf8')
     {
@@ -78,7 +78,7 @@ class Split
     }
     /**
      * 获取字符长度
-     * @return [type] [description]
+     * @return int|Integer 返回字符串的长度
      */
     public function getLen()
     {
@@ -86,7 +86,7 @@ class Split
     }
     /**
      * 获取字符串列表
-     * @return [type] [description]
+     * @return array 返回一个分割后的数组
      */
     public function getList()
     {
@@ -113,3 +113,5 @@ class Split
 
 $s = Split::get_Instance();
 echo $s::getLetter(-1);
+$list = $s->getList();
+print_r($list);
