@@ -41,6 +41,16 @@ php-cs-fixer.phar 的下载使用 `composer global require squizlabs/php_codesni
 		"version": 4
 	}
 
+以上配置，存在一些问题，phpfmt 会误判无效代码而删除，例如类定义静态方法会删除关键字`public` 和 `static`，因此可以使用如下配置，则只是用修复，而不删除代码：
+
+	{
+		"passes":
+		[
+			"OnlyOrderUseClauses"
+		],
+		"version": 1
+	}
+
 ### PHPNamespace ###
 `PHP` 命名空间自动载入插件,当前默认 `Settings-default` 的设置
 
