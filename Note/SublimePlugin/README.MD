@@ -17,9 +17,12 @@ phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP
 
 参考文章：[sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
 
+php-cs-fixer.phar 的下载使用 `composer global require squizlabs/php_codesniffer ` 安装，然后配置系统环境变量。
 
 ### PHP Companion ###
 命名空间查找补全插件，鼠标选择类名 eg. `Command` 执行 `Ctrl+shif+P` 输入 `fine use` 则自动查找补充命名空间。 
+
+如果 `fine use` 失败，请安装 phpcs
 
 ### phpfmt ###
 `PHP` 代码规范自动修补插件。
