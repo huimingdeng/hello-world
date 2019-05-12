@@ -95,3 +95,9 @@ P.S. 处理 windows 中 git add 中的警告信息：[https://blog.csdn.net/unit
 
 1. 查看最近几次commit信息 `git log -n --stat`
 2. 查看某次commit详细信息 `git show <commit-id> --stat`
+
+## git issue ##
+1. 用于任务管理
+2. bug 报告
+
+参考 [Github issues的使用](https://blog.csdn.net/Wuzihui___/article/details/79952068 "Github issues的使用")
