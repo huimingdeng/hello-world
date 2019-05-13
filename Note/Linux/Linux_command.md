@@ -50,3 +50,14 @@ CentOS 操作记录（踩坑笔记）。
 ![linux crontab 定时任务设置说明](https://i.imgur.com/kfHoZM3.png)
 
 P.S. Linux  <EOT>：文本终结， 用 `CTRL+D` 键输入。
+
+### Crontab 使用教程 ###
+命令规则编写可使用工具： [crontab 在线工具](https://www.pppet.net/ "在线Cron表达式生成器")
+
+#### Cron 和 Crontab 区别 ####
+Cron Linux系统内置系统进程。
+
+Crontab Cron的配置文件，作业列表；在作业列表设定计划实现任务。
+
+
+
