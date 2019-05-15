@@ -51,7 +51,9 @@ eg. sudo apt-get install docker-ce=5:18.09.0~3-0~ubuntu-xenial docker-ce-cli=5:1
 
 ![docker](https://i.loli.net/2019/05/15/5cdb9e304b3ae73265.png)
 
+卸载docker `sudo apt-get purge docker-ce`
 
+删除docker文件 `sudo rm -rf /var/lib/docker`
 
 ## docker 安装 mysql
 
