@@ -30,7 +30,7 @@ windows `cmd` 中输入 `docker version` 查看是否正确安装。
 
 P.S. 命令详细请查看菜鸟 docker 教程查找——[docker 命令大全](http://www.runoob.com/docker/docker-command-manual.html "docker命令大全")
 
-## [ubuntu 安装 docker]([https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+## [ubuntu 安装 docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 Docker需要64的操作系统。此外你的kernel内核至少要在3.10版本之上。
 
