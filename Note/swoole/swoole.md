@@ -171,3 +171,7 @@ win10家庭版安装 docker 的坑，需要使用 dockertoolbox 安装 docker �
 ![docker-win10 errors](https://i.imgur.com/8qUv8EG.png)
 
 ### docker 处理 ###
+dockerfile 文件创建相关服务。
+
+### swoft ###
+swoft.xmind -- swoft 思维导图。
