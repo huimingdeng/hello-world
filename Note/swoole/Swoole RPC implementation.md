@@ -101,4 +101,169 @@ $demo = [
 
 #### OnRequest.php
 
+```
+<?php
+
+if (!defined('SERVER_PATH')) exit("No Access");
+
+class OnRequest
+{
+    private static $query;
+    private static $code;
+    private static $msg;
+    private static $data;
+
+    public static function run($serv, $request, $response)
+    {
+        try {
+            $data = decrypt($request->rawContent());
+            self::$query   = $data;
+            if (empty($data)) {
+                self::$code = '-1';
+                self::$msg  = '非法请求';
+                self::end($request, $response);
+            }
+
+            //TODO 验证Token
+
+            switch ($data['type']) {
+                case 'SW': //单个请求,等待结果
+                    $task = [
+                        'request' => $data,
+                        'server'  => 'http'
+                    ];
+                    $rs = $serv->task(json_encode($task), -1, function ($serv, $task_id, $rs_data) use ($request, $response) {
+                        self::$code = '1';
+                        self::$msg  = '成功';
+                        self::$data = $rs_data['response'];
+                        self::end($request, $response);
+                    });
+                    if ($rs === false) {
+                        self::$code = '-1';
+                        self::$msg  = '失败';
+                        self::end($request, $response);
+                    }
+                    break;
+
+                case 'SN': //单个请求,不等待结果
+                    $task = [
+                        'request' => $data,
+                        'server'  => 'http'
+                    ];
+                    $rs = $serv->task(json_encode($task));
+                    if ($rs === false) {
+                        self::$code = '-1';
+                        self::$msg  = '失败';
+                    } else {
+                        self::$code = '1';
+                        self::$msg  = '成功';
+                    }
+                    self::end($request, $response);
+                    break;
+                default:
+                    self::$code = '-1';
+                    self::$msg  = '非法请求';
+                    self::end($request, $response);
+            }
+        } catch(Exception $e) {
+        }
+    }
+
+    private static function end($request = null, $response = null)
+    {
+        $rs['request_method'] = $request->server['request_method'];
+        $rs['request_time']   = $request->server['request_time'];
+        $rs['response_time']  = time();
+        $rs['code']           = self::$code;
+        $rs['msg']            = self::$msg;
+        $rs['data']           = self::$data;
+        $rs['query']          = self::$query;
+        $response->end(json_encode($rs));
+        self::$data = [];
+        return;
+    }
+}
+```
+
+#### OnReceive.php
+
+```
+<?php
+
+if (!defined('SERVER_PATH')) exit("No Access");
+
+class OnReceive
+{
+    private static $request_time;
+    private static $query;
+    private static $code;
+    private static $msg;
+    private static $data;
+
+    public static function run($serv, $fd, $reactor_id, $data)
+    {
+        try {
+            self::$request_time = time();
+            $data = decrypt($data);
+            self::$query = $data;
+
+            //TODO 验证Token
+
+            
+            switch ($data['type']) {
+                case 'SW': //单个请求,等待结果
+                    $task = [
+                        'fd'           => $fd,
+                        'request'      => $data,
+                        'server'       => 'tcp',
+                        'request_time' => self::$request_time,
+                    ];
+                    $rs = $serv->task(json_encode($task));
+                    if ($rs === false) {
+                        self::$code = '-1';
+                        self::$msg  = '失败';
+                        self::handlerTask($serv, $fd);
+                    }
+                    break;
+
+                case 'SN': //单个请求,不等待结果
+                    $task = [
+                        'fd'           => $fd,
+                        'request'      => $data,
+                        'server'       => 'tcp',
+                        'request_time' => self::$request_time,
+                    ];
+                    $rs = $serv->task(json_encode($task));
+                    if ($rs === false) {
+                        self::$code = '-1';
+                        self::$msg  = '失败';
+                    } else {
+                        self::$code = '1';
+                        self::$msg  = '成功';
+                    }
+                    self::handlerTask($serv, $fd);
+                    break;
+                default:
+                    self::$code = '-1';
+                    self::$msg  = '非法请求';
+                    self::handlerTask($serv, $fd);
+            }
+        } catch(Exception $e) {
+        }
+    }
+
+    private static function handlerTask($serv, $fd)
+    {
+        $rs['request_method'] = 'TCP';
+        $rs['request_time']   = self::$request_time;
+        $rs['response_time']  = time();
+        $rs['code']           = self::$code;
+        $rs['msg']            = self::$msg;
+        $rs['data']           = self::$data;
+        $rs['query']          = self::$query;
+        $serv->send($fd, json_encode($rs));
+    }
+}
+```
+
 
