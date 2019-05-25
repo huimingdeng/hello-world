@@ -1,5 +1,5 @@
 # [Nginx 静态文件服务配置及优化](https://segmentfault.com/a/1190000019276954 "Nginx 静态文件服务配置及优化") #
-笔记转载自博客。
+笔记转载自博客 [Nginx 静态文件服务配置及优化](https://segmentfault.com/a/1190000019276954 "Nginx 静态文件服务配置及优化")。
 
 ## 根目录和索引文件 ##
 `root` 指令指定将用于搜索文件的根目录。 为了获取所请求文件的路径，`NGINX` 将请求 `URI` 附加到 `root` 指令指定的路径。该指令可以放在 `http {}`，`server {}` 或 `location {}` 上下文中的任何级别。在下面的示例中，为虚拟服务器定义了 `root` 指令。 它适用于未包含根指令的所有`location {}` 块，以显式重新定义根：
@@ -48,3 +48,34 @@
 	}
 
 这里，如果请求中的 URI 是 `/path/`，并且 `/data/path/index.html` 不存在但 `/data/path/index.php` 存在，则内部重定向到 `/path/index.php` 将映射到第二个位置。结果，请求被代理。
+
+### 尝试几种选择 ###
+`try_files` 指令可用于检查指定的文件或目录是否存在; NGINX 会进行内部重定向，如果没有，则返回指定的状态代码。例如，要检查对应于请求 URI 的文件是否存在，请使用 `try_files` 指令和 `$uri` 变量，如下所示：
+
+	server {
+	    root /www/data;
+	
+	    location /images/ {
+	        try_files $uri /images/default.gif;
+	    }
+	}
+
+该文件以 URI 的形式指定，使用在当前位置或虚拟服务器的上下文中设置的根或别名指令进行处理。在这种情况下，如果对应于原始 URI 的文件不存在，NGINX 会将内部重定向到最后一个参数指定的 URI，并返回 `/www/data/images/default.gif`。
+
+最后一个参数也可以是状态代码（直接以等号开头）或位置名称。 在以下示例中，如果 `try_files` 指令的所有参数都不会解析为现有文件或目录，则会返回 404 错误。
+
+	location / {
+	    try_files $uri $uri/ $uri.html =404;
+	}
+
+在下一个示例中，如果原始 URI 和带有附加尾部斜杠的 URI 都不会解析为现有文件或目录，则会将请求重定向到指定位置，并将其传递给代理服务器。
+
+	location / {
+	    try_files $uri $uri/ @backend;
+	}
+	
+	location @backend {
+	    proxy_pass http://backend.example.com;
+	}
+
+有关更多信息，请观看内容缓存网络研讨会，了解如何显着提高网站性能，并深入了解 NGINX 的缓存功能。
