@@ -133,3 +133,9 @@
 	192/0/128        *.80       
 	0/0/128        *.8080
 
+### 调整操作系统 ###
+将 `net.core.somaxconn` 内核参数的值从其默认值（128）增加到足以容纳大量流量的值。在这个例子中，它增加到 4096。
+
+- FreeBSD 的命令为 sudo sysctl kern.ipc.somaxconn=4096
+- Linux 的命令为 1. sudo sysctl -w net.core.somaxconn=4096 2. 将 net.core.somaxconn = 4096 加入到 /etc/sysctl.conf 文件中。
+
