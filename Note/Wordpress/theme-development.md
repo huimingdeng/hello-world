@@ -15,3 +15,8 @@ WordPress 中一套主题首页可以设置最新文章或默认首页的方式�
 		... 
 
 对应 wordpress 后台编辑页面中的`页面属性`，如果一套主题没有模板，那么 Page 的页面属性就没有模板选项，剩下`父级`和`排序`选项。
+
+
+
+## WooCommerce 插件主题 ##
+配套管理用户订单信息插件：[Custom My Account for Woocommerce](https://cn.wordpress.org/plugins/custom-my-account-for-woocommerce/ "Custom My Account for Woocommerce")
