@@ -165,11 +165,36 @@
 响应格式化处理的大致思路：对特定的请求（对此类请求做标记）的处理结果，在返回给用户时进行拦截（使用事件机制），对原有响应进行格式化处理。  
 响应的代码：
 
+- App\Http\Middleware\BusinessFormatOutput : 路由中间件，在某些路由放置该中间件，则标记该请求，表明其响应需要进行格式化处理
+- App\Listeners\AddBusinessStatusToResponse : 事件handler，处理由dingo触发的ResponseWasMorphed事件，对响应进行格式化处理
+- App\Http\Controllers\ApiController.php文件中的常量BusinessStatusHeader，通过响应中的header为中介，将业务逻辑处理结果传递到2中的事件handler中，并最终构成格式化响应。
 
 
 
+### 错误码
 
+错误码相关的代码文件为：app\Common\Enum\ErrorCode.php  
+错误码格式：A-BB-CCC
 
+- A : 表示错误级别,0代表成功，1代表系统级错误，2代表服务（业务）级错误；
+- B : 表示项目/模块/分类；
+- C : 具体错误编号；
+
+不同错误级别错误码的使用：
+
+- 业务级错误码用于表示业务处理结果。
+  
+  - Service层业务处理失败，抛出BusinessException时使用业务级状态码
+  - Controller层构造响应时，定义响应的业务处理结果，eg：`return $this->response->array($validator->errors()->toArray())->withHeader(self::BusinessStatusHeader, [ErrorCode::BUSINESS_INVALID_PARAM`, '业务处理结果信息']);
+  - 用于日志记录（业务相关的日志）
+
+- 系统级错误码用于表示代码运行异常。
+  
+  - 用于记录系统性异常日志，Controller、Service、Transformer、Repository、Model各个层皆可
+
+**注意：**
+
+1. 错误码文件不能重写，若有新的错误码，请按现有分类添加，不能删除或修改旧的错误码。
 
 
 
