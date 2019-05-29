@@ -198,6 +198,51 @@
 
 
 
+### 异常与异常处理
+
+异常相关的代码：app/Exceptions目录。**在应用代码中，只能抛出BusinessException或者是SystemException。请不要抛出其他的异常，不同异常通过异常的code来区分**（code的定义在app/Common/Enum/ErrorCode.php）。
+
+当业务逻辑执行失败时，抛出BusinessException，常见可能情况如下：
+
+- Controller层校验输入失败，抛出BusinessException
+- Service层业务逻辑执行失败，直接抛出BusinessException（如账户余额不足，无法转账）
+- Service层业务逻辑执行失败（但没有抛出异常，而是通过返回值指明执行失败），则接受到该返回值的调用者抛出BusinessException
+
+Controller必须捕捉BusinessException（因此即使抛出了BusinessException，依然要返回一个成功类响应（见上文）），并根据BusinessException的相应信息构造响应。建议所有Controller的action以下面的格式进行编写。
+
+```
+public function add(Request $request, ReserveService $reserveService){
+    try{//将所有的控制器逻辑放到try块中
+        $postData = $request->post();
+ 
+        //校验数据有效性
+        /** @var \Illuminate\Validation\Validator $validator*/
+        $validator = Validator::make($postData, [
+            'orderName' => 'required',
+            'reservePhone' => 'required',
+        ]);
+ 
+        if($validator->fails()){//校验失败
+            new BusinessException(ErrorCode::BUSINESS_INVALID_PARAM, "", $validator->errors()->toArray());
+        }
+ 
+        $result = $reserveService->addReservation($postData);
+        if(true === $result){
+            //业务逻辑执行成功
+            return $this->response->array([]);
+        }else{
+            //通过返回值指示业务逻辑执行失败
+            throw new BusinessException(ErrorCode::BUSINESS_BUSY);
+        }
+    } catch (BusinessException $e){//捕捉BusinessException，根据异常的信息构造响应，下面这段代码可以通用
+        return $this->response->array($e->getExtra())
+            ->withHeader(self::BUSINESS_STATUS_HEADER, [$e->getCode(), $e->getMessage()]);
+    }
+}
+```
+
+当发生底层系统异常时，抛出SystemException。没有捕捉处理的SystemException会造成一个失败类响应。
+
 
 
 
