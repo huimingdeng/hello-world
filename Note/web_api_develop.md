@@ -243,7 +243,13 @@ public function add(Request $request, ReserveService $reserveService){
 
 当发生底层系统异常时，抛出SystemException。没有捕捉处理的SystemException会造成一个失败类响应。
 
+### 日志与预警
 
+日志组件与预警组件的存在是为了更好的维护项目，及时处理bug。应该根据自己的需要添加相应的日志组件和预警组件。
+
+### 文档
+
+选择集成一个成熟的文档工具，如swagger，blueprint等。
 
 
 
