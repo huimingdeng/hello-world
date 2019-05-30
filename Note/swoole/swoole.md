@@ -1,5 +1,8 @@
 # swoole 学习笔记 #
-因工作原因，落后太多，学习 swoole 记录笔记，积累补充学习。[swoole入门指引](https://wiki.swoole.com/wiki/page/1.html "swoole入门指引")
+因工作原因，落后太多，学习 swoole 记录笔记，积累补充学习。
+
+- [swoole入门指引](https://wiki.swoole.com/wiki/page/1.html "swoole入门指引")
+- [浅析swoole中server的实现](https://segmentfault.com/a/1190000019309013 "浅析swoole中server的实现")
 
 ## swoole 安装 ##
 目前下载的 swoole 版本为 swoole-4.2.13  `wget  https://pecl.php.net/get/swoole-4.2.13.tgz`
