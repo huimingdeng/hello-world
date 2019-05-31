@@ -10,10 +10,30 @@ namespace common\library\block;
  * @package common\library\block
  */
 class block {
+    /**
+     * 索引
+     * @var [type]
+     */
     private $index;
+    /**
+     * 时间戳
+     * @var [type]
+     */
     private $timestamp;
+    /**
+     * 数据
+     * @var [type]
+     */
     private $data;
+    /**
+     * 前一区块的hash值，形成链条，不可缺失
+     * @var [type]
+     */
     private $previous_hash;
+    /**
+     * 随机字符
+     * @var [type]
+     */
     private $random_str;
     /**
      * hash 值存取
@@ -37,6 +57,12 @@ class block {
 
     private function hash_block(){
         $str = $this->index . $this->timestamp . $this->data . $this->random_str . $this->previous_hash;
-        return hash("sha256", $str);
+        return hash("haval160,4", $str);
     }
 }
+
+function create_genesis_block(){
+    return new \common\library\block\block(0, time(), "第一个区块", 0, 0);
+}
+
+
