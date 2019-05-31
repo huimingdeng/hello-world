@@ -20,12 +20,9 @@
 			<div class="row">
 				<div class="col-md-4">
 					<?php 
-
-include_once 'Tetris.php';
-use Tetris\Tetris;
-
-$tetris = new Tetris();
-?>
+						include_once 'Tetris.php';
+						$tetris = new Tetris\Tetris();
+					?>
 				</div>
 			</div>
 		</div>
