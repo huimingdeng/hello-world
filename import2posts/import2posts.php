@@ -1,6 +1,5 @@
 <?php
 require_once dirname(dirname(__FILE__)) . "/" . "wp-blog-header.php";
-// require_once dirname(dirname(__FILE__)) . "/wp-admin/includes/media.php";
 
 global $wpdb;
 
@@ -61,15 +60,8 @@ $post_insert = [
 $post_id = wp_insert_post($post_insert);
 
 // 模仿上传图片
-// ( [my_image_upload] => Array ( [name] => （微信）分销商城.png [type] => image/png [tmp_name] => C:\Users\DHM\AppData\Local\Temp\php10EA.tmp [error] => 0 [size] => 166661 ) )
-
-$tmp_name = dirname(__FILE__) . "/" . $post_name . $ext;
-// print_r(getimagesizefromstring)
 exit;
 
-if (file_exists($tmp_name)) {
-	unlink($tmp_name);
-}
 // 保存临时图片
 // file_put_contents($tmp_name, base64_decode($post->img));
 file_put_contents($path, base64_decode($post->img)); // 生成原图
@@ -87,26 +79,7 @@ $large = getimagesize($large_path);
 
 // 获取图片类型
 if (file_exists($path)) {
-	$imge_size = filesize($tmp_name); // 103369
 
-	// exit;
-	// echo $tmp_name;exit;
-	$file_id = 'my_image_upload';
-
-	$_FILES[$file_id] = [
-		"name" => $post_name . $ext,
-		"type" => $img_mime,
-		"tmp_name" => $tmp_name,
-		"error" => 0,
-		"size" => $imge_size,
-	];
-
-	// $bool = media_handle_upload( $file_id,  $post_id);
-	// print_r($bool);
-	/*if(file_exists($path)){
-	        echo "ok".PHP_EOL;
-*/
-	// exit;
 	$attachment_insert = [
 		'post_title' => $post->title,
 		'post_content' => '',
