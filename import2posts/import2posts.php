@@ -48,7 +48,7 @@ $html = sprintf($html_template, $post->author, date("Y/m/d", strtotime($post->pu
 
 $post_insert = [
 	'post_title' => $post->title,
-	'post_content' => $html,
+	'post_content' => '', // 因为 包含图片，所以插入文章为空
 	'post_excerpt' => mb_substr($post->abstract, 0, 200),
 	'post_type' => 'post',
 	'post_status' => 'publish',
@@ -79,14 +79,14 @@ file_put_contents($path, base64_decode($post->img)); // 生成原图
 // 生成 thumbnail 图片，压缩后的，为封面图
 // $thumbnail_path =
 // file_put_contents($thumbnail_path, 'data');
-// 获取 thumbnail 信息
+// 获取 thumbnail 信息 默认为 150x150
 $thumbnail = getimagesize($thumbnail_path);
 // 生成 medium 图片
 $medium = getimagesize($medium_path);
 // 生成 medium_large 图片 扩大
-$medium_large = getimagesize($medium_large_path);
+// $medium_large = getimagesize($medium_large_path);
 // 生成 large 图片 扩大
-$large = getimagesize($large_path);
+// $large = getimagesize($large_path);
 
 // 获取图片类型
 if (file_exists($path)) {
@@ -114,7 +114,7 @@ if (file_exists($path)) {
 			"width" => $img_info[0],
 			"height" => $img_info[1],
 			"file" => $year . "/" . $month . "/" . $post_name . $ext,
-			"sizes" =>
+			"sizes" => // 默认媒体库上传 thumbnail 和 medium
 			[
 				"thumbnail" =>
 				[
@@ -132,20 +132,20 @@ if (file_exists($path)) {
 					"mime-type" => $medium['mime'],
 				],
 
-				"medium_large" => [
-					"file" => $year . "/" . $month . "/" . $post_name . $medium_large[0] . "x" . $medium_large[1] . $ext,
-					"width" => $medium_large[0],
-					"height" => $medium_large[1],
-					"mime-type" => $medium_large['mime'],
-				],
+				// "medium_large" => [
+				// 	"file" => $year . "/" . $month . "/" . $post_name . $medium_large[0] . "x" . $medium_large[1] . $ext,
+				// 	"width" => $medium_large[0],
+				// 	"height" => $medium_large[1],
+				// 	"mime-type" => $medium_large['mime'],
+				// ],
 
-				"large" => [
+				// "large" => [
 
-					"file" => $year . "/" . $month . "/" . $post_name . $large[0] . "x" . $large[1] . $ext,
-					"width" => $large[0],
-					"height" => $large[1],
-					"mime-type" => $large['mime'],
-				],
+				// 	"file" => $year . "/" . $month . "/" . $post_name . $large[0] . "x" . $large[1] . $ext,
+				// 	"width" => $large[0],
+				// 	"height" => $large[1],
+				// 	"mime-type" => $large['mime'],
+				// ],
 
 			],
 
@@ -171,4 +171,30 @@ if (file_exists($path)) {
 	foreach ($attachment_meta as $meta_key => $meta_value) {
 		$meta_ids[$meta_key] = add_post_meta($attachment_id, $meta_key, $meta_value); // 判断 meta_id|false 是否成功
 	}
+
+	// 生成附件信息后，更改文章正文内容
+	/**
+	 * alignnone 默认显示方式为无
+	 * wp-image-{attachment_id}
+	 * size-{%s}: 值为以下
+	 * size-full : 原图大小
+	 * size-large : 大图
+	 * size-medium ： 裁剪后中型图
+	 * size-thumbnail : 缩略图
+	 * @var string
+	 */
+	$html_template = <<<EOF
+<p>By:%s on %s</p>
+<p><img src="%s" class="alignnone wp-image-%s size-%s" alt="" width="%s" height="%s" /></p>
+<p>%s</p>
+<p><a href="%s" target="blank">%s</a></p>
+<p>Keywords: %s</p>
+EOF;
+
+	$html = sprintf($html_template, $post->author, date("Y/m/d", strtotime($post->pub_date)), $img_url, $attachment_id, $attachment_type, $attachment_width, $attachment_height, $post->abstract, $post->links, $post->links, $post->keyword);
+	$edit_post = [
+		'ID' => $post_id,
+		'post_content' => $html,
+	];
+	wp_update_post($edit_post);
 }
