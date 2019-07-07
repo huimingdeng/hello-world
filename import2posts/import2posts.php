@@ -108,10 +108,7 @@ if (file_exists($path)) {
 	$attachment_id = wp_insert_post($attachment_insert);
 	// print_r($attachment_id);
 	// 设定SEO 元素
-	$meta = [
-		"_aioseop_description" => substr($post->abstract, 0, 200),
-		"_aioseop_title" => $post->title,
-		"_aioseop_keywords" => $post->keyword,
+	$attachment_meta = [
 		"_wp_attached_file" => $year . '/' . $month . '/' . $post_name . $ext,
 		"_wp_attachment_metadata" => serialize([
 			"width" => $img_info[0],
@@ -168,10 +165,10 @@ if (file_exists($path)) {
 			],
 		]), // 附件等比例的缩略图
 		"_wp_attachment_image_alt" => "", // 原图的 alt 属性
-		"_thumbnail_id" => $attachment_id, // 图片缩略图
+		"_thumbnail_id" => $attachment_id, // 图片缩略图，存在该属性则表示有设置缩略图
 	];
 
-	foreach ($meta as $meta_key => $meta_value) {
+	foreach ($attachment_meta as $meta_key => $meta_value) {
 		$meta_ids[$meta_key] = add_post_meta($attachment_id, $meta_key, $meta_value); // 判断 meta_id|false 是否成功
 	}
 }
