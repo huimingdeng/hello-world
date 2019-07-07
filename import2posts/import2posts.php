@@ -59,13 +59,24 @@ $post_insert = [
 
 $post_id = wp_insert_post($post_insert);
 
+// 设定SEO 元素
+$seo_meta = [
+	"_aioseop_description" => substr($post->abstract, 0, 200),
+	"_aioseop_title" => $post->title,
+	"_aioseop_keywords" => $post->keyword,
+];
+
+foreach ($seo_meta as $meta_key => $meta_value) {
+	$meta_ids[$meta_key] = add_post_meta($post_id, $meta_key, $meta_value); // 判断 meta_id|false 是否成功
+}
+
 // 模仿上传图片
 exit;
 
 // 保存临时图片
 // file_put_contents($tmp_name, base64_decode($post->img));
 file_put_contents($path, base64_decode($post->img)); // 生成原图
-// 生成 thumbnail 图片，压缩
+// 生成 thumbnail 图片，压缩后的，为封面图
 // $thumbnail_path =
 // file_put_contents($thumbnail_path, 'data');
 // 获取 thumbnail 信息
@@ -155,10 +166,12 @@ if (file_exists($path)) {
 				"orientation" => 0,
 				"keywords" => [],
 			],
-		])
+		]), // 附件等比例的缩略图
+		"_wp_attachment_image_alt" => "", // 原图的 alt 属性
+		"_thumbnail_id" => $attachment_id, // 图片缩略图
 	];
 
 	foreach ($meta as $meta_key => $meta_value) {
-		$meta_ids[$meta_key] = add_post_meta($post_id, $meta_key, $meta_value); // 判断 meta_id|false 是否成功
+		$meta_ids[$meta_key] = add_post_meta($attachment_id, $meta_key, $meta_value); // 判断 meta_id|false 是否成功
 	}
 }
