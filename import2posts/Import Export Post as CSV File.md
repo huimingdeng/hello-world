@@ -175,6 +175,8 @@ foreach ($fn as $lines) {
 
 ### 第三步：使用插件导入 `wp_posts` 表
 
+执行步骤如图：
+
 
 
 
