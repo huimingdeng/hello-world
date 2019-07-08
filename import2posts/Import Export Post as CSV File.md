@@ -80,6 +80,8 @@ SELECT
 	'' AS post_category,
 	'' AS post_tag,
 	1 AS post_author,
+	-- 组合设定 featured_image 
+
 	CONCAT(
 		"http://sgrna.igenebio.net/temp/",
 		pmc_id,
@@ -127,10 +129,10 @@ SELECT CONCAT(img_dir,'/',img_file_name) AS path,pmc_id FROM pmc_crispr_v2`
 
 ![图片信息](https://i.loli.net/2019/07/08/5d22de1dcad9599168.png)
 
-编写脚本，把分散在各个目录的图片汇聚到一个目录里面（方便下载和上传到 WordPress 所在服务器）
+编写脚本，把分散在各个目录的图片汇聚到一个目录里面（方便下载和上传到 WordPress 所在服务器临时目录路径：`/home/xxx/httpdocs/temp/` )
 
 ```php
-<?php 
+<?php // 在 bmnars 用户中创建目录 download 执行当前脚本，然后下载图片，上传到 /home/<user>/httpdocs/temp/ 目录，和第一步设置的 featured_image 相呼应
 $fn = file("get_images.csv"); // 读取前面导出的文档
 foreach ($fn as $lines) {
     $arr = explode(',', $lines);
@@ -179,4 +181,12 @@ foreach ($fn as $lines) {
 
 ![设置SEO](https://i.loli.net/2019/07/08/5d22ea303ab0679526.png)
 
+付费功能，直接忽略，跳过此步骤。
 
+![付费功能](https://i.loli.net/2019/07/08/5d22ebb8f0b6616962.png)
+
+
+
+### 第四步：删除临时目录的图片
+
+eg . 找到服务器 `/home/xxx/httpdocs/temp/` 目录，删除目录下面的第二步汇聚(第二步上传到服务器)的临时图片。
