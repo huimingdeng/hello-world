@@ -60,54 +60,42 @@ pmc_id    title    author    pub_date    keyword    img_dir�
 ```sql
 -- 查询结果，然后使用 Navicat 导出成为 CSV 文档。
 SELECT
-    title_trans AS post_title,
-    CONCAT(
-        "<p>By",
-        author,
-        " on ",
-        pub_date,
-        "</p><p><img class=\"alignnone size-full\" src=\"",
-        CONCAT(
-            "http://sgrna.igenebio.net/temp/",
-            pmc_id,
-            '-',
-            img_file_name
-        ),
-        "\" alt=\"",
-        title_trans,
-        "\" /></p><p>",
-        abstract_trans,
-        "</p><p><a href=\"",
-        links,
-        "\" target=\"_blank\">",
-        links,
-        "</a></p>",
-        "<p>Keywords: ",
-        keyword_trans,
-        "</p>"
-    ) AS post_content,
-    abstract_trans AS post_excerpt,
-    '' AS post_date,
-    title_trans AS post_name,
-    '' AS post_category,
-    '' AS post_tag,
-    1 AS post_author,
-    CONCAT(
-        "http://sgrna.igenebio.net/temp/",
-        pmc_id,
-        '-',
-        img_file_name
-    ) AS featured_image,
-    '' AS post_slug,
-    0 AS post_parent,
-    'publish' AS post_status,
-    keyword_trans AS Keywords,
-    'closed' AS comment_status,
-    keyword_trans AS seo_keywords,
-    abstract_trans AS seo_description,
-    title_trans AS seo_title
+	title_trans AS post_title,
+	CONCAT(
+		"<p>",
+		abstract_trans,
+		"</p><p><b>Source:</b> <a href=\"",
+		links,
+		"\" target=\"_blank\">",
+		links,
+		"</a></p>",
+		"<p>Keywords: ",
+		keyword_trans,
+		"</p>"
+	) AS post_content,
+	CONCAT(LEFT(abstract_trans, 190), '... ...') AS post_excerpt,
+
+	pub_date AS post_date,
+	title_trans AS post_name,
+	'' AS post_category,
+	'' AS post_tag,
+	1 AS post_author,
+	CONCAT(
+		"http://sgrna.igenebio.net/temp/",
+		pmc_id,
+		'-',
+		img_file_name
+	) AS featured_image,
+	'' AS post_slug,
+	0 AS post_parent,
+	'publish' AS post_status,
+	keyword_trans AS Keywords,
+	'closed' AS comment_status,
+	keyword_trans AS seo_keywords,
+	abstract_trans AS seo_description,
+	title_trans AS seo_title
 FROM
-    pmc_crispr_v2
+	pmc_crispr_v2
 ```
 
 将上述查询的结果导出形成 CSV 文件。图片操作示意：
