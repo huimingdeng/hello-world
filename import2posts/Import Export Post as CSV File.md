@@ -165,6 +165,18 @@ foreach ($fn as $lines) {
 
 执行步骤如图：
 
+![上传CSV文档](https://i.loli.net/2019/07/08/5d22e9960411a27313.png)
 
+上传CSV 文档
+
+![上传完成，下一步](https://i.loli.net/2019/07/08/5d22e9ba2a71e81680.png)
+
+设置 wp_posts 字段元素
+
+![设置字段1](https://i.loli.net/2019/07/08/5d22e9e6826fc88893.png)
+
+设置 SEO 元素
+
+![设置SEO](https://i.loli.net/2019/07/08/5d22ea303ab0679526.png)
 
 
