@@ -18,17 +18,21 @@ CentOS 操作记录（踩坑笔记）。
 
 ### rsync 命令
 
-使用 `rsync` 进行同步和更新文件。
+使用 `rsync` 进行同步和更新文件。[参考](https://www.linuxprobe.com/how-linux-rsync.html)
 
-1. 同步本地文件到远程服务器
-   
-   1. -a 递归，保留
+**Example**
+
+1. 同步本地文件到远程服务器并删除已经存在的同名文件和目录
 
 ```bash
 rsync -avz --delete /home/local/httpdocs/mystaticsite/ remote@www.example.org:/home/remote/httpdocs/
 ```
 
+2. 远程同步到本地服务器
 
+```bash
+rsync -avz reomote@www.example.org:192.168.1.4:/home/remote/httpdocs/ /home/local/httpdocs/mystaticsitez/
+```
 
 ### tar 命令
 
@@ -98,25 +102,29 @@ tar -zcvf function.dis.tar.gz function.dis.* --remove-files --exclude=function.d
 
 常用命令参数    ：
 
-    crontab -u <user> 指定用户，命令不指定用户无法执行
-    crontab -l 查看定时任务
-    crontab -e 创建定时任务 ，保存后会自动保存在 /tmp/crontab.<zFP6Rr>  <zFP6Rr>为随机字符
-    crontab -r 删除用户的定时任务
-    crontab -i 删除 crontab 文件前提醒用户
-    ... ...
+```bash
+crontab -u <user> #指定用户，命令不指定用户无法执行
+crontab -l #查看定时任务
+crontab -e #创建定时任务 ，保存后会自动保存在 /tmp/crontab.<zFP6Rr>  <zFP6Rr>为随机字符
+crontab -r #删除用户的定时任务
+crontab -i #删除 crontab 文件前提醒用户
+... ...
+```
 
 ![Linux crontab 定时任务参数](https://i.imgur.com/INVHTUb.png)
 
 定时任务设置说明：
 
-    # Example of job definition:
-    # .---------------- minute (0 - 59) *：表示任意 */1: 表示每间隔1分钟 1,50: 第1分钟或50分钟 1-50: 一道50分钟
-    # |  .------------- hour (0 - 23)
-    # |  |  .---------- day of month (1 - 31)
-    # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
-    # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-    # |  |  |  |  |
-    # *  *  *  *  * user-name  command to be executed
+```bash
+# Example of job definition:
+# .---------------- minute (0 - 59) *：表示任意 */1: 表示每间隔1分钟 1,50: 第1分钟或50分钟 1-50: 一道50分钟
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+```
 
 ![linux crontab 定时任务设置说明](https://i.imgur.com/kfHoZM3.png)
 
