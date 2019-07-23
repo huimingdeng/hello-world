@@ -20,11 +20,32 @@ $$
 
 4. 【填空题】有一种细菌，经过一分钟分裂为 2 个，再过一分钟，分裂为 4 个，将这样的细菌放在一个瓶子里面，一个小时后瓶子被细菌充满了。现假设一开始放入瓶中的为 2 个细菌，那么到充满瓶要____分钟? （5分）
 
-`考验基本逻辑思维`
+`考验基本逻辑思维` 59 分钟
+
+$$
+2\60 =2*2^59
+$$
 
 5. 【流程题】请用流程图画出请假流程(小于等于3天，直属上司可审批，大于3天需要部门主管二次审批) （15分）
 
 `考验流程判断思维`
+
+```flow
+flowchat
+flowchat
+st=>start: Start
+e=>end: End
+op1=>operation: Operation
+sub1=>subroutine: Subroutine
+cond=>condition: yes or no ?
+io=>inputoutput: proceess something...
+st->op1->cond`
+cond(yes)->io->e`
+cond(no)->sub1(right)->op1
+
+```
+
+
 
 6. 【编程题】Write a function to display the below diagram given the line number as input (25分)
 
