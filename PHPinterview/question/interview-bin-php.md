@@ -16,7 +16,7 @@ $$
 
 3. 写一种验证中国大陆11位手机号码的正则表达式。（10分）
 
-`考验正则表达式能力`
+`考验正则表达式能力`  `/^1[38][0-9]{9}/`
 
 4. 【填空题】有一种细菌，经过一分钟分裂为 2 个，再过一分钟，分裂为 4 个，将这样的细菌放在一个瓶子里面，一个小时后瓶子被细菌充满了。现假设一开始放入瓶中的为 2 个细菌，那么到充满瓶要____分钟? （5分）
 
@@ -84,31 +84,34 @@ display(5);
        -- 删除 ID 值最大的记录，小的不删除
    )
    ```
-   
-   
+
 2. 每页显示3条记录，写 SQL 查询出第 4 页显示的数据，按 ID 增序（5分）
    
    ```sql
    SELECT * FROM StudentScore ORDER BY ID ASC Limit 9,3 -- page = total/3 ∴ p=4 = 11/3  -- 3 ... 1
    -- index 0 -> 10, ∴ index-9 => 10(id)
    ```
-   
-   
-3.  写SQL查询出所有科目成绩都大于80分的学生。（10分）
+
+3. 写SQL查询出所有科目成绩都大于80分的学生。（10分）
    
    ```sql
    -- 1. 查询获取不小于80分的学生信息
    SELECT * FROM studentscore AS res WHERE res.student NOT IN(
-       -- 查询分数小于80分学生
-       SELECT DISTINCT(tmp.student) FROM studentscore AS tmp WHERE tmp.score < 80
+      -- 查询分数小于80分学生
+      SELECT DISTINCT(tmp.student) FROM studentscore AS tmp WHERE tmp.score < 80
    )
    --------------------------------
    -- 2. 方案二，来源网络
    SELECT DISTINCT student FROM studentscore a WHERE score >= 80 AND NOT EXISTS ( 
-       SELECT 1 FROM studentscore b WHERE b.student = a.student AND b.`subject` != a.`subject` AND b.score < 80
+      SELECT 1 FROM studentscore b WHERE b.student = a.student AND b.`subject` != a.`subject` AND b.score < 80
    )
    ORDER BY a.student
    ```
-   
-   
+
 4. 写SQL查询1班每个学生总分和1班学生总分。（10分）
+
+```sql
+SELECT student,SUM(score) AS total FROM studentscore GROUP BY student UNION SELECT class AS student, SUM(score) AS total FROM studentscore GROUP BY class
+```
+
+
