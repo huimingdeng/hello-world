@@ -26,7 +26,16 @@ $$
 
 `考验流程判断思维`
 
-
+```flow
+st=>start: 开始
+e=>end: 结束
+cond=>condition: >3
+op1=>operation: 初审
+op2=>operation: 复审
+st->op1->cond
+cond(yes)->op2->e
+cond(no)->e
+```
 
 6. 【编程题】Write a function to display the below diagram given the line number as input (25分)
 
@@ -115,5 +124,3 @@ display(5);
 ```sql
 SELECT student,SUM(score) AS total FROM studentscore GROUP BY student UNION SELECT class AS student, SUM(score) AS total FROM studentscore GROUP BY class
 ```
-
-
