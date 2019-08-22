@@ -1,1 +1,10 @@
-{}
+{
+	"autoload":{
+		"psr-4":{
+			"RESTFUL\\":"lib"
+		}
+	},
+	"files":[
+		"site.php"
+	]
+}
