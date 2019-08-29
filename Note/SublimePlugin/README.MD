@@ -10,13 +10,15 @@
 
 phpcs（PHP Code Sniffer） 自定义设置：`Preference->Package Settings->PHP Code Sniffer->Settings - User` 详细配置参数参考 `Preference->Package Settings->PHP Code Sniffer->Settings - Default`
 
-    {
-        "show_debug": true,
-        "php_cs_fixer_show_quick_panel":true,
-        "php_cs_fixer_executable_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php-cs-fixer-v2.phar",
-        "phpcs_executable_path":"C:\\Users\\DHM\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat",
-        "phpcs_php_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
-    }
+```json
+{
+    "show_debug": true,
+    "php_cs_fixer_show_quick_panel":true,
+    "php_cs_fixer_executable_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php-cs-fixer-v2.phar",
+    "phpcs_executable_path":"C:\\Users\\DHM\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat",
+    "phpcs_php_path":"F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
+}
+```
 
 参考文章：[sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
 
@@ -34,27 +36,31 @@ php-cs-fixer.phar 的下载使用 `composer global require squizlabs/php_codesni
 
 `settings-user`:
 
-    {
-        "autocomplete": true,
-        "enable_auto_align": true,
-        "format_on_save": true,
-        "indent_with_space": true,
-        "php_bin": "F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
-    // 或 "php_bin":"F:/coding/phpStudy/PHPTutorial/php/php-7.2.1-nts/php.exe",
-        "psr1_naming": false,
-        "psr2": true,
-        "version": 4
-    }
+```json
+{
+    "autocomplete": true,
+    "enable_auto_align": true,
+    "format_on_save": true,
+    "indent_with_space": true,
+    "php_bin": "F:\\phpStudy\\PHPTutorial\\php\\php-7.2.1-nts\\php.exe",
+// 或 "php_bin":"F:/coding/phpStudy/PHPTutorial/php/php-7.2.1-nts/php.exe",
+    "psr1_naming": false,
+    "psr2": true,
+    "version": 4
+}
+```
 
 以上配置，存在一些问题，phpfmt 会误判无效代码而删除，例如类定义静态方法会删除关键字`public` 和 `static`，因此可以使用如下配置，则只是用修复，而不删除代码：
 
-    {
-        "passes":
-        [
-            "OnlyOrderUseClauses"
-        ],
-        "version": 1
-    }
+```json
+{
+    "passes":
+    [
+        "OnlyOrderUseClauses"
+    ],
+    "version": 1
+}
+```
 
 ### PHPNamespace
 
@@ -66,49 +72,51 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 
 ## 我的常用插件：
 
-    "channels":
-    [
-        "https://raw.githubusercontent.com/HBLong/channel_v3_daily/master/channel_v3.json"
-    ],
-    "in_process_packages":
-    [
-    ],
-    "installed_packages":
-    [
-        "Alignment",
-        "AlignTab",
-        "All Autocomplete",
-        "AutoFileName",
-        "BracketHighlighter",
-        "ChineseLocalizations",
-        "Color Highlight",
-        "ColorPicker",
-        "ConvertToUTF8",
-        "CTags",
-        "DocBlockr",
-        "Emmet",
-        "Emmet Css Snippets",
-        "FTPSync",
-        "Git",
-        "JavaScript Completions",
-        "JavaScript Console",
-        "jQuery",
-        "JsFormat",
-        "Package Control",
-        "PHP Companion",
-        "Phpcs",
-        "phpfmt",
-        "PhpNamespace",
-        "Pretty JSON",
-        "SFTP",
-        "SublimeLinter",
-        "SublimeLinter-csslint",
-        "SublimeLinter-jscs",
-        "SublimeLinter-jshint",
-        "SublimeLinter-php",
-        "SublimeLinter-phpcs",
-        "SublimeREPL"
-    ]
+```json
+"channels":
+[
+    "https://raw.githubusercontent.com/HBLong/channel_v3_daily/master/channel_v3.json"
+],
+"in_process_packages":
+[
+],
+"installed_packages":
+[
+    "Alignment",
+    "AlignTab",
+    "All Autocomplete",
+    "AutoFileName",
+    "BracketHighlighter",
+    "ChineseLocalizations",
+    "Color Highlight",
+    "ColorPicker",
+    "ConvertToUTF8",
+    "CTags",
+    "DocBlockr",
+    "Emmet",
+    "Emmet Css Snippets",
+    "FTPSync",
+    "Git",
+    "JavaScript Completions",
+    "JavaScript Console",
+    "jQuery",
+    "JsFormat",
+    "Package Control",
+    "PHP Companion",
+    "Phpcs",
+    "phpfmt",
+    "PhpNamespace",
+    "Pretty JSON",
+    "SFTP",
+    "SublimeLinter",
+    "SublimeLinter-csslint",
+    "SublimeLinter-jscs",
+    "SublimeLinter-jshint",
+    "SublimeLinter-php",
+    "SublimeLinter-phpcs",
+    "SublimeREPL"
+]
+```
 
 ### P.S.
 
@@ -116,25 +124,27 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 
 ### sublimeLinter 设置
 
-    // SublimeLinter Settings - User
-    {
-    
-        "paths": {
-            "linux": [],
-            "osx": [],
-            "windows": [
-                "F:/phpStudy/PHPTutorial/php/php-7.2.1-nts",
-                "F:/wamp/bin/php/php7.0.4",
-                "F:/wamp/bin/php/php5.6.19"
-            ]
-        },
-        "linters": {
-            "phpcs": {
-                "disable":true,
-                "standard": "${folder}/phpcs.xml"
-            }
+```json
+// SublimeLinter Settings - User
+{
+
+    "paths": {
+        "linux": [],
+        "osx": [],
+        "windows": [
+            "F:/phpStudy/PHPTutorial/php/php-7.2.1-nts",
+            "F:/wamp/bin/php/php7.0.4",
+            "F:/wamp/bin/php/php5.6.19"
+        ]
+    },
+    "linters": {
+        "phpcs": {
+            "disable":true,
+            "standard": "${folder}/phpcs.xml"
         }
     }
+}
+```
 
 `phpcs` 相关配置和软件安装参考 [sublime text 3 phpcs](https://blog.csdn.net/yxwb1253587469/article/details/72896241 "sublime text 3 phpcs")
 
@@ -142,9 +152,46 @@ PHP/JavaScript 等注释自动补充 `@param` 、 `@return` 等信息。
 
 ### JavaScript Completions 设置
 
-    {
-        "completion_active_list": {
-            "jQuery": true,
-            "CSS": true,
-        }
+```json
+{
+    "completion_active_list": {
+        "jQuery": true,
+        "CSS": true,
     }
+}
+```
+
+## xdebug client
+
+安装插件 `xdebug client`.
+
+### xdebug 配置
+
+phpstudy2018 配置 xdebug 方案：
+
+开启`phpinfo`查看信息，然后下载对应版本的 [xdebug](https://xdebug.org/download.php)  。
+
+![phpinfo](https://i.loli.net/2019/08/29/h4tJlBuImedGO9R.png)
+
+配置 `php.ini` 文件
+
+```ini
+[XDebug]
+xdebug.profiler_output_dir="F:\phpStudy\PHPTutorial\tmp\xdebug"
+xdebug.trace_output_dir="F:\phpStudy\PHPTutorial\tmp\xdebug"
+;zend_extension="D:\Program Files\phpStudy20161103\php\php-7.2.1-nts\ext\php_xdebug.dll"
+zend_extension="F:\phpStudy\PHPTutorial\php\php-7.2.1-nts\ext\php_xdebug-2.8.0beta2-7.2-vc15-nts.dll"
+;启用代码自动跟踪
+xdebug.auto_trace=1
+;允许收集传递给函数的参数变量 
+xdebug.collect_params=1
+;允许收集函数调用的返回值
+xdebug.collect_return=1
+;指定堆栈跟踪文件的存放目录 
+xdebug.trace_output_dir="F:\phpStudy\PHPTutorial\tmp\xdebug"　　
+
+;启用性能检测分析  
+xdebug.profiler_enable=on
+```
+
+
