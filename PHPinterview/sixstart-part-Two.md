@@ -61,4 +61,15 @@ P.S. 缓存雪崩参考https://www.cnblogs.com/hadley/p/9979785.html
 事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。
 ```
 
+### 2019-8-31
+
+#### Redis 内存淘汰机制有哪些？
+
+***A、noeviction: 当内存不足以容纳新写入数据时，新写入操作会报错***
+***B、allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key***
+***C、volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 key***
+D、allkeys-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个 key。
+
+P.S. redis 内存淘汰参考 [https://www.cnblogs.com/alsf/p/9399011.html](https://www.cnblogs.com/alsf/p/9399011.html)
+
 
