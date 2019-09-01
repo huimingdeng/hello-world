@@ -68,10 +68,10 @@ $$
   
   - 将（1）式代入（2）式： $p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})$  (3)
 
-- 似然函数：
+- 似然函数：（根据样本估计参数值）
 
 $$
-L(\theta) = \prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta) = \prod\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
+L(\theta) = \prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta) = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
 $$
 
 - 解释：什么样的参数跟我们的数据组合后恰好是真实值
