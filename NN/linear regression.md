@@ -64,14 +64,14 @@ $$
   
   - 预测值与误差：$y^{(i)}=\theta^Tx^{(i)}+\varepsilon^{(i)} $  (1)
   
-  - 由于误差服从高斯分布：$p(\varepsilon^{(i)}) = \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(\varepsilon^{(i)})^2}{2\sigma^2})$   (2)
+  - 由于误差服从高斯分布：$p(\varepsilon^{(i)}) = \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(\varepsilon^{(i)})^2}{2\sigma^2})$   (2)
   
-  - 将（1）式代入（2）式： $p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})$  (3)
+  - 将（1）式代入（2）式： $p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})$  (3)
 
 - 似然函数：（根据样本估计参数值）
 
 $$
-L(\theta) = \prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta) = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
+L(\theta) = \prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta) = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
 $$
 
 - 解释：什么样的参数跟我们的数据组合后恰好是真实值
@@ -79,7 +79,7 @@ $$
 - 对数似然：
 
 $$
-\log L(\theta) = \log \prod_{i=1}^{m} \frac{1}{\sqrt {2\pi}\sigma } exp(- \frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
+\log L(\theta) = \log \prod_{i=1}^{m} \frac{1}{\sqrt {2\pi}\sigma } \exp(- \frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})
 $$
 
 - 解释：乘法难解，加法容易，对数里面乘法转换成加法
