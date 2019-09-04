@@ -103,3 +103,24 @@ if('xuexi' == 0){
 答案解析：
 
 `if($str==0)`，字符串和数字比较是否相等， 相当于 把`$str` 字符串隐性转换为数字，然后再比较，相当于 `if( intval($str) == 0 ) `。if(\$str==0) 判断 和 `if( intval($str) == 0 )` 是等价的，而和 `if ($str)` 是不一样的。`if ($str)` 可以判断 `$str`值有没有被初始化。有没有付值，只要付值，就返回`true`。 当然你也可以使用 `$str="字符串"`;`if($str===0){ echo "返回了true.";}` ，就是 判断 `$str`的数据类型 和值 都和0的值 数据类型一样，才可以返回`true`
+
+### 2019-9-4
+
+以下PHP代码运行结果正确的是？
+
+```php
+$referenceTable = array();
+$referenceTable['val1'] = array(1， 2);
+$referenceTable['val2'] = 3;
+$referenceTable['val3'] = array(4， 5);
+$testArray = array();
+$testArray = array_merge($testArray， $referenceTable['val3']);
+var_dump($testArray);
+```
+
+A、Array ( [val1] => Array ( [0] => 1 [1] => 2 ) [val2] => 3 [val3] => Array ( [0] => 4 [1] => 5 ) )
+B、array(2) { [0]=> int(4) [1]=> int(5) }
+C、array(2) { [0]=> int(1) [1]=> int(2) }
+D、null
+
+
