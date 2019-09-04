@@ -106,7 +106,7 @@ if('xuexi' == 0){
 
 ### 2019-9-4
 
-以下PHP代码运行结果正确的是？
+#### 以下PHP代码运行结果正确的是？
 
 ```php
 $referenceTable = array();
@@ -119,8 +119,9 @@ var_dump($testArray);
 ```
 
 A、Array ( [val1] => Array ( [0] => 1 [1] => 2 ) [val2] => 3 [val3] => Array ( [0] => 4 [1] => 5 ) )
-B、array(2) { [0]=> int(4) [1]=> int(5) }
+***B、array(2) { [0]=> int(4) [1]=> int(5) }***
 C、array(2) { [0]=> int(1) [1]=> int(2) }
 D、null
 
-
+答案解析：
+array_merge() 将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组
