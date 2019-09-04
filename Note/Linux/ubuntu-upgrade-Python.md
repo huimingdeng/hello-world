@@ -202,6 +202,12 @@ ubuntu@VM-0-4-ubuntu:~$
 
 更新 `pip` 失败报错：
 
+```bash
+Traceback (most recent call last):
+  File "/usr/bin/pip", line 9, in <module>
+    from pip import main
+```
+
 
 
 需要修改 `/usr/bin/pip` 文件 `sudo vim /usr/bin/pip`
