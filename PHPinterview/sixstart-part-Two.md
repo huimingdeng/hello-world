@@ -138,8 +138,17 @@ B、将PHP代码转换成语言片段（Tokens）、将表达式编译成Opcodes
 
 D、将PHP代码转换为语言片段（Tokens）、将表达式编译成Opcodes、将Tokens转换成简单而有意义的表达式、顺次执行Opcodes
 
+答案解析：
+正确答案为C
+
+1. Scanning(Lexing) ，将PHP代码转换为语言片段(Tokens)
+
+2. Parsing， 将Tokens转换成简单而有意义的表达式
+
+3. Compilation， 将表达式编译成Opocdes
+
+4. Execution， 顺次执行Opcodes，每次一条，从而实现PHP脚本的功能。
+
 P.S. 原理可参考《PHP7底层设计与源码实现》——2.1.2 章：PHP7执行原理概述。
 
 ![rMm2cxtEvnoi4PD](https://i.loli.net/2019/09/05/rMm2cxtEvnoi4PD.jpg)
-
-
