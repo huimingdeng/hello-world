@@ -40,12 +40,23 @@
          
          1. 参考解决方案：[配置centos7解决 docker Failed to get D-Bus connection 报错](https://blog.csdn.net/xiaochonghao/article/details/64438246)
          
-         2. 退出容器，尝试处理。
+         2. 退出容器，尝试处理。-- 添加失败，删除镜像重新执行。
 
 3. 安装`nginx` ：
-   
-   1. 
 
 
 
+### DockerHub 上传本地镜像
 
+```bash
+ubuntu@VM-0-4-ubuntu:~$ docker tag 9c786412710e huimingdeng/nginx-centos:0.01
+...
+ubuntu@VM-0-4-ubuntu:~$ docker inspect 9c786412710e
+ubuntu@VM-0-4-ubuntu:~$ docker login
+.... // enter your username & password
+ubuntu@VM-0-4-ubuntu:~$ docker push huimingdeng/nginx-centos:0.01 
+```
+
+推送完成后，本地的镜像若要删除则需要强制删除。
+
+![IDZseCt14uBSXU8](https://i.loli.net/2019/09/05/IDZseCt14uBSXU8.png)
