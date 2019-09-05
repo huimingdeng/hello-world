@@ -125,3 +125,21 @@ D、null
 
 答案解析：
 array_merge() 将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组
+
+### 2019-9-5
+
+#### PHP执行的时候有如下执行过程：`Scanning(Lexing) - Compilation -Execution - Parsing`, 其中含义分别为：
+
+A、 将PHP代码转换为语言片段（Tokens）、将Tokens转换成简单而有意义的表达式、顺次执行Opcodes、将表达式编译成Opcodes。
+
+B、将PHP代码转换成语言片段（Tokens）、将表达式编译成Opcodes、顺次执行Opcodes、将Tokens转换成简单而有意义的表达式。
+
+***C、将PHP代码转换为语言片段（Tokens）、将Tokens转换成简单而有意义的表达式、将表达式编译成Opcodes、顺次执行Opcodes***
+
+D、将PHP代码转换为语言片段（Tokens）、将表达式编译成Opcodes、将Tokens转换成简单而有意义的表达式、顺次执行Opcodes
+
+P.S. 原理可参考《PHP7底层设计与源码实现》——2.1.2 章：PHP7执行原理概述。
+
+![rMm2cxtEvnoi4PD](https://i.loli.net/2019/09/05/rMm2cxtEvnoi4PD.jpg)
+
+
