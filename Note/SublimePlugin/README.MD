@@ -194,4 +194,23 @@ xdebug.trace_output_dir="F:\phpStudy\PHPTutorial\tmp\xdebug"　　
 xdebug.profiler_enable=on
 ```
 
+## go 配置执行
 
+sublime text 3 配置编译 go `ctrl+B` 执行，以及`go` 语法提示。
+
+1. 安装 `Golang build` 配置参考 [Golang Build Configuration](https://github.com/golang/sublime-build/blob/master/docs/configuration.md)
+
+2. 配置 `首选项` -> `package settings` -> `Golang Config` -> `Setings - User`
+   
+   1. ```json
+      {
+           "windows": {
+               "PATH": "E:\\software\\Go\\bin",
+               "GOPATH": "E:\\software\\Go"
+           }
+       }
+      ```
+
+3. 重启 sublime 。
+
+或者安装 `GoSbulime` ,如果使用 `package control` 无法安装，则可以到[GitHub](https://github.com/DisposaBoy/GoSublime)下载压缩包，解压安装，`首选项` -> `浏览插件目录` 中进行解压安装
