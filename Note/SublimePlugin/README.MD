@@ -204,13 +204,38 @@ sublime text 3 配置编译 go `ctrl+B` 执行，以及`go` 语法提示。
    
    1. ```json
       {
-           "windows": {
-               "PATH": "E:\\software\\Go\\bin",
-               "GOPATH": "E:\\software\\Go"
-           }
+           "windows": {
+               "PATH": "E:\\software\\Go\\bin",
+               "GOPATH": "E:\\software\\Go"
+           }
        }
       ```
 
 3. 重启 sublime 。
 
 或者安装 `GoSbulime` ,如果使用 `package control` 无法安装，则可以到[GitHub](https://github.com/DisposaBoy/GoSublime)下载压缩包，解压安装，`首选项` -> `浏览插件目录` 中进行解压安装
+
+新建编译系统 `Go.sublime-build`
+
+```json
+{
+	"cmd": ["go", "run", "$file_name"], 
+    "file_regex": "^[ ]*File \"(…*?)\", line ([0-9]*)", 
+    "working_dir": "$file_path", 
+    "selector": "source.go"
+}
+```
+
+配置环境变量
+
+```json
+{
+    "env" : {
+
+		"GOPATH":"", // 工程目录
+		"GOROOT":"E:\\software\\Go\\"
+	}
+}
+```
+
+
