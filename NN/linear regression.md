@@ -98,7 +98,28 @@ $$
 J(\theta) = \frac{1}{2}\sum_{i=1}^m{(y^{(i)}-\theta^Tx^{(i)})^2}  {(最小二乘法)} 
 $$
 
+目标函数：
 
+$$
+J(\theta) = \frac{1}{2} \sum_{i=1}^m{(h_{\theta} (x^{(i)})-y^{(i)})}^2 \\
+ = \frac{1}{2} (X\theta-y)^T(X\theta-y)
+$$
+
+求偏导：
+
+$$
+\nabla_{\theta}J(\theta) = \nabla_{\theta}(\frac{1}{2} (X\theta-y)^T(X\theta-y))\\
+ = \nabla_{\theta}(\frac{1}{2}(X^T\theta^T-y^T)(X\theta-y)) \\
+ = \nabla_{\theta}(\frac{1}{2}(\theta^TX^TX\theta-\theta^TX^Ty-y^TX\theta+y^Ty)) \\
+ = \frac{1}{2}(2X^TX\theta-X^Ty-(y^TX)^T) \\
+ =X^TX\theta-X^Ty
+$$
+
+偏导等于0：
+
+$$
+\theta = (X^TX)^{-1}X^Ty
+$$
 
 
 
