@@ -6,6 +6,8 @@
 
 centos 系统参考：https://www.cnblogs.com/lwf-blog/p/8182975.html
 
+安装 3.7+ 报错 `ModuleNotFoundError: No module named '_ctypes'`: https://www.cnblogs.com/sea-stream/p/10388303.html
+
 ## 更新python源与安装
 
 `sudo add-apt-repository ppa:jonathonf/python-3.6`
