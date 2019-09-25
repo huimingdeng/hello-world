@@ -4,6 +4,8 @@
 
 参考 https://www.cnblogs.com/yjlch1016/p/8641910.html
 
+centos 系统参考：https://www.cnblogs.com/lwf-blog/p/8182975.html
+
 ## 更新python源与安装
 
 `sudo add-apt-repository ppa:jonathonf/python-3.6`
@@ -208,8 +210,6 @@ Traceback (most recent call last):
     from pip import main
 ```
 
-
-
 需要修改 `/usr/bin/pip` 文件 `sudo vim /usr/bin/pip`
 
 ```python
@@ -224,8 +224,6 @@ import sys
 from pip import main
 if __name__ == '__main__':
     sys.exit(main())
-
-
 ```
 
 修改后：
@@ -243,10 +241,7 @@ import sys
 from pip import __main__
 if __name__ == '__main__':
     sys.exit(__main__._main()) #sys.exit(main())
-
 ```
-
-
 
 保存后执行`pip list` 结果如下：
 
@@ -272,7 +267,3 @@ unattended-upgrades 0.1
 urllib3             1.13.1
 wheel               0.29.0
 ```
-
-
-
-
