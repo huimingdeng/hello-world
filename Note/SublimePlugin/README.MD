@@ -219,7 +219,7 @@ sublime text 3 配置编译 go `ctrl+B` 执行，以及`go` 语法提示。
 
 ```json
 {
-	"cmd": ["go", "run", "$file_name"], 
+    "cmd": ["go", "run", "$file_name"], 
     "file_regex": "^[ ]*File \"(…*?)\", line ([0-9]*)", 
     "working_dir": "$file_path", 
     "selector": "source.go"
@@ -232,10 +232,25 @@ sublime text 3 配置编译 go `ctrl+B` 执行，以及`go` 语法提示。
 {
     "env" : {
 
-		"GOPATH":"", // 工程目录
-		"GOROOT":"E:\\software\\Go\\"
-	}
+        "GOPATH":"", // 工程目录
+        "GOROOT":"E:\\software\\Go\\"
+    }
 }
+```
+
+## PHPunit
+
+安装，PHPunit，配置 phpunit.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="test">
+            <file>test/Test.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
 ```
 
 
