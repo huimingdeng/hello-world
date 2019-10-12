@@ -1,0 +1,19 @@
+1. 官网 https://phpunit.de/ 下载对应的 PHPUnit.phar 包
+	官网案例：
+	https://phpunit.de/getting-started/phpunit-8.html
+
+2. 参考配置文章：
+	https://www.cnblogs.com/schaepher/p/5011392.html
+	http://m.zzvips.com/article/13931.html 
+	
+	
+	
+3. 官网的composer PHPUnit 测试方式
+	composer require --dev phpunit/phpunit^8  :  php7.2 or 7.3 使用
+	
+4. 官网 phpunit 测试方式：	
+	wget -O phpunit https://phar.phpunit.de/phpunit-8.phar
+		./phpunit --version 查看版本信息
+		
+		eg. ./phpunit --bootstrap src/autoload.php tests/EmailTest 
+		
