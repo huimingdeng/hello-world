@@ -1,6 +1,6 @@
 ## Session攻击手段(会话劫持/固定)及其安全防御措施
 
-PHP开源社区  *2019. October. 31*
+PHP开源社区  *2019. October. 31*  转载 [https://blog.csdn.net/h_mxc/article/details/50542038](https://blog.csdn.net/h_mxc/article/details/50542038)
 
 #### 一、概述
 
@@ -24,7 +24,7 @@ PHP开源社区  *2019. October. 31*
 
 - 攻击者通过捕获到的Session ID访问站点即可获得目标用户合法会话。
 
-![images\session hijacking](images\session hijacking.webp)
+![GcHLXvwM5g4Y9br](https://i.loli.net/2019/10/31/GcHLXvwM5g4Y9br.jpg)
 
 ##### 攻击者获取SessionID的方式有多种：
 
@@ -98,8 +98,6 @@ phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，
    $token = md5(uniqid(rand(), true));
    $_SESSION['token'] = $token;
    ```
-   
-   
 
 **三、 会话固定（Session fixation）**
 
@@ -114,8 +112,8 @@ phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，
 - 目标用户携带攻击者设定的Session ID登录站点；
 
 - 攻击者通过Session ID获得合法会话。
-  
-  ![images\session fixation](images\session fixation.webp)
+
+![Otfz9LcdeYagTFm](https://i.loli.net/2019/10/31/Otfz9LcdeYagTFm.jpg)
 
 ##### 攻击者重置SessionID的方式：
 
