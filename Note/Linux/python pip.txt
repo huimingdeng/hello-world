@@ -1,0 +1,9 @@
+
+linux upgrade pip error:
+	use command:  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;python get-pip.py
+	pip miss path, use command:
+		which pip
+		pip -> show bash: xxxx
+		type(pip)
+		hash -r
+		
