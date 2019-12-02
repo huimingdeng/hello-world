@@ -1,0 +1,2 @@
+切换安装源，临时
+	python -m pip install --index-url https://pypi.tuna.tsinghua.edu.cn/simple <module>
