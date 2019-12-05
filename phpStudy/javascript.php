@@ -15,7 +15,7 @@ $createTime = date('Y-m-d',filectime($filename));?>
 		<?php foreach($file_arr as $k=>$v){ 
 			if(preg_match('/\d+/',$v,$m)){ $arr_js[$m[0]]=$v; }
 		}
-		for($i=1;$i<=count($arr_js);$i++){
+		for($i=1;$i<count($arr_js);$i++){
 		?>
 		<li>
 			<a href="<?php echo 'javascript/'.$arr_js[$i];?>" target="_blank"><?php echo $arr_js[$i];?></a>
