@@ -12,7 +12,7 @@
 | ------- | ------------------------------------------------------------------------------ |
 | string1 | 必需。规定要比较的第一个字符串。                                                               |
 | string2 | 必需。规定要比较的第二个字符串。                                                               |
-| 返回值     | 0 - 如果两个字符串相等<br/>< 0 - 如果 string1 小于 string2 <br/>> 0 - 如果 string1 大于 string2 |
+| 返回值     | 0 - 如果两个字符串相等<br/>< 0 - 如果 string1 小于 string2 <br/>> 0 - 如果 string1 大于 string2 |
 | PHP 版本  | 4+                                                                             |
 
 ```php
@@ -40,8 +40,6 @@
 | string2 | 必需。规定要比较的第二个字符串。                                                             |
 | 返回值     | 0 - 如果两个字符串相等 <br/><0 - 如果 string1 小于 string2<br/>>0 - 如果 string1 大于 string2 |
 | PHP版本   | 4+                                                                           |
-
-
 
 ### 面向对象链式操作
 
@@ -81,13 +79,13 @@ mail($to, $subject, $message, $headers);
 | `query_data`     | 必需。可以是数组或包含属性的对象.<br/>一个 `query_data` 数组可以是简单的一维结构，也可以是由数组组成的数组（其依次可以包含其它数组）<br/>如果 `query_data` 是一个对象，只有 public 的属性会加入结果。 |
 | `numeric_prefix` | 可选。如果在基础数组中使用了数字下标同时给出了该参数，此参数值将会作为基础数组中的数字下标元素的前缀。<br/>这是为了让 PHP 或其它 CGI 程序在稍后对数据进行解码时获取合法的变量名。                           |
 | `arg_separator`  | 可选。除非指定并使用了这个参数，否则会用 arg_separator.output 来分隔参数。since `5.1.2`                                                              |
-| `enc_type`       | 可选。默认使用 `PHP_QUERY_RFC1738`.  since `5.4.0`                                                                                |
+| `enc_type`       | 可选。默认使用 `PHP_QUERY_RFC1738`.  since `5.4.0`                                                                                |
 | 返回值              | 返回一个 URL 编码后的字符串                                                                                                           |
 
 ```php
 $post_data = array(        
-	'secret' => '6Le0ucgUAAAAAGmfMlKy5dO-ScdXhuQ1j96u3NJM',        
-	'response' => date("Y-m-d H:i:s", time())
+    'secret' => 'your_website_key',        
+    'response' => date("Y-m-d H:i:s", time())
 );
 
 $postdata = http_build_query($post_data);
@@ -115,6 +113,41 @@ eg. return string 'secret=6Le0ucgUAAAAAGmfMlKy5dO-ScdXhuQ1j96u3NJM&response=2019
 
 #### [file_get_contents](https://www.php.net/manual/zh/function.file-get-contents) 函数
 
+```php
+file_get_contents( string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]] ) : string
+```
 
+将整个文件读入一个字符串
+
+| 参数                 | 描述                                                                                                                                                                                                                                                         |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filename`         | 要读取的文件的名称                                                                                                                                                                                                                                                  |
+| `use_include_path` | `Note: As of PHP 5 the FILE_USE_INCLUDE_PATH can be used to trigger include path search.`                                                                                                                                                                  |
+| `context`          | A valid context resource created with [**`stream_context_create()`**](#stream_context_create). 如果你不需要自定义 **`context`**，可以用 NULL 来忽略                                                                                                                        |
+| `offset`           | The offset where the reading starts on the original stream.<br/>Seeking (offset) is not supported with remote files. Attempting to seek on non-local files may work with small offsets, but this is unpredictable because it works on the buffered stream. |
+| `maxlen`           | Maximum length of data read. The default is to read until end of file is reached. Note that this parameter is applied to the stream processed by the filters.                                                                                              |
+| 返回值                | The function returns the read data 或者在失败时返回 FALSE.                                                                                                                                                                                                         |
+
+For example:
+
+```php
+$url = 'https://www.google.com/recaptcha/api/siteverify';
+$post_data = [
+    'secret' => 'your_website_key',
+    'response' => 'your_reCaptcha_response_token'
+];
+$postdata = http_build_query($post_data);
+$options = [
+    'http' => [
+        'method' => 'POST',
+        'header' => 'Content-type:application/x-www-form-urlencoded',
+        'content' => $postdata,
+        'timeout' => 30 // unit second
+    ]
+];
+$context = stream_context_crreate($options);
+$result = file_get_contents($url, false, $context);
+return $result;
+```
 
 
