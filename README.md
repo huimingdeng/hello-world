@@ -50,3 +50,33 @@ php 日常使用函数和案例，进入 [php-doc](https://github.com/huimingden
 
 
 P.S. Markdown Pad2 在 Windows10 无法渲染问题，国外镜像下载：`To fix this issue, please try installing the Awesomium 1.6.6 SDK.`
+
+
+### 同一台机器如何配置多个GitHub账号
+参考 [Tom-php/python](https://github.com/tom-php/python)
+
+#### 第一步：创建新的 SSH key
+
+```bash
+sshkey -t rsa -b 4096 -C "your_email@host.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/your_name  //eg. Tom-php
+// Test
+ssh -T git@github.com
+```
+
+#### 第二步：配置config文件
+在 `~/.ssh/` 目录下创建 `config` 文件，写入如下信息：
+
+```bash
+Host	your_host_alias
+HostName	github.com
+User	git
+IdentityFile	~/.ssh/your_ssh_private_key_file
+```
+
+#### 第三步：修改仓库远程的源地址
+```bash
+git remote set-url origin your_host_alias:your_github_username/your_repository.git
+```
+
