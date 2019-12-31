@@ -1,0 +1,1 @@
+for i in `grep "^>GC" result.txt` ; do line=`grep -A7 $i result.txt | tail -1` ; n=`echo $line | awk -F"," '{print NF}'` ; for d in `seq 1 $n` ;do c=`echo $line | cut -d"," -f$d|sed 's/%pred NB(0): //g'` ; echo -e "$i\t$c" ;done ; done
