@@ -1,0 +1,488 @@
+<!DOCTYPE html><html><head>
+      <title>Centos6&#x5347;&#x7EA7;mysql5.1.73&#x5230;mysql5.7.23</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\CRAB\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.3\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="centos6%E5%8D%87%E7%BA%A7mysql5173%E5%88%B0mysql5723">Centos6&#x5347;&#x7EA7;mysql5.1.73&#x5230;mysql5.7.23</h1>
+
+<p>centos6&#x5B89;&#x88C5;mysql5.1.73</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment"># CentOS release 6.10 (Final)</span>
+<span class="token comment"># mysql Server version 5.1.73</span>
+
+<span class="token comment"># &#x5B89;&#x88C5;</span>
+yum <span class="token function">install</span> -y mysql-server.x86_64
+
+<span class="token comment"># &#x542F;&#x52A8;</span>
+<span class="token function">service</span> mysqld start
+
+<span class="token comment"># &#x8BBE;&#x7F6E;mysql&#x5F00;&#x673A;&#x81EA;&#x542F;</span>
+<span class="token comment"># chkconfig --list | grep mysqld</span>
+<span class="token comment"># chkconfig mysqld on</span>
+
+<span class="token comment"># root&#x6DFB;&#x52A0;&#x5BC6;&#x7801;</span>
+/usr/bin/mysqladmin -u root password <span class="token string">&apos;root&apos;</span>
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x5E93;</span>
+mysql -u root -p -e <span class="token string">&apos;create database genec1&apos;</span><span class="token punctuation">;</span>
+
+<span class="token comment"># &#x5BFC;&#x5165;&#x6D4B;&#x8BD5;&#x6570;&#x636E;</span>
+mysql -u root -p genec1 <span class="token operator">&lt;</span>/data/_glz_Mus_gene.sql
+</pre><p>&#x5347;&#x7EA7;&#x5230;5.5</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment"># &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x73AF;&#x5883;</span>
+yum <span class="token function">install</span> -y epel-release
+<span class="token comment"># rpm -ivh https://dl.iuscommunity.org/pub/ius/stable/CentOS/6/x86_64/ius-release-1.0-15.ius.centos6.noarch.rpm</span>
+<span class="token function">rpm</span> -ivh https://repo.ius.io/ius-release-el6.rpm
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x5907;&#x4EFD;&#x8DEF;&#x5F84;</span>
+<span class="token function">mkdir</span> -p /data/mysqlupgrade/mysql51
+
+<span class="token comment"># &#x8DF3;&#x8FC7;&#x6743;&#x9650;&#x9A8C;&#x8BC1;</span>
+<span class="token function">cat</span> <span class="token operator">&gt;&gt;</span> /etc/my.cnf <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+[client]
+user=root
+password=root
+EOF</span>
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">cp</span> /etc/my.cnf /data/mysqlupgrade/mysql51/mysql-5.1.cnf.orig
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x6570;&#x636E;&#x5E93;,&#x7528;&#x6237;</span>
+mysql -e <span class="token string">&apos;show databases;&apos;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql51/mysql-5.1.databases
+mysql --silent --skip-column-names --execute <span class="token string">&quot;select concat(&apos;\&apos;&apos;,User,&apos;\&apos;@\&apos;&apos;,Host,&apos;\&apos;&apos;) as User from mysql.user;&quot;</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token function">read</span> u<span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token keyword">echo</span> <span class="token string">&quot;-- <span class="token variable">$u</span>&quot;</span><span class="token punctuation">;</span> mysql --silent --skip-column-names --execute <span class="token string">&quot;show grants for <span class="token variable">$u</span>&quot;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;s/$/;/&apos;</span><span class="token punctuation">;</span> <span class="token keyword">done</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql51/mysql-5.1.grants
+
+<span class="token comment"># &#x5BFC;&#x51FA;&#x6240;&#x6709;&#x6570;&#x636E;</span>
+yum <span class="token function">install</span> -y xz
+mysqldump --routines --all-databases <span class="token operator">|</span> xz <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql51/mysql-5.1.dump.sql.xz
+<span class="token comment"># -- Warning: Skipping the data of table mysql.event. Specify the --events option explicitly.</span>
+<span class="token comment"># &#x662F;&#x5426;&#x5907;&#x4EFD;&#x4E8B;&#x4EF6;&#x8868; --events</span>
+
+<span class="token comment"># &#x505C;&#x6B62;mysql</span>
+<span class="token function">service</span> mysqld stop
+
+<span class="token comment"># &#x5347;&#x7EA7;&#x5230;5.5</span>
+yum remove -y remove mysql mysql-server mysql-libs
+yum <span class="token function">install</span> -y mysql55 mysql55-server mysql55-libs mysqlclient16
+
+<span class="token comment"># dbsake,&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+yum -y <span class="token function">install</span> <span class="token function">wget</span>
+<span class="token function">wget</span> -O /data/mysqlupgrade/dbsake http://get.dbsake.net
+<span class="token function">chmod</span> u+x /data/mysqlupgrade/dbsake
+/data/mysqlupgrade/dbsake upgrade-mycnf --config /data/mysqlupgrade/mysql51/mysql-5.1.cnf.orig --target 5.5<span class="token operator">&gt;</span> /data/mysqlupgrade/mysql-5.5.cnf
+<span class="token function">mv</span> -f /data/mysqlupgrade/mysql-5.5.cnf /etc/my.cnf
+
+<span class="token comment"># &#x8DF3;&#x8FC7;&#x6743;&#x9650;&#x9A8C;&#x8BC1;,&#x67E5;&#x770B;&#x7248;&#x672C;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;s/\[mysqld\]/[mysqld]\nskip-grant-tables\nskip-networking/&apos;</span> /etc/my.cnf
+<span class="token function">service</span> mysqld start
+mysql -sse <span class="token string">&quot;select @@version;&quot;</span>
+
+<span class="token comment"># &#x5BF9;&#x6BD4;</span>
+mysql -e <span class="token string">&quot;show databases;&quot;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql51/mysql-5.5.databases
+<span class="token function">diff</span> -U0 /data/mysqlupgrade/mysql51/mysql-5.1.databases /data/mysqlupgrade/mysql51/mysql-5.5.databases
+
+<span class="token comment"># &#x66F4;&#x65B0;database schema</span>
+mysql_upgrade
+
+<span class="token comment"># &#x68C0;&#x67E5;&#x8868;,&#x6240;&#x6709;&#x90FD;OK</span>
+mysqlcheck -A
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x6743;&#x9650;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/\(skip-grant-tables\|skip-networking\)/d&apos;</span> /etc/my.cnf
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x9A8C;&#x8BC1;</span>
+mysqladmin -uroot -p version
+</pre><p>&#x5347;&#x7EA7;&#x5230;5.6</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment"># &#x521B;&#x5EFA;&#x5907;&#x4EFD;&#x8DEF;&#x5F84;</span>
+<span class="token function">mkdir</span> -p /data/mysqlupgrade/mysql55
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">cp</span> /etc/my.cnf /data/mysqlupgrade/mysql55/mysql-5.5.cnf.orig
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x6570;&#x636E;&#x5E93;,&#x7528;&#x6237;</span>
+mysql -e <span class="token string">&apos;show databases;&apos;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql55/mysql-5.5.databases
+mysql --silent --skip-column-names --execute <span class="token string">&quot;select concat(&apos;\&apos;&apos;,User,&apos;\&apos;@\&apos;&apos;,Host,&apos;\&apos;&apos;) as User from mysql.user;&quot;</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token function">read</span> u<span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token keyword">echo</span> <span class="token string">&quot;-- <span class="token variable">$u</span>&quot;</span><span class="token punctuation">;</span> mysql --silent --skip-column-names --execute <span class="token string">&quot;show grants for <span class="token variable">$u</span>&quot;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;s/$/;/&apos;</span><span class="token punctuation">;</span> <span class="token keyword">done</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql55/mysql-5.5.grants
+
+<span class="token comment"># &#x5BFC;&#x51FA;&#x6240;&#x6709;&#x6570;&#x636E;</span>
+mysqldump --routines --all-databases <span class="token operator">|</span> xz <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql55/mysql-5.5.dump.sql.xz
+<span class="token comment"># -- Warning: Skipping the data of table mysql.event. Specify the --events option explicitly.</span>
+<span class="token comment"># &#x662F;&#x5426;&#x5907;&#x4EFD;&#x4E8B;&#x4EF6;&#x8868; --events</span>
+
+<span class="token comment"># &#x505C;&#x6B62;mysql</span>
+<span class="token function">service</span> mysqld stop
+
+<span class="token comment"># &#x5347;&#x7EA7;&#x5230;5.6</span>
+yum remove -y mysql55-common-5.5.61-2.ius.el6.x86_64
+<span class="token comment"># yum remove -y mysql55 mysql55-server mysql55-libs</span>
+<span class="token comment"># rpm -qa|grep mysql</span>
+<span class="token comment"># yum remove -y  mysqlclient16-5.1.61-4.ius.el6.x86_64</span>
+yum <span class="token function">install</span> -y mysql56u mysql56u-server mysql56u-libs mysqlclient16
+
+<span class="token comment"># dbsake,&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">wget</span> -O /data/mysqlupgrade/dbsake http://get.dbsake.net
+<span class="token function">chmod</span> u+x /data/mysqlupgrade/dbsake
+/data/mysqlupgrade/dbsake upgrade-mycnf --config /data/mysqlupgrade/mysql55/mysql-5.5.cnf.orig --target 5.6<span class="token operator">&gt;</span> /data/mysqlupgrade/mysql-5.6.cnf
+<span class="token function">mv</span> -f /data/mysqlupgrade/mysql-5.6.cnf /etc/my.cnf
+
+<span class="token comment"># &#x8DF3;&#x8FC7;&#x6743;&#x9650;&#x9A8C;&#x8BC1;,&#x67E5;&#x770B;&#x7248;&#x672C;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;s/\[mysqld\]/[mysqld]\nskip-grant-tables\nskip-networking/&apos;</span> /etc/my.cnf
+<span class="token function">service</span> mysqld start
+mysql -sse <span class="token string">&quot;select @@version&quot;</span>
+mysql -e <span class="token string">&quot;show databases;&quot;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql55/mysql-5.6.databases
+<span class="token function">diff</span> -U0 /data/mysqlupgrade/mysql55/mysql-5.5.databases /data/mysqlupgrade/mysql55/mysql-5.6.databases
+
+<span class="token comment"># &#x66F4;&#x65B0;database schema</span>
+mysql_upgrade
+
+<span class="token comment"># &#x68C0;&#x67E5;&#x8868;,&#x6240;&#x6709;&#x90FD;OK</span>
+mysqlcheck -A
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x6743;&#x9650;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/\(skip-grant-tables\|skip-networking\)/d&apos;</span> /etc/my.cnf
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x9A8C;&#x8BC1;</span>
+mysqladmin -uroot -p version
+</pre><p>&#x5347;&#x7EA7;&#x5230;5.7</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment"># &#x521B;&#x5EFA;&#x5907;&#x4EFD;&#x8DEF;&#x5F84;</span>
+<span class="token function">mkdir</span> -p /data/mysqlupgrade/mysql56
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">cp</span> /etc/my.cnf /data/mysqlupgrade/mysql56/mysql-5.6.cnf.orig
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x5907;&#x4EFD;&#x6570;&#x636E;&#x5E93;,&#x7528;&#x6237;</span>
+mysql -e <span class="token string">&apos;show databases;&apos;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql56/mysql-5.6.databases
+mysql --silent --skip-column-names --execute <span class="token string">&quot;select concat(&apos;\&apos;&apos;,User,&apos;\&apos;@\&apos;&apos;,Host,&apos;\&apos;&apos;) as User from mysql.user;&quot;</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token function">read</span> u<span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token keyword">echo</span> <span class="token string">&quot;-- <span class="token variable">$u</span>&quot;</span><span class="token punctuation">;</span> mysql --silent --skip-column-names --execute <span class="token string">&quot;show grants for <span class="token variable">$u</span>&quot;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;s/$/;/&apos;</span><span class="token punctuation">;</span> <span class="token keyword">done</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql56/mysql-5.6.grants
+
+<span class="token comment"># &#x5BFC;&#x51FA;&#x6240;&#x6709;&#x6570;&#x636E;</span>
+mysqldump --routines --all-databases <span class="token operator">|</span> xz <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql56/mysql-5.6.dump.sql.xz
+<span class="token comment"># -- Warning: Skipping the data of table mysql.event. Specify the --events option explicitly.</span>
+<span class="token comment"># &#x662F;&#x5426;&#x5907;&#x4EFD;&#x4E8B;&#x4EF6;&#x8868; --events</span>
+
+<span class="token comment"># &#x505C;&#x6B62;mysql</span>
+<span class="token function">service</span> mysqld stop
+
+<span class="token comment"># &#x5347;&#x7EA7;&#x5230;5.7</span>
+yum remove -y  mysql56u mysql56u-server mysql56u-libs mysql56u-common
+<span class="token function">rpm</span> -qa<span class="token operator">|</span><span class="token function">grep</span> mysql
+yum <span class="token function">install</span> -y mysql57u mysql57u-server mysql57u-libs mysqlclient16
+
+<span class="token comment"># dbsake,&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">wget</span> -O /data/mysqlupgrade/dbsake http://get.dbsake.net
+<span class="token function">chmod</span> u+x /data/mysqlupgrade/dbsake
+/data/mysqlupgrade/dbsake upgrade-mycnf --config /data/mysqlupgrade/mysql56/mysql-5.6.cnf.orig --target 5.7<span class="token operator">&gt;</span> /data/mysqlupgrade/mysql-5.7.cnf
+<span class="token function">mv</span> -f /data/mysqlupgrade/mysql-5.7.cnf /etc/my.cnf
+
+<span class="token comment"># &#x8DF3;&#x8FC7;&#x6743;&#x9650;&#x9A8C;&#x8BC1;,&#x67E5;&#x770B;&#x7248;&#x672C;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;s/\[mysqld\]/[mysqld]\nskip-grant-tables\nskip-networking/&apos;</span> /etc/my.cnf
+<span class="token function">service</span> mysqld start
+mysql -sse <span class="token string">&quot;select @@version&quot;</span>
+mysql -e <span class="token string">&quot;show databases;&quot;</span> <span class="token operator">&gt;</span> /data/mysqlupgrade/mysql56/mysql-5.7.databases
+<span class="token function">diff</span> -U0 /data/mysqlupgrade/mysql56/mysql-5.6.databases /data/mysqlupgrade/mysql56/mysql-5.7.databases
+
+<span class="token comment"># &#x66F4;&#x65B0;database schema,&#x62A5;&#x9519;&#x5219;&#x4FEE;&#x590D;&#x540E;&#x91CD;&#x65B0;&#x8FD0;&#x884C;</span>
+mysql_upgrade
+<span class="token comment"># error    : Table upgrade required. Please do &quot;REPAIR TABLE `_glz_Mus_gene`&quot; or dump/reload to fix it!</span>
+<span class="token comment"># sys.sys_config                                     OK</span>
+<span class="token comment"># Repairing tables</span>
+<span class="token comment"># genec1._glz_Mus_gene</span>
+
+<span class="token comment"># &#x68C0;&#x67E5;&#x8868;,&#x6240;&#x6709;&#x90FD;OK</span>
+mysqlcheck -A
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x6743;&#x9650;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/\(skip-grant-tables\|skip-networking\|user=root\|password=root\)/d&apos;</span> /etc/my.cnf
+
+<span class="token comment"># &#x6CE8;&#x610F;&#x4E00;&#x5F00;&#x59CB;&#x6DFB;&#x52A0;&#x8FDB;&#x53BB;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;user,passowrd&#x8981;&#x5220;&#x9664;</span>
+
+<span class="token comment"># &#x91CD;&#x542F;</span>
+<span class="token function">service</span> mysqld restart
+
+<span class="token comment"># &#x9A8C;&#x8BC1;</span>
+mysqladmin -uroot -p version
+</pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
