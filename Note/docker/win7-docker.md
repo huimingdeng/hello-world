@@ -19,7 +19,15 @@ $ docker-machine.exe ls # 没找到default
 NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
 ```
 
-是因为安装的 `docker-quickstart-terminal` 启动快捷方式无效，需要手动设置
+是因为安装的 `docker-quickstart-terminal` 启动快捷方式无效，需要手动设置（因为已经安装过 git, 所以安装 `docker` 没有勾选，这里可以修改快捷方式启动）
+
+### modified quick start icon
+
+例如，我的 `GIT` 安装在 `E:\software\Git` 因此，修改 `E:\software\Git\bin\` 替换掉 `C:\Program Files\Git\bin\`
+
+![修改快捷方式](images\Docker Quickstart Terminal-l.png)
+
+### created `default`
 
 1. 执行命令 `docker-machine env default` 如果提示没有 `default` 在需要手动创建
 
