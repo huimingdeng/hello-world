@@ -132,10 +132,54 @@ P.S. Linux  <EOT>：文本终结， 用 `CTRL+D` 键输入。
 
 ### Crontab 使用教程
 
-命令规则编写可使用工具： [crontab 在线工具](https://www.pppet.net/ "在线Cron表达式生成器")
+命令规则编写可使用工具： [crontab 在线工具](https://www.pppet.net/ "在线Cron表达式生成器") P.S. 这是Java的crontab和Linux存在差异，最好还是用 `man crontab` 查看用法。
 
 #### Cron 和 Crontab 区别
 
 Cron Linux系统内置系统进程。
 
 Crontab Cron的配置文件，作业列表；在作业列表设定计划实现任务。
+
+#### 定时任务同步文件，rsync不开启daemon
+
+因为远程服务器rsync没有配置daemon 所以，使用 expect + spawn 模式，模拟用户交互同步文件。
+
+使用 `--dry-run` 进行测试, `rsync_test.sh`，正式使用则去除 `--dry-run` 参数
+
+```shell
+#!/bin/sh
+
+password='YOUR_PASSWORD'
+
+/usr/bin/expect <<-EOF
+set timeout -1
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file1 REMOTE_USER@HOST:/home/REMOTE_USER/file1
+expect "*?assword:*"
+send -- "$password\r"
+send -- "\r"
+expect eof
+EOF
+
+/usr/bin/expect <<-EOF
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file2 REMOTE_USER@HOST:/home/REMOTE_USER/file2
+expect "*?assword:*"
+send -- "$password\r"
+send -- "\r"
+expect eof
+EOF
+
+/usr/bin/expect <<-EOF
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file3 REMOTE_USER@HOST:/home/REMOTE_USER/file3
+expect "*?assword:*"
+send -- "$password\r"
+send -- "\r"
+expect eof
+EOF
+```
+
+`crontab -e`
+
+```shell
+0 13 1 1 * /home/LOCAL_USER/rsync_test.sh # 1月1日13时0分同步 , + 13 times zone, US, Washington, local CST
+```
+
