@@ -153,7 +153,7 @@ password='YOUR_PASSWORD'
 
 /usr/bin/expect <<-EOF
 set timeout -1
-spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file1 REMOTE_USER@HOST:/home/REMOTE_USER/file1
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  REMOTE_USER@HOST:/home/LOCAL_USER/file1 REMOTE_USER@HOST:/home/REMOTE_USER/file1
 expect "*?assword:*"
 send -- "$password\r"
 send -- "\r"
@@ -161,7 +161,7 @@ expect eof
 EOF
 
 /usr/bin/expect <<-EOF
-spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file2 REMOTE_USER@HOST:/home/REMOTE_USER/file2
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  REMOTE_USER@HOST:/home/LOCAL_USER/file2 REMOTE_USER@HOST:/home/REMOTE_USER/file2
 expect "*?assword:*"
 send -- "$password\r"
 send -- "\r"
@@ -169,7 +169,7 @@ expect eof
 EOF
 
 /usr/bin/expect <<-EOF
-spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  /home/LOCAL_USER/file3 REMOTE_USER@HOST:/home/REMOTE_USER/file3
+spawn rsync -avze ssh --dry-run --delete -c --exclude=uploads/*  REMOTE_USER@HOST:/home/LOCAL_USER/file3 REMOTE_USER@HOST:/home/REMOTE_USER/file3
 expect "*?assword:*"
 send -- "$password\r"
 send -- "\r"
