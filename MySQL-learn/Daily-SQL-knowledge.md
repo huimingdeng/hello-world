@@ -98,3 +98,27 @@ ORDER BY
     cat_no,
     `date`
 ```
+
+创建函数，过滤HTML标签:
+
+
+```mysql
+CREATE DEFINER=`genec1`@`localhost` FUNCTION `RemoveH5v2`(`str` text) RETURNS text CHARSET utf8
+BEGIN
+	#Routine body goes here...
+	DECLARE isStart, isEnd, isLength INT;
+	WHILE LOCATE('<',str) > 0 AND LOCATE('>', str, LOCATE('<', str)) > 0 DO
+	BEGIN
+		SET isStart = LOCATE('<', str), isEnd = LOCATE('>',str,LOCATE('<', str));
+		SET isLength = (isEnd - isStart) + 1;
+		IF isLength > 0 THEN
+			BEGIN
+				SET str = INSERT(str, isStart, isLength, '');
+			END;
+		END IF;
+	END;
+	END WHILE;
+	RETURN str;
+END
+```
+
