@@ -47,7 +47,7 @@ body {
 	box-sizing: border-box;
 	overflow: hidden;
 }
-/*https://www.zhihu.com/people/luo-wen-zhou-92/zvideos*/
+
 .tea {
 	position: absolute;
 	top: 20px;
@@ -73,6 +73,8 @@ body {
 
 .plate {
 	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 	bottom: -50px;
 	width: 500px;
 	height: 200px;
