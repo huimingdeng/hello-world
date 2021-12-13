@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>八卦阴阳绘制测试</title>
+	<style type="text/css">
+		* {
+			margin: 0; padding: 0; box-sizing: border-box;
+		}
+		body {background: #607d8b; justify-content: center; align-items: center; width: 100%}
+		:root{
+			--h: 12px; /* 阳爻的高度 */
+			--v: 10px;  /* 阴爻的高度 */
+			--s: 16px; /* 阴爻宽度 :before,:after */
+			--w: 40px; /* 阳爻的宽度 */
+			--c: 300px; /* 圆直径 */
+		}
+		.container {		}
+		.glance {
+			display: block;
+			clear: both;
+			width: 100%;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.gua-body {
+			width: 100%;
+			clear: both;
+			overflow: hidden;
+			justify-content: center;
+			text-align: center;
+		}
+		.base {
+			width: var(--w);
+			/*position: relative;*/
+			margin-right: var(--h);
+			display: inline-block;
+			position: absolute;
+			/*display: flex;*/
+		}
+		.overlook {
+			width: var(--w);
+			position: relative;
+			margin-right: var(--h);
+			display: inline-block;
+		}
+		.base span {
+			width: var(--w);
+			height: var(--h);
+			border: 1px solid orange;
+			display: inline-block;
+			padding: 0;
+			box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
+			z-index: 100;
+		}
+		.overlook span {
+			width: var(--w);
+			height: var(--h);
+			border: 1px solid orange;
+			display: inline-block;
+			padding: 0;
+			box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
+		}
+		.overlook span.active, .base span.active {
+			border: none;
+			padding: 0;
+			box-shadow: none;
+		}
+		.overlook span.active:before , .base span.active:before, .overlook span.active:after, .base span.active:after {
+			width: var(--s);
+			height: var(--v);
+			display: inline-block;
+			content: '';
+			background: #000;
+			position: absolute;
+			border: 1px solid orange;
+			box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
+		}
+		.overlook span.active:before , .base span.active:before {
+			left: 0;
+		}
+		.overlook span.active:after, .base span.active:after {
+			right: 0;
+		}
+		.overlook p, .base p { display:flex; justify-content:center; align-items:center; font-size: 0.12em; color: orange;}
+
+		.circle {
+			width: var(--c);
+			height: var(--c);
+			margin: 100px auto;
+			border-left: calc(var(--c)/2) solid white;
+            border-right: calc(var(--c)/2) solid black;
+			border-radius: 50%;
+			position: relative;
+			/*transform: rotate(315deg);*/
+		}
+
+		.innate {
+			animation: innate 20s linear infinite;}
+		.acquired {
+			animation: acquired 20s linear infinite;}
+
+		.circle:before {
+			content: '';
+            display: block;
+            width: calc(var(--c)/6);
+            height: calc(var(--c)/6);
+            border: calc(var(--c)/6) solid white;
+            background: black;
+            border-radius: 100%;
+            margin-left: calc(var(--c)/4 * -1);
+		}
+		.circle:after {
+			content: '';
+            display: block;
+            width: calc(var(--c)/6);
+            height: calc(var(--c)/6);
+            border: calc(var(--c)/6) solid black;
+            background: white;
+            border-radius: 100%;
+            margin-left: calc(var(--c)/4 * -1);
+		}
+
+		.circle:hover {
+			animation-play-state: 'paused';
+		}
+
+		/*innate*/
+
+		.circle.innate .qian, .circle.innate .qian span {
+			transform:rotate(0deg);
+			top: -80px;
+			right: -20px;
+			margin: 0 auto;
+		}
+		.circle.innate .kun {
+			transform:rotate(180deg);
+			bottom: -80px;
+			right: -20px;
+			margin: 0 auto;
+		}
+		.circle.innate .li {
+			transform:rotate(-90deg);
+			/*right: 175px;
+			top: 105px; /*35%*/
+			right: calc(calc(var(--c) + 40px)/2);
+			bottom: calc(calc(var(--c) - 60px)/2);
+			margin: 0 auto;
+		}
+		.circle.innate .kan {
+			transform:rotate(90deg);
+			/*left: 170px;
+			top: 105px;*/
+			left: calc(calc(var(--c) + 40px)/2);
+			bottom: calc(calc(var(--c) - 60px)/2);
+			margin: 0 auto;
+		}
+		.circle.innate .dui {
+			transform: rotate(-45deg);
+			/*top: -25px;
+			right: 105px;*/
+			left: calc(calc(var(--c))/2 *-1);
+			top: calc(calc(var(--c))/12 * -1);
+		}
+		.circle.innate .zhen {
+			transform: rotate(-135deg);
+			bottom: -25px;
+			right: 105px;
+		}
+		.circle.innate .xun {
+			transform: rotate(45deg);
+			/*top: -20px;
+			left: 120px;*/
+			right: calc(calc(var(--c))/2 *-1);
+			bottom: calc(calc(var(--c))/12);
+		}
+		.circle.innate .gen {
+			transform: rotate(135deg);
+			bottom: -25px;
+			left: 115px;
+		}
+
+		/*acquired*/
+
+		.circle.acquired .li, .circle.acquired .li span {
+			transform:rotate(0deg);
+			top: -80px;
+			right: -20px;
+			margin: 0 auto;
+		}
+		.circle.acquired .kan {
+			transform:rotate(180deg);
+			bottom: -80px;
+			right: -20px;
+			margin: 0 auto;
+		}
+		.circle.acquired .zhen {
+			transform:rotate(-90deg);
+			right: calc(calc(var(--c) + 40px)/2);
+			bottom: calc(calc(var(--c) - 60px)/2);
+			margin: 0 auto;
+		}
+		.circle.acquired .dui {
+			transform:rotate(90deg);
+			left: calc(calc(var(--c) + 40px)/2);
+			bottom: calc(calc(var(--c) - 60px)/2);
+			margin: 0 auto;
+		}
+		.circle.acquired .xun {
+			transform: rotate(-45deg);
+			top: -25px;
+			right: 105px;
+		}
+		.circle.acquired .gen {
+			transform: rotate(-135deg);
+			bottom: -25px;
+			right: 105px;
+		}
+		.circle.acquired .kun {
+			transform: rotate(45deg);
+			top: -20px;
+			left: 120px;
+		}
+		.circle.acquired .qian {
+			transform: rotate(135deg);
+			bottom: -25px;
+			left: 115px;
+		}
+
+		.qian span, .qian span.active:before, .qian span.active:after {
+			background: linear-gradient(to right, orange, white, orange);
+		}
+		.dui span, .dui span.active:before, .dui span.active:after {
+			background: gray;
+		}
+		.li span, .li span.active:before, .li span.active:after {
+			background: red;
+		}
+		.zhen span, .zhen span.active:before, .zhen span.active:after {
+			background: green;
+		}
+		.xun span, .xun span.active:before, .xun span.active:after {
+			background: greenyellow;
+		}
+		.kan span, .kan span.active:before, .kan span.active:after {
+			background: blue;
+		}
+		.gen span, .gen span.active:before, .gen span.active:after {
+			background: yellow;
+		}
+		.kun span, .kun span.active:before, .kun span.active:after {
+			background: black;
+		}
+		span.active {
+			background: transparent;
+		}
+
+		/*@keyframes innate {
+			from { transform:rotate(0deg); }
+			to { transform:rotate(360deg); }
+		}
+		@keyframes acquired {
+			from { transform:rotate(360deg); }
+			to { transform:rotate(0deg); }
+		}*/
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="circle innate">
+			<div class="base qian">
+				<span class="" ></span>
+				<span class="" ></span>
+				<span class="" ></span>
+				<p>乾天</p>
+			</div>
+			<div class="base dui">
+				<span class="active" ></span>
+				<span class="" ></span>
+				<span class="" ></span>
+				<p>兑泽</p>
+			</div>
+			<div class="base li">
+				<span class="" ></span>
+				<span class="active" ></span>
+				<span class="" ></span>
+				<p>离火</p>
+			</div>
+			<div class="base zhen">
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<span class="" ></span>
+				<p>震雷</p>
+			</div>
+			<!-- <div class="circle">
+				
+			</div> -->
+			<div class="base xun">
+				<span class="" ></span>
+				<span class="" ></span>
+				<span class="active" ></span>
+				<p>巽风</p>
+			</div>
+			<div class="base kan">
+				<span class="active" ></span>
+				<span class="" ></span>
+				<span class="active" ></span>
+				<p>坎水</p>
+			</div>
+			<div class="base gen">
+				<span class="" ></span>
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<p>艮山</p>
+			</div>
+			<div class="base kun">
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<p>坤地</p>
+			</div>
+		</div>
+		<div class="circle acquired">
+			<div class="base qian">
+				<span class="" ></span>
+				<span class="" ></span>
+				<span class="" ></span>
+				<p>乾天</p>
+			</div>
+			<div class="base dui">
+				<span class="active" ></span>
+				<span class="" ></span>
+				<span class="" ></span>
+				<p>兑泽</p>
+			</div>
+			<div class="base li">
+				<span class="" ></span>
+				<span class="active" ></span>
+				<span class="" ></span>
+				<p>离火</p>
+			</div>
+			<div class="base zhen">
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<span class="" ></span>
+				<p>震雷</p>
+			</div>
+			<div class="base xun">
+				<span class="" ></span>
+				<span class="" ></span>
+				<span class="active" ></span>
+				<p>巽风</p>
+			</div>
+			<div class="base kan">
+				<span class="active" ></span>
+				<span class="" ></span>
+				<span class="active" ></span>
+				<p>坎水</p>
+			</div>
+			<div class="base gen">
+				<span class="" ></span>
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<p>艮山</p>
+			</div>
+			<div class="base kun">
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<span class="active" ></span>
+				<p>坤地</p>
+			</div>
+		</div>
+		<div class="gua-body">
+			<div class="overlook">
+				<div class="outside xun">
+					<span ></span>
+					<span ></span>
+					<span class="active" ></span>
+				</div>
+				<div class="inside">
+					<span class="active" ></span>
+					<span class="active" ></span>
+					<span class="active" ></span>
+				</div>
+				<p>观</p>
+			</div>
+			<div class="overlook">
+				<div class="outside">
+					<span class="active" ></span>
+					<span class="active" ></span>
+					<span class="active" ></span>
+				</div>
+				<div class="inside xun">
+					<span ></span>
+					<span ></span>
+					<span class="active" ></span>
+				</div>
+				<p>升</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
