@@ -1,6 +1,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #607d8b; justify-content: center; align-items: center; width: 100%; font-size: 62.5%; /* default font-size = 16px, so: 16px * 62.5% = 10px, 12px = 1.2em, 10px = 1em */ }
-:root { --h: 1.2em; /* 阳爻的高度 */ --v: 1em;  /* 阴爻的高度 */ --s: 1.6em; /* 阴爻宽度 :before,:after */ --w: 4em; /* 阳爻的宽度 */ --c: 30em; /* 圆直径 */ --m: 10em; /* 外边距 */ }
+:root { --h: 1.2em; /* 阳爻的高度 */ --v: 1em;  /* 阴爻的高度 */ --s: 1.6em; /* 阴爻宽度 :before,:after */ --w: 4em; /* 阳爻的宽度 */ --c: 30em; /* 圆直径 */ --m: 10em; /* 外边距 */ --clr: #000; --mc: 2.45em; }
 .container { width: 100%; clear: both; }
 
 /*响应式*/
@@ -36,7 +36,7 @@ body { background: #607d8b; justify-content: center; align-items: center; width:
 .base span { width: var(--w); height: var(--h); border: 1px solid orange; display: inline-block; padding: 0; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); z-index: 100; }
 .overlook span { width: var(--w); height: var(--h); border: 1px solid orange; display: inline-block; padding: 0; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); }
 .overlook span.active, .base span.active { border: none; padding: 0; box-shadow: none; }
-.overlook span.active:before, .base span.active:before, .overlook span.active:after, .base span.active:after { width: var(--s); height: var(--v); display: inline-block; content: ''; background: #000; position: absolute; border: 1px solid orange; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); }
+.overlook span.active:before, .base span.active:before, .overlook span.active:after, .base span.active:after { width: var(--s); height: var(--v); display: inline-block; content: ''; background: var(--clr); position: absolute; border: 1px solid orange; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); }
 .overlook span.active:before, .base span.active:before { left: 0; }
 .overlook span.active:after, .base span.active:after { right: 0; }
 .overlook p, .base p { display: flex; justify-content: center; align-items: center; font-size: 0.12em; color: orange; }
@@ -116,6 +116,7 @@ span.active { background: transparent; }
 	75% { opacity: 0.5; }
 	100% { opacity: 0; }
 }
+
 @media (max-width:40em) {
 	.container>.left, .container>.right { width: 100%; margin: calc(var(--m)/2) auto; }
 	.container .circle { margin: calc(var(--m)/2) 25%; }
@@ -124,3 +125,39 @@ span.active { background: transparent; }
 	.circle.innate .zhen, .circle.acquired .gen { bottom: -5em; right: 6.5em; }
 	.circle.innate .gen, .circle.acquired .qian { bottom: -5em; left: 6.5em; }
 }
+
+/*八门遁甲 九宫格*/
+.bamen { width:100%; margin: 0 auto; justify-content: center; align-items: center; position: relative;}
+.bamen .rows { height: var(--c); text-align: center;}
+.bamen .rows .columns { width:var(--c); height:var(--c); display: inline-block;}
+.bamen .rows .columns:nth-child(1) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr);}
+/*columns*/
+.bamen .rows .columns:nth-child(2) { margin: 0 -2px;}
+.bamen .rows .columns:nth-child(3) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr); }
+/* row */
+.bamen .rows:nth-child(1) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr);}
+.bamen .rows:nth-child(3) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr); }
+/*大九宫内九宫*/
+.bamen .rows .columns .row { height:var(--m); text-align: center; vertical-align: middle; width: calc(var(--c) - 0.2em); position: relative;}
+.bamen .rows .columns .row a { display:inline-block; margin-top: -0.4em; margin-right: -0.4em; padding: 0px; vertical-align: middle; text-align: center; text-decoration: none; }
+.bamen .rows .columns .row .column { width: var(--m); height: var(--m); }
+.bamen .rows .columns .row .column>span {
+	font-size: var(--w); vertical-align: middle; text-align: center;
+}
+.bamen .rows .columns .row .column>div {
+	display: inline-block; vertical-align: middle; text-align: center;
+}
+/* row  */
+.bamen .rows .columns .row:nth-child(1) a { border-bottom: 1px dashed var(--clr); }
+.bamen .rows .columns .row:nth-child(2) a { border-bottom: 1px dashed var(--clr); }
+/*column*/
+.bamen .rows .columns .row .column:nth-child(1) { border-right: 1px dashed var(--clr); }
+.bamen .rows .columns .row .column:nth-child(2) { border-right: 1px dashed var(--clr); }
+
+/*center-circle*/
+/*.bamen .rows:nth-child(2) .columns:nth-child(2) */
+.bamen .center-circle { width: var(--mc); height: var(--mc); border-radius: 50%; position: relative; display: inline-block; text-align: center; vertical-align: middle;	animation: acquired 20s linear infinite; border-left: calc(var(--mc)/2) solid white; border-right: calc(var(--mc)/2) solid black; opacity:0.75; }
+.bamen .center-circle:before { content: ''; display: block; width: calc(var(--mc)/6); height: calc(var(--mc)/6); border: calc(var(--mc)/6) solid white; background: black; border-radius: 100%; margin-left: calc(var(--mc)/4 * -1); }
+.bamen .center-circle:after { content: ''; display: block; width: calc(var(--mc)/6); height: calc(var(--mc)/6); border: calc(var(--mc)/6) solid black; background: white; border-radius: 100%; margin-left: calc(var(--mc)/4 * -1); }
+
+.bamen .rows .columns .row .column>span.center-circle{display: block;}
