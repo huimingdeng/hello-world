@@ -130,13 +130,13 @@ span.active { background: transparent; }
 .bamen { width:100%; margin: 0 auto; justify-content: center; align-items: center; position: relative;}
 .bamen .rows { height: var(--c); text-align: center;}
 .bamen .rows .columns { width:var(--c); height:var(--c); display: inline-block;}
-.bamen .rows .columns:nth-child(1) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr);}
+/*.bamen .rows .columns:nth-child(1) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr);}*/
 /*columns*/
 .bamen .rows .columns:nth-child(2) { margin: 0 -2px;}
-.bamen .rows .columns:nth-child(3) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr); }
+/*.bamen .rows .columns:nth-child(3) { border-left: 1px solid var(--clr); border-right: 1px solid var(--clr); }*/
 /* row */
-.bamen .rows:nth-child(1) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr);}
-.bamen .rows:nth-child(3) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr); }
+/*.bamen .rows:nth-child(1) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr);}*/
+/*.bamen .rows:nth-child(3) .columns { border-top: 1px solid var(--clr); border-bottom: 1px solid var(--clr); }*/
 /*大九宫内九宫*/
 .bamen .rows .columns .row { height:var(--m); text-align: center; vertical-align: middle; width: calc(var(--c) - 0.2em); position: relative;}
 .bamen .rows .columns .row a { display:inline-block; margin-top: -0.4em; margin-right: -0.4em; padding: 0px; vertical-align: middle; text-align: center; text-decoration: none; }
@@ -148,11 +148,11 @@ span.active { background: transparent; }
 	display: inline-block; vertical-align: middle; text-align: center;
 }
 /* row  */
-.bamen .rows .columns .row:nth-child(1) a { border-bottom: 1px dashed var(--clr); }
-.bamen .rows .columns .row:nth-child(2) a { border-bottom: 1px dashed var(--clr); }
+/*.bamen .rows .columns .row:nth-child(1) a { border-bottom: 1px dashed var(--clr); }*/
+/*.bamen .rows .columns .row:nth-child(2) a { border-bottom: 1px dashed var(--clr); }*/
 /*column*/
-.bamen .rows .columns .row .column:nth-child(1) { border-right: 1px dashed var(--clr); }
-.bamen .rows .columns .row .column:nth-child(2) { border-right: 1px dashed var(--clr); }
+/*.bamen .rows .columns .row .column:nth-child(1) { border-right: 1px dashed var(--clr); }*/
+/*.bamen .rows .columns .row .column:nth-child(2) { border-right: 1px dashed var(--clr); }*/
 
 /*center-circle*/
 /*.bamen .rows:nth-child(2) .columns:nth-child(2) */
