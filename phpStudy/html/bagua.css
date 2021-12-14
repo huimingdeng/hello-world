@@ -1,283 +1,126 @@
-* {
-	margin: 0; padding: 0; box-sizing: border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #607d8b; justify-content: center; align-items: center; width: 100%; font-size: 62.5%; /* default font-size = 16px, so: 16px * 62.5% = 10px, 12px = 1.2em, 10px = 1em */ }
+:root { --h: 1.2em; /* 阳爻的高度 */ --v: 1em;  /* 阴爻的高度 */ --s: 1.6em; /* 阴爻宽度 :before,:after */ --w: 4em; /* 阳爻的宽度 */ --c: 30em; /* 圆直径 */ --m: 10em; /* 外边距 */ }
+.container { width: 100%; clear: both; }
+
+/*响应式*/
+@media (max-width:40em) {
+	:root { --c: 15em; /* 圆直径 */ }
 }
-body {background: #607d8b; justify-content: center; align-items: center; width: 100%}
-:root{
-	--h: 12px; /* 阳爻的高度 */
-	--v: 10px;  /* 阴爻的高度 */
-	--s: 16px; /* 阴爻宽度 :before,:after */
-	--w: 40px; /* 阳爻的宽度 */
-	--c: 300px; /* 圆直径 */
-}
-.container {		}
-.glance {
-	display: block;
-	clear: both;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	margin: 0 auto;
-	text-align: center;
-}
+
 /*太极图绘制*/
-.circle {
-	width: var(--c);
-	height: var(--c);
-	margin: 100px 100px;
-	border-radius: 50%;
-	position: relative;
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-	/*transform: rotate(315deg);*/
-}
+.circle { width: var(--c); height: var(--c); margin: var(--m); border-radius: 50%; position: relative; display: inline-block; text-align: center; vertical-align: middle;	/*transform: rotate(315deg);*/ }
+.circle:before { content: ''; display: block; width: calc(var(--c)/6); height: calc(var(--c)/6); border: calc(var(--c)/6) solid white; background: black; border-radius: 100%; margin-left: calc(var(--c)/4 * -1); }
+.circle:after { content: ''; display: block; width: calc(var(--c)/6); height: calc(var(--c)/6); border: calc(var(--c)/6) solid black; background: white; border-radius: 100%; margin-left: calc(var(--c)/4 * -1); }
 
-.innate { animation: innate 20s linear infinite; border-left: calc(var(--c)/2) solid black;
-    border-right: calc(var(--c)/2) solid white;}
-.acquired { animation: acquired 20s linear infinite; border-left: calc(var(--c)/2) solid white;
-    border-right: calc(var(--c)/2) solid black;}
+/*innate & acuired */
+.circle.innate .qian, .circle.innate .qian span, .circle.acquired .li, .circle.acquired .li span { transform: rotate(0deg); top: -8em; right: -1.5em; margin: 0 auto; }
+.circle.innate .kun, .circle.acquired .kan { transform: rotate(180deg); bottom: -8em; right: -1.5em; margin: 0 auto; }
+.circle.innate .li { transform: rotate(-90deg); right: 17em; bottom: 12em; margin: 0 auto; }
+.circle.acquired .zhen { transform: rotate(-90deg);	/*right: 175px; top: 105px; /*35%*/ right: calc(calc(var(--c) + 4em)/2); bottom: calc(calc(var(--c) - 6em)/2); margin: 0 auto; }
+.circle.innate .kan { transform: rotate(90deg); left: 17em; bottom: 12em; margin: 0 auto; }
+.circle.acquired .dui { transform: rotate(90deg);	/*left: 170px; top: 105px;*/ left: calc(calc(var(--c) + 4em)/2); bottom: calc(calc(var(--c) - 6em)/2); margin: 0 auto; }
 
-.circle:before {
-	content: '';
-    display: block;
-    width: calc(var(--c)/6);
-    height: calc(var(--c)/6);
-    border: calc(var(--c)/6) solid white;
-    background: black;
-    border-radius: 100%;
-    margin-left: calc(var(--c)/4 * -1);
-}
-.circle:after {
-	content: '';
-    display: block;
-    width: calc(var(--c)/6);
-    height: calc(var(--c)/6);
-    border: calc(var(--c)/6) solid black;
-    background: white;
-    border-radius: 100%;
-    margin-left: calc(var(--c)/4 * -1);
-}
+/*四对角存在问题*/
+.circle.innate .dui, .circle.acquired .xun { transform: rotate(-45deg);	/*top: -25px; right: 105px;*/ top: -2.5em; right: 10.5em; }
+.circle.innate .zhen, .circle.acquired .gen { transform: rotate(-135deg); bottom: -2.5em; right: 10.5em; }
+.circle.innate .xun, .circle.acquired .kun { transform: rotate(45deg); top: -2em; left: 12em; }
+.circle.innate .gen, .circle.acquired .qian { transform: rotate(135deg); bottom: -2.5em; left: 11.5em; }
 
-/*innate*/
-
-.circle.innate .qian, .circle.innate .qian span {
-	transform:rotate(0deg);
-	top: -80px;
-	right: -20px;
-	margin: 0 auto;
-}
-.circle.innate .kun {
-	transform:rotate(180deg);
-	bottom: -80px;
-	right: -20px;
-	margin: 0 auto;
-}
-.circle.innate .li {
-	transform:rotate(-90deg);
-	/*right: 175px;
-	top: 105px; /*35%*/
-	right: calc(calc(var(--c) + 40px)/2);
-	bottom: calc(calc(var(--c) - 60px)/2);
-	margin: 0 auto;
-}
-.circle.innate .kan {
-	transform:rotate(90deg);
-	/*left: 170px;
-	top: 105px;*/
-	left: calc(calc(var(--c) + 40px)/2);
-	bottom: calc(calc(var(--c) - 60px)/2);
-	margin: 0 auto;
-}
-.circle.innate .dui {
-	transform: rotate(-45deg);
-	/*top: -25px;
-	right: 105px;*/
-	top: calc(calc(var(--c) / 4 / 3 ) * -1);
-	right: calc(var(--c) / 2 / 1.43);
-}
-.circle.innate .zhen {
-	transform: rotate(-135deg);
-	bottom: -25px;
-	right: 105px;
-}
-.circle.innate .xun {
-	transform: rotate(45deg);
-	/*top: -20px;
-	left: 120px;*/
-	top: calc(calc(var(--c) / 4 / 2 ) * -1);
-	left: calc(var(--c) / 2 / 1.45);
-}
-.circle.innate .gen {
-	transform: rotate(135deg);
-	/*bottom: -25px;
-	left: 115px;*/
-	bottom: calc(calc(var(--c) / 4 / 3 ) * -1);
-	left: calc(var(--c) / 2 / 1.3);
-}
-
-/*acquired*/
-
-.circle.acquired .li, .circle.acquired .li span {
-	transform:rotate(0deg);
-	top: -80px;
-	right: -20px;
-	margin: 0 auto;
-}
-.circle.acquired .kan {
-	transform:rotate(180deg);
-	bottom: -80px;
-	right: -20px;
-	margin: 0 auto;
-}
-.circle.acquired .zhen {
-	transform:rotate(-90deg);
-	right: calc(calc(var(--c) + 40px)/2);
-	bottom: calc(calc(var(--c) - 60px)/2);
-	margin: 0 auto;
-}
-.circle.acquired .dui {
-	transform:rotate(90deg);
-	left: calc(calc(var(--c) + 40px)/2);
-	bottom: calc(calc(var(--c) - 60px)/2);
-	margin: 0 auto;
-}
-.circle.acquired .xun {
-	transform: rotate(-45deg);
-	top: -25px;
-	right: 105px;
-}
-.circle.acquired .gen {
-	transform: rotate(-135deg);
-	bottom: -25px;
-	right: 105px;
-}
-.circle.acquired .kun {
-	transform: rotate(45deg);
-	top: -20px;
-	left: 120px;
-}
-.circle.acquired .qian {
-	transform: rotate(135deg);
-	bottom: -25px;
-	left: 115px;
-}
+/*acquired  end */
 
 /* 八卦绘制 */
-.gua-body {
-	width: 100%;
-	clear: both;
-	overflow: hidden;
-	justify-content: center;
-	text-align: center;
-}
-.base {
-	width: var(--w);
-	margin-right: var(--h);
-	display: inline-block;
-	position: absolute;
-}
-.overlook {
-	width: var(--w);
-	position: relative;
-	margin-right: var(--h);
-	display: inline-block;
-}
-.base span {
-	width: var(--w);
-	height: var(--h);
-	border: 1px solid orange;
-	display: inline-block;
-	padding: 0;
-	box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
-	z-index: 100;
-}
-.overlook span {
-	width: var(--w) ;
-	height: var(--h);
-	border: 1px solid orange;
-	display: inline-block;
-	padding: 0;
-	box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
-}
-.overlook span.active, .base span.active {
-	border: none;
-	padding: 0;
-	box-shadow: none;
-}
-.overlook span.active:before , .base span.active:before, .overlook span.active:after, .base span.active:after {
-	width: var(--s);
-	height: var(--v);
-	display: inline-block;
-	content: '';
-	background: #000;
-	position: absolute;
-	border: 1px solid orange;
-	box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.6);
-}
-
-.overlook span.active:before , .base span.active:before {
-	left: 0;
-}
-.overlook span.active:after, .base span.active:after {
-	right: 0;
-}
-.overlook p, .base p { display:flex; justify-content:center; align-items:center; font-size: 0.12em; color: orange;}
-
-.qian span, .qian span.active:before, .qian span.active:after {
-	background: linear-gradient(to right, orange, white, orange);
-}
-.dui span, .dui span.active:before, .dui span.active:after {
-	background: gray;
-}
-.li span, .li span.active:before, .li span.active:after {
-	background: red;
-}
-.zhen span, .zhen span.active:before, .zhen span.active:after {
-	background: green;
-}
-.xun span, .xun span.active:before, .xun span.active:after {
-	background: greenyellow;
-}
-.kan span, .kan span.active:before, .kan span.active:after {
-	background: blue;
-}
-.gen span, .gen span.active:before, .gen span.active:after {
-	background: yellow;
-}
-.kun span, .kun span.active:before, .kun span.active:after {
-	background: black;
-}
-span.active {
-	background: transparent;
-}
-
-
-.left , .right {
-	width: 49%;
-	padding: 0px;
-	border-spacing: 0px;
-	margin: 0px;
-	display: inline-block;
-	overflow: hidden;
-}
-
-.gua-body .left, .gua-body .right {
-	padding: 60px;
-	with: 620px;
-}
-
-.clearboth {
-	display: inline-block;
-	clear: both;
-}
+.gua-body { width: 100%; clear: both; overflow: hidden; justify-content: center; text-align: center; }
+.base { width: var(--w); margin-right: var(--h); display: inline-block; position: absolute; }
+.overlook { width: var(--w); position: relative; margin: var(--h); display: inline-block; }
+.base span { width: var(--w); height: var(--h); border: 1px solid orange; display: inline-block; padding: 0; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); z-index: 100; }
+.overlook span { width: var(--w); height: var(--h); border: 1px solid orange; display: inline-block; padding: 0; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); }
+.overlook span.active, .base span.active { border: none; padding: 0; box-shadow: none; }
+.overlook span.active:before, .base span.active:before, .overlook span.active:after, .base span.active:after { width: var(--s); height: var(--v); display: inline-block; content: ''; background: #000; position: absolute; border: 1px solid orange; box-shadow: 0.3em 0.3em 0.3em 0em rgba(0, 0, 0, 0.6); }
+.overlook span.active:before, .base span.active:before { left: 0; }
+.overlook span.active:after, .base span.active:after { right: 0; }
+.overlook p, .base p { display: flex; justify-content: center; align-items: center; font-size: 0.12em; color: orange; }
+.qian span, .qian span.active:before, .qian span.active:after { background: linear-gradient(to right, orange, white, orange); }
+.dui span, .dui span.active:before, .dui span.active:after { background: gray; }
+.li span, .li span.active:before, .li span.active:after { background: red; }
+.zhen span, .zhen span.active:before, .zhen span.active:after { background: green; }
+.xun span, .xun span.active:before, .xun span.active:after { background: greenyellow; }
+.kan span, .kan span.active:before, .kan span.active:after { background: blue; }
+.gen span, .gen span.active:before, .gen span.active:after { background: yellow; }
+.kun span, .kun span.active:before, .kun span.active:after { background: black; }
+span.active { background: transparent; }
+.top { max-height: 50em; height: 50em; text-align: center; }
+.left, .right { width: 49%; padding: 0; border-spacing: 0; margin: 0; display: inline-block; transform-origin: center; }
+.gua-body .left, .gua-body .right { width: calc(calc(var(--w) + 3em) * 8); padding: 0; }
+.clearboth { display: inline-block; clear: both; }
 
 /*动画*/
-
+.innate { animation: innate 10s linear infinite; border-left: calc(var(--c)/2) solid black; border-right: calc(var(--c)/2) solid white; transform-origin: center; }
+.innate:before, .innate:after { animation: innate-white 10s linear infinite; }
+.circle.innate .dui { animation: innate-dui 10s linear infinite; }
+.circle.innate .zhen { animation: innate-zhen 10s linear infinite; }
+.circle.innate .xun { animation: innate-xun 10s linear infinite; }
+.circle.innate .gen { animation: innate-gen 10s linear infinite; }
+.circle.innate .li { animation: innate-li 10s linear infinite; }
+.circle.innate .kan { animation: innate-kan 10s linear infinite; }
+.acquired { animation: acquired 20s linear infinite; border-left: calc(var(--c)/2) solid white; border-right: calc(var(--c)/2) solid black; opacity: 0; }
 @keyframes innate {
-	from { transform:rotate(0deg); }
-	to { transform:rotate(360deg); }
+	from { transform: rotate(0deg) infinite; }
+	to { transform: rotate(360deg); }
+	25% { width: calc(var(--c) / 2); height: calc(var(--c) / 2); border-left-width: calc(var(--c) / 4); border-right-width: calc(var(--c) / 4);		/*transform: rotate(45deg) scale(2.0);*/ }
+	50% { filter: grayscale(100%); width: var(--c); height: var(--c); border-left-width: calc(var(--c) / 2); border-right-width: calc(var(--c) / 2); }
+	75% { width: calc(var(--c) / 2); height: calc(var(--c) / 2); border-left-width: calc(var(--c) / 4); border-right-width: calc(var(--c) / 4); }
+	100% { }
+}
+@keyframes innate-white {
+	25% { width: calc(var(--c)/12); height: calc(var(--c)/12); border-width: calc(var(--c)/12); margin-left: calc(var(--c)/8 * -1);		/*transform: rotate(45deg) scale(1.0);*/ }
+	50% { width: calc(var(--c)/6); height: calc(var(--c)/6); border-width: calc(var(--c)/6); margin-left: calc(var(--c)/4 * -1); }
+	75% { width: calc(var(--c)/12); height: calc(var(--c)/12); border-width: calc(var(--c)/12); margin-left: calc(var(--c)/8 * -1); }
+	100% { }
+}
+@keyframes innate-dui {
+	25% { top: -4.5em; right: 5.5em; }
+	50% { top: -2.5em; right: 10.5em; }
+	75% { top: -4.5em; right: 5.5em; }
+}
+@keyframes innate-zhen {
+	25% { bottom: -4.5em; right: 5.5em; }
+	50% { bottom: -2.5em; right: 10.5em; }
+	75% { bottom: -4.5em; right: 5.5em; }
+}
+@keyframes innate-xun {
+	25% { top: -5em; left: 7em; }
+	50% { top: -2.5em; left: 10.5em; }
+	75% { top: -5em; left: 7em; }
+}
+@keyframes innate-gen {
+	25% { bottom: -5em; left: 7em; }
+	50% { bottom: -2.5em; left: 11.5em; }
+	75% { bottom: -5em; left: 7em; }
+}
+@keyframes innate-li {
+	25% { right: 9.5em; bottom: 4.5em; }
+	50% { right: 17em; bottom: 12em; }
+	75% { right: 9.5em; bottom: 4.5em; }
+}
+@keyframes innate-kan {
+	25% { left: 9.5em; bottom: 4.5em; }
+	50% { left: 17em; bottom: 12em; }
+	75% { left: 9.5em; bottom: 4.5em; }
 }
 @keyframes acquired {
-	from { transform:rotate(360deg) ; }
-	to { transform:rotate(0deg); }
+	from { transform: rotate(360deg); }
+	to { transform: rotate(0deg); }
+	25% { opacity: 0.5; }
+	50% { filter: grayscale(100%); opacity: 1; }
+	75% { opacity: 0.5; }
+	100% { opacity: 0; }
+}
+@media (max-width:40em) {
+	.container>.left, .container>.right { width: 100%; margin: calc(var(--m)/2) auto; }
+	.container .circle { margin: calc(var(--m)/2) 25%; }
+	.circle.innate .dui, .circle.acquired .xun { top: -5em; right: 6.5em; }
+	.circle.innate .xun, .circle.acquired .kun { top: -5em; left: 6.5em; }
+	.circle.innate .zhen, .circle.acquired .gen { bottom: -5em; right: 6.5em; }
+	.circle.innate .gen, .circle.acquired .qian { bottom: -5em; left: 6.5em; }
 }
