@@ -13,11 +13,10 @@ mysql工作原理：连接请求->连接池存储->服务管理器等功能处�
 
 
 mysql工作原理图：
-![mysql原理](https://i.imgur.com/3c2o0MO.png)
-
+![mysql原理](images/mysql-logic.png)
 
 SQL执行过程示意：
-![SQL执行](https://i.imgur.com/gTDysEh.png)
+![SQL执行](images/SQL-execute.png)
 
 ## MySQL事务处理 ##
 保证操作的一致性。典型案例：支付订单，优惠卷等。当执行事务操作，会对当前操作表加锁，防止其它影响。(分布式事务)
@@ -132,14 +131,14 @@ mysql 操作：（要关闭事务自动提交）
 5. 不利于调试(SQL过多，无注释)
 
 ### 存储引擎的创建 ###
-	
+
 	create procedure <procedure_name>(arvg1,...)
 	begin
 		delete <variablename> type;
 		exec statement
 	end
 	$$
-
+	
 	call <procedure_name>(arvg1,...)
 
 存储过程执行，预编译不知在创建后已经进行，后面调用者直接进入了 optimizer 部分。
@@ -173,7 +172,7 @@ php 调用：
 游标的声明添加(消耗 MySQL 性能)：
 
 	DECLARE <cursor name> CURSOR FOR <ResultSet>
-
+	
 	OPEN <cursor name> // 开启游标，资源操作有对应的关闭操作
 	CLOSE <cursor name> // 关闭游标
 	DECLARE CONTINUE HANDLER FOR <...> NOT FOUND // 设置句柄，结果集查询不到数据自动跳出
@@ -197,7 +196,7 @@ php 调用：
 		end loop; //结束循环
 	CLOSE test_cursor;
 	END;
-	
+
 游标的好处：不满足条件可以弃用数据。
 
 P.S. 结果存储在临时表，不用每次查询获取。
