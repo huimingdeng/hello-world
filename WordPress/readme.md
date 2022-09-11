@@ -126,56 +126,27 @@ if ( file_exists( ABSPATH . 'wp-config.php' ) ) {
 	require_once dirname( ABSPATH ) . '/wp-config.php';
 
 } else {
-
-	// A config file doesn't exist.
-
-	define( 'WPINC', 'wp-includes' );
-	require_once ABSPATH . WPINC . '/load.php';
-
-	// Standardize $_SERVER variables across setups.
-	wp_fix_server_vars();
-
-	require_once ABSPATH . WPINC . '/functions.php';
-
-	$path = wp_guess_url() . '/wp-admin/setup-config.php';
-
-	/*
-	 * We're going to redirect to setup-config.php. While this shouldn't result
-	 * in an infinite loop, that's a silly thing to assume, don't you think? If
-	 * we're traveling in circles, our last-ditch effort is "Need more help?"
-	 */
-	if ( false === strpos( $_SERVER['REQUEST_URI'], 'setup-config' ) ) {
-		header( 'Location: ' . $path );
-		exit;
-	}
-
-	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-	require_once ABSPATH . WPINC . '/version.php';
-
-	wp_check_php_mysql_versions();
-	wp_load_translations_early();
-
-	// Die with an error message.
-	$die = '<p>' . sprintf(
-		/* translators: %s: wp-config.php */
-		__( "There doesn't seem to be a %s file. I need this before we can get started." ),
-		'<code>wp-config.php</code>'
-	) . '</p>';
-	$die .= '<p>' . sprintf(
-		/* translators: 1: Documentation URL, 2: wp-config.php */
-		__( 'Need more help? <a href="%1$s">Read the support article on %2$s</a>.' ),
-		__( 'https://wordpress.org/support/article/editing-wp-config-php/' ),
-		'<code>wp-config.php</code>'
-	) . '</p>';
-	$die .= '<p>' . sprintf(
-		/* translators: %s: wp-config.php */
-		__( "You can create a %s file through a web interface, but this doesn't work for all server setups. The safest way is to manually create the file." ),
-		'<code>wp-config.php</code>'
-	) . '</p>';
-	$die .= '<p><a href="' . $path . '" class="button button-large">' . __( 'Create a Configuration File' ) . '</a></p>';
-
-	wp_die( $die, __( 'WordPress &rsaquo; Error' ) );
+	...
 }
 ```
 
 最后，判断项目根目录是否存在`wp-config.php`，存在则加载数据库及网站配置信息；否则需要创建`wp-config.php`文件，并且运行程序安装WordPress。
+
+#### 安装Wordpress
+
+```php
+// A config file doesn't exist.
+define( 'WPINC', 'wp-includes' );
+require_once ABSPATH . WPINC . '/load.php';
+```
+
+定义常量`WPINC`，存储字符串'wp-includes'，为目录名称。
+
+```php
+// Standardize $_SERVER variables across setups.
+wp_fix_server_vars();
+require_once ABSPATH . WPINC . '/functions.php';
+$path = wp_guess_url() . '/wp-admin/setup-config.php';
+```
+
+PS. 后续将用思维导图记录。
