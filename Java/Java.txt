@@ -4,3 +4,17 @@
 1. JDK选择
 https://www.oracle.com/java/technologies/downloads/
 JDK 17.0.1 -> JDK 17.X.X
+
+2. JDK\JRE\JAVA 跨平台原理介绍
+
+JDK: Java Development Kit
+JRE: Java Runtime Environment 
+JVM: Java Virtual Machine
+
+生产部署只需要安装JRE.
+P.S. JAVA_HOME\PATH 配置
+
+3. IDE(integrated Developoment Environment)
+
+IntelliJ IDEA -- 简称IDEA, 付费 5000/year	https://www.jetbrains.com/idea/
+
