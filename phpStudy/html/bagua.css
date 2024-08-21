@@ -56,7 +56,21 @@ span.active { background: transparent; }
 .clearboth { display: inline-block; clear: both; }
 
 /*动画*/
-.innate { /*animation: innate 10s linear infinite;*/ border-left: calc(var(--c)/2) solid black; border-right: calc(var(--c)/2) solid white; transform-origin: center; }
+.innate { 
+	/*animation: innate 10s linear infinite;*/ 
+	transform-origin: center; 
+}
+
+.yun {
+	border-left: calc(var(--c)/2) solid black; 
+	border-right: calc(var(--c)/2) solid white; 
+}
+
+.yang {
+	border-left: calc(var(--c)/2) solid white; 
+	border-right: calc(var(--c)/2) solid black; 
+}
+
 /*.innate:before, .innate:after { animation: innate-white 10s linear infinite; }
 .circle.innate .dui { animation: innate-dui 10s linear infinite; }
 .circle.innate .zhen { animation: innate-zhen 10s linear infinite; }
@@ -64,7 +78,12 @@ span.active { background: transparent; }
 .circle.innate .gen { animation: innate-gen 10s linear infinite; }
 .circle.innate .li { animation: innate-li 10s linear infinite; }
 .circle.innate .kan { animation: innate-kan 10s linear infinite; }*/
-.acquired { /*animation: acquired 20s linear infinite;*/ border-left: calc(var(--c)/2) solid white; border-right: calc(var(--c)/2) solid black; opacity: 1; }
+.acquired { 
+	/*animation: acquired 20s linear infinite;*/ 
+	/*border-left: calc(var(--c)/2) solid white; 
+	border-right: calc(var(--c)/2) solid black; */
+	opacity: 1; 
+}
 /*先天太极图旋转变小变大动画*/
 @keyframes innate {
 	from { transform: rotate(0deg) infinite; }
