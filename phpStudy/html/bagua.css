@@ -56,15 +56,16 @@ span.active { background: transparent; }
 .clearboth { display: inline-block; clear: both; }
 
 /*动画*/
-.innate { animation: innate 10s linear infinite; border-left: calc(var(--c)/2) solid black; border-right: calc(var(--c)/2) solid white; transform-origin: center; }
-.innate:before, .innate:after { animation: innate-white 10s linear infinite; }
+.innate { /*animation: innate 10s linear infinite;*/ border-left: calc(var(--c)/2) solid black; border-right: calc(var(--c)/2) solid white; transform-origin: center; }
+/*.innate:before, .innate:after { animation: innate-white 10s linear infinite; }
 .circle.innate .dui { animation: innate-dui 10s linear infinite; }
 .circle.innate .zhen { animation: innate-zhen 10s linear infinite; }
 .circle.innate .xun { animation: innate-xun 10s linear infinite; }
 .circle.innate .gen { animation: innate-gen 10s linear infinite; }
 .circle.innate .li { animation: innate-li 10s linear infinite; }
-.circle.innate .kan { animation: innate-kan 10s linear infinite; }
-.acquired { animation: acquired 20s linear infinite; border-left: calc(var(--c)/2) solid white; border-right: calc(var(--c)/2) solid black; opacity: 0; }
+.circle.innate .kan { animation: innate-kan 10s linear infinite; }*/
+.acquired { /*animation: acquired 20s linear infinite;*/ border-left: calc(var(--c)/2) solid white; border-right: calc(var(--c)/2) solid black; opacity: 1; }
+/*先天太极图旋转变小变大动画*/
 @keyframes innate {
 	from { transform: rotate(0deg) infinite; }
 	to { transform: rotate(360deg); }
@@ -73,6 +74,7 @@ span.active { background: transparent; }
 	75% { width: calc(var(--c) / 2); height: calc(var(--c) / 2); border-left-width: calc(var(--c) / 4); border-right-width: calc(var(--c) / 4); }
 	100% { }
 }
+/*先天八卦内太极图伸缩变小的动画*/
 @keyframes innate-white {
 	25% { width: calc(var(--c)/12); height: calc(var(--c)/12); border-width: calc(var(--c)/12); margin-left: calc(var(--c)/8 * -1);		/*transform: rotate(45deg) scale(1.0);*/ }
 	50% { width: calc(var(--c)/6); height: calc(var(--c)/6); border-width: calc(var(--c)/6); margin-left: calc(var(--c)/4 * -1); }
